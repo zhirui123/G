@@ -102,6 +102,41 @@ public class WaybillService {
 
 
 
+    /**
+     * 根据车牌号查询
+     * @param licensePlateNum
+     * @param userId
+     * @return
+     */
+
+    public   List<Waybill> queryByLicensePlateNumAndUserId(String licensePlateNum,String userId) throws  Exception{
+        return  this.waybillMapper.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
+    }
+
+
+    /**
+     * 根据罐体编号查询
+     * @param canbodyNum
+     * @param userId
+     * @return
+     */
+
+    public   List<Waybill> queryByCanbodyNumAndUserId(String canbodyNum,String userId)throws  Exception{
+        return  this.waybillMapper.queryByCanbodyNumAndUserId(canbodyNum, userId);
+    }
+
+
+    /**
+     * 根据押运员
+     * @param escortName
+     * @param userId
+     * @return
+     */
+    public List<Waybill> queryByEscortNameAndUserId(String escortName,String userId)throws Exception{
+        return  this.waybillMapper.queryByEscortNameAndUserId(escortName, userId);
+    }
+
+
 
 //
 //

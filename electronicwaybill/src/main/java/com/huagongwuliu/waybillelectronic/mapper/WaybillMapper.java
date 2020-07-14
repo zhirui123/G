@@ -75,4 +75,35 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      */
     @Select("select * from tb_eway where carriage_name LIKE concat('%',#{carriageName},'%') and user_id = #{userId}")
     List<Waybill> queryByCarriageNameAndUserId(String carriageName,String userId);
+
+    /**
+     * 根据车牌号查询
+     * @param licensePlateNum
+     * @param userId
+     * @return
+     */
+    @Select("select * from tb_eway where license_plate_num LIKE concat('%',#{licensePlateNum},'%') and user_id = #{userId}")
+    List<Waybill> queryByLicensePlateNumAndUserId(String licensePlateNum,String userId);
+
+
+    /**
+     * 根据罐体编号查询
+     * @param canbodyNum
+     * @param userId
+     * @return
+     */
+    @Select("select * from tb_eway where canbody_num LIKE concat('%',#{canbodyNum},'%') and user_id = #{userId}")
+    List<Waybill> queryByCanbodyNumAndUserId(String canbodyNum,String userId);
+
+
+    /**
+     * 根据押运员
+     * @param escortName
+     * @param userId
+     * @return
+     */
+    @Select("select * from tb_eway where escort_name LIKE concat('%',#{escortName},'%') and user_id = #{userId}")
+    List<Waybill> queryByEscortNameAndUserId(String escortName,String userId);
+
+
 }

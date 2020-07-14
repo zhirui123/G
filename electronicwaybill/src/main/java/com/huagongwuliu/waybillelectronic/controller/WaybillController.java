@@ -234,7 +234,13 @@ public class WaybillController {
         return info;
     }
 
-
+    /**
+     * 根据装货人查询
+     * @param shipmentName
+     * @param userId
+     * @return
+     * @throws Exception
+     */
 
     @PostMapping("/findbyshipmentname")
     @ResponseBody
@@ -242,6 +248,107 @@ public class WaybillController {
         //验证码错误
         ResultInfo info = new ResultInfo();
         List<Waybill>  waybills =  this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
+        try {
+            info.setResult_code(0);
+            info.setResult_data(waybills);
+            info.setResult_msg("成功");
+        }catch (Exception e){
+            info.setResult_code(1);
+            info.setResult_data(waybills);
+            info.setResult_msg("失败");
+        }
+        return info;
+    }
+
+    /**
+     * 根据承运人修改
+     * @param carriageName
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/findbycarriageName")
+    @ResponseBody
+    public   ResultInfo queryByCarriageNameAndUserId(@RequestParam("carriageName") String carriageName,@RequestParam("userId") String userId) throws  Exception{
+        //验证码错误
+        ResultInfo info = new ResultInfo();
+        List<Waybill>  waybills =  this.waybillService.queryByCarriageNameAndUserId(carriageName, userId);
+        try {
+            info.setResult_code(0);
+            info.setResult_data(waybills);
+            info.setResult_msg("成功");
+        }catch (Exception e){
+            info.setResult_code(1);
+            info.setResult_data(waybills);
+            info.setResult_msg("失败");
+        }
+        return info;
+    }
+
+
+    /**
+     * 根据车牌号查询
+     * @param licensePlateNum
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/findbylicenseplatenum")
+    @ResponseBody
+    public   ResultInfo queryByLicensePlateNumAndUserId(@RequestParam("licensePlateNum") String licensePlateNum,@RequestParam("userId") String userId) throws  Exception{
+        //验证码错误
+        ResultInfo info = new ResultInfo();
+        List<Waybill>  waybills =  this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
+        try {
+            info.setResult_code(0);
+            info.setResult_data(waybills);
+            info.setResult_msg("成功");
+        }catch (Exception e){
+            info.setResult_code(1);
+            info.setResult_data(waybills);
+            info.setResult_msg("失败");
+        }
+        return info;
+    }
+
+    /**
+     * 根据罐体编号查询
+     * @param canbodyNum
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/findbycanbodynum")
+    @ResponseBody
+    public   ResultInfo queryByCanbodyNumAndUserId(@RequestParam("canbodyNum") String canbodyNum,@RequestParam("userId") String userId) throws  Exception{
+        //验证码错误
+        ResultInfo info = new ResultInfo();
+        List<Waybill>  waybills =  this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
+        try {
+            info.setResult_code(0);
+            info.setResult_data(waybills);
+            info.setResult_msg("成功");
+        }catch (Exception e){
+            info.setResult_code(1);
+            info.setResult_data(waybills);
+            info.setResult_msg("失败");
+        }
+        return info;
+    }
+
+    /**
+     * 根据押运员姓名查询
+     * @param escortName
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/findbyescortname")
+    @ResponseBody
+    public   ResultInfo queryByEscortNameAndUserId(@RequestParam("escortName") String escortName,@RequestParam("userId") String userId) throws  Exception{
+        //验证码错误
+        ResultInfo info = new ResultInfo();
+        List<Waybill>  waybills =  this.waybillService.queryByEscortNameAndUserId(escortName, userId);
         try {
             info.setResult_code(0);
             info.setResult_data(waybills);
