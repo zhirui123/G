@@ -50,14 +50,22 @@ public class WaybillService {
         return this.waybillMapper.insert(waybill);
     }
 
+
     public  int changeStatusAction(String status,Long id) throws Exception{
         return  this.waybillMapper.changeStatus(status,id);
     }
 
 
-
-
-
+    /**
+     * 根据托运人，模糊查询
+     * @param shipperName
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public   List<Waybill> queryByShipperNameAndUserId(String shipperName,String userId) throws  Exception{
+        return  this.waybillMapper.queryByShipperNameAndUserId(shipperName,userId);
+    }
 
 //
 //

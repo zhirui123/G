@@ -33,9 +33,18 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
     List<Waybill> queryByUserId(String userId);
 
     @Update("UPDATE tb_eway SET status = #{status}  where id = #{id}")
-     int changeStatus(String status,Long id);
+    int changeStatus(String status,Long id);
 
 
+
+    /**
+     * 根据托运人查询
+     * @param shipperName
+     * @param userId
+     * @return
+     */
+    @Select("select * from tb_eway where shipper_name = #{shipperName} and user_id = #{userId}")
+    List<Waybill> queryByShipperNameAndUserId(String shipperName,String userId);
 
 
 

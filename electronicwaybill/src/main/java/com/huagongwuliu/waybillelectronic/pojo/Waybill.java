@@ -1,7 +1,6 @@
 package com.huagongwuliu.waybillelectronic.pojo;
 
 import lombok.Data;
-import org.springframework.http.ResponseEntity;
 
 import javax.persistence.*;
 
@@ -72,9 +71,6 @@ public class Waybill {
 
     private  String userId;//
     private  String waybillCode;//电子运单编号
-    private  String status;// 0、待接单、1接单完成、2开始装货、3装货完成、4开始卸货、5任务完成
-
-    private ResponseEntity<byte[]>   urlCode;// url二维码的
 
 
 
