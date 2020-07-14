@@ -1,8 +1,10 @@
 package com.huagongwuliu.waybillelectronic.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.huagongwuliu.waybillelectronic.pojo.Goods;
 import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
+import com.huagongwuliu.waybillelectronic.service.GoodsService;
 import com.huagongwuliu.waybillelectronic.service.WaybillService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class WaybillController {
 
     @Autowired
     private WaybillService waybillService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     @GetMapping("/show")
     public String show(){
@@ -362,5 +367,23 @@ public class WaybillController {
     }
 
 
+
+    @PostMapping("/findbygoodname")
+    @ResponseBody
+    public   ResultInfo queryByGoodsName(@RequestParam("goodsName") String goodsName) throws  Exception{
+        //验证码错误
+        ResultInfo info = new ResultInfo();
+        List<Goods> goodsList = this.goodsService.queryByGoodsName(goodsName);
+        try {
+            info.setResult_code(0);
+            info.setResult_data(goodsList);
+            info.setResult_msg("成功");
+        }catch (Exception e){
+            info.setResult_code(1);
+            info.setResult_data(goodsList);
+            info.setResult_msg("失败");
+        }
+        return info;
+    }
 
 }
