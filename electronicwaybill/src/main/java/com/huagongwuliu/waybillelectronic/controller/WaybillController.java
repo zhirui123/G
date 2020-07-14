@@ -6,13 +6,15 @@ import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.service.WaybillService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/waybill")
 public class WaybillController {
 
@@ -34,7 +36,12 @@ public class WaybillController {
     public  Waybill findwaybillsById(@RequestParam("id") Long id) throws  Exception{
         return this.waybillService.queryById(id);
     }
-
+    @RequestMapping("/yd")
+    public String aa(@RequestParam("id") Long id, ModelMap modelMap) throws Exception {
+        Waybill waybill = this.waybillService.queryById(id);
+        modelMap.addAttribute("yd",waybill);
+        return "yd";
+    }
 
     @PostMapping("/findbyidanduserid")
     @ResponseBody

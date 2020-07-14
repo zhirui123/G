@@ -8,10 +8,8 @@ import javax.persistence.*;
 @Data
 public class Waybill {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-    @Column(name = "shipper_name")
     private  String shipperName;//托运方
     private  String shipperContact;//托运方联系人
     private  String shipperPhone;//托运方 联系电话
