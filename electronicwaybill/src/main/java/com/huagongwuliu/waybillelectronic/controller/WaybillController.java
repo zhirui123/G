@@ -192,7 +192,7 @@ public class WaybillController {
      */
     @PostMapping("/findbyshippername")
     @ResponseBody
-    public   ResultInfo queryByShipmentNameAndUserId(@RequestParam("shipperName") String shipperName,@RequestParam("userId") String userId) throws  Exception{
+    public   ResultInfo queryByShipperNameAndUserId(@RequestParam("shipperName") String shipperName,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
         List<Waybill>  waybills =  this.waybillService.queryByShipperNameAndUserId(shipperName, userId);
@@ -208,9 +208,51 @@ public class WaybillController {
         return info;
     }
 
+    /**
+     * 根据收货人查询
+     * @param shiptoName
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+
+    @PostMapping("/findbyshiptoname")
+    @ResponseBody
+    public   ResultInfo queryByShiptoNameAndUserId(@RequestParam("shiptoName") String shiptoName,@RequestParam("userId") String userId) throws  Exception{
+        //验证码错误
+        ResultInfo info = new ResultInfo();
+        List<Waybill>  waybills =  this.waybillService.queryByShiptoNameAndUserId(shiptoName,userId);
+        try {
+            info.setResult_code(0);
+            info.setResult_data(waybills);
+            info.setResult_msg("成功");
+        }catch (Exception e){
+            info.setResult_code(1);
+            info.setResult_data(waybills);
+            info.setResult_msg("失败");
+        }
+        return info;
+    }
 
 
 
+    @PostMapping("/findbyshipmentname")
+    @ResponseBody
+    public   ResultInfo queryByShipmentNameAndUserId(@RequestParam("shipmentName") String shipmentName,@RequestParam("userId") String userId) throws  Exception{
+        //验证码错误
+        ResultInfo info = new ResultInfo();
+        List<Waybill>  waybills =  this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
+        try {
+            info.setResult_code(0);
+            info.setResult_data(waybills);
+            info.setResult_msg("成功");
+        }catch (Exception e){
+            info.setResult_code(1);
+            info.setResult_data(waybills);
+            info.setResult_msg("失败");
+        }
+        return info;
+    }
 
 
 

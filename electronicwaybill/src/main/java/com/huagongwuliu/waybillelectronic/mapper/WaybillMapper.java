@@ -43,9 +43,36 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where shipper_name = #{shipperName} and user_id = #{userId}")
+    @Select("select * from tb_eway where shipper_name like concat('%',#{shipperName},'%') and user_id = #{userId}")
     List<Waybill> queryByShipperNameAndUserId(String shipperName,String userId);
 
 
+    /**
+     * 根据收货人查询
+     * @param shiptoName
+     * @param userId
+     * @return
+     */
+    @Select("select * from tb_eway where shipto_name LIKE concat('%',#{shiptoName},'%') and user_id = #{userId}")
+    List<Waybill> queryByShiptoNameAndUserId(String shiptoName,String userId);
 
+
+    /**
+     * 根据装货人名称查询
+     * @param shipmentName
+     * @param userId
+     * @return
+     */
+    @Select("select * from tb_eway where shipment_name LIKE concat('%',#{shipmentName},'%') and user_id = #{userId}")
+    List<Waybill> queryByShipmentNameAndUserId(String shipmentName,String userId);
+
+
+    /**
+     * 根据承运人查询
+     * @param carriageName
+     * @param userId
+     * @return
+     */
+    @Select("select * from tb_eway where carriage_name LIKE concat('%',#{carriageName},'%') and user_id = #{userId}")
+    List<Waybill> queryByCarriageNameAndUserId(String carriageName,String userId);
 }

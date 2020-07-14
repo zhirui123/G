@@ -67,6 +67,42 @@ public class WaybillService {
         return  this.waybillMapper.queryByShipperNameAndUserId(shipperName,userId);
     }
 
+
+    /**
+     * 根据收货人查询
+     * @param shiptoName
+     * @param userId
+     * @return
+     */
+    public   List<Waybill> queryByShiptoNameAndUserId(String shiptoName,String userId) throws  Exception{
+        return  this.waybillMapper.queryByShiptoNameAndUserId(shiptoName, userId);
+    }
+
+    /**
+     * 根据装货人查询
+     * @param shipmentName
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public   List<Waybill> queryByShipmentNameAndUserId(String shipmentName,String userId)throws Exception{
+        return  this.waybillMapper.queryByShipmentNameAndUserId(shipmentName, userId);
+    }
+
+    /**
+     * 根据承运人查询
+     * @param carriageName
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public   List<Waybill> queryByCarriageNameAndUserId(String carriageName,String userId)throws  Exception{
+        return  this.waybillMapper.queryByCarriageNameAndUserId(carriageName, userId);
+    }
+
+
+
+
 //
 //
 //    public void  deleteWaybillById(Long id) throws Exception{
