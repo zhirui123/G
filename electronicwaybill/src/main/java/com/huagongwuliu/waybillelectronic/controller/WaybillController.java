@@ -1,18 +1,25 @@
 package com.huagongwuliu.waybillelectronic.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.google.zxing.WriterException;
 import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.service.GoodsService;
 import com.huagongwuliu.waybillelectronic.service.WaybillService;
+import com.huagongwuliu.waybillelectronic.utils.QRCodeGenerator;
+import com.huagongwuliu.waybillelectronic.utils.WaybillUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Controller
@@ -74,7 +81,6 @@ public class WaybillController {
         if (userId.length() ==0 || userId == null){
             return new ResultInfo(1001,null,"请输入用户id");
         }
-
         try {
             PageInfo<Waybill> waybills =  this.waybillService.queryByUserId(userId,pageNum,pageSize);
             return new ResultInfo(0,waybills,"成功");
@@ -97,9 +103,9 @@ public class WaybillController {
         }
 
         try {
-
-            waybill.setWaybillCode(UUID.randomUUID().toString().replace("-",""));
+            waybill.setWaybillCode(WaybillUtils.getCode());
             int recode  =  this.waybillService.insertWaybillByWaubillObj(waybill);
+
             if (recode == 0){
                 info.setResult_code(1);
                 info.setResult_msg("失败");
@@ -115,8 +121,6 @@ public class WaybillController {
             }else{
                 info.setResult_data(recode);
             }
-
-
             return info;
         }catch (Exception e){
             info.setResult_code(1);
@@ -457,6 +461,31 @@ public class WaybillController {
     }
 
 
+    /**
+     * 生成二维码
+     * @return
+     */
+    @GetMapping(value="/qrimage")
+    public ResponseEntity<byte[]> getQRImage(@RequestParam String codestr) {
+//
+        //二维码内的信息
+        String info = codestr;
+
+        byte[] qrcode = null;
+        try {
+            qrcode = QRCodeGenerator.getQRCodeImage(info, 360, 360);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+
+        }
+
+        // Set headers
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+
+        return new ResponseEntity<byte[]> (qrcode, headers, HttpStatus.CREATED);
+    }
 
 
 

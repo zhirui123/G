@@ -186,8 +186,8 @@
                     灭火方法： 喷水冷却容器，将容器从火场中转移出来。灭火应用泡沫、干粉、二氧化碳灭火器 防护措施： 操作人员必须经过专门培训，严格遵守操作规程，并配备相应的劳动防护用品。
                     运输作业应尽量选于早晚、避免高温作业，作业中严禁任何火种、氧化剂、静电。
                 </td>
-                <td colspan="3" valign="middle" align="center" class="img-w" id="qrcode">
-                    <img width="110" height="110" src="/img/qrcode.php"></td>
+               <td colspan="3" valign="middle" align="center" class="img-w" id="qrcode">
+                    <img id="imagesqrcode" width="110" height="110"></td>
             </tr>
             <tr>
                 <td colspan="2" style="font-weight:bolder;text-align:left;">调度人:</td>
@@ -203,6 +203,18 @@
 <script src="/js/html2canvas.js"></script>
 <script src="/js/jspdf.debug.js"></script>
 <script>
+    let url = ''
+
+    function getlianjie() {
+        url = '/waybill/qrimage?codestr='+window.location.href
+        document.getElementById('imagesqrcode').src = url
+        console.log(url)
+        return   window.location.href;
+    }
+    getlianjie()
+
+
+
     //转pdf文件
     function doPrint() {
         bdhtml = window.document.body.innerHTML;
