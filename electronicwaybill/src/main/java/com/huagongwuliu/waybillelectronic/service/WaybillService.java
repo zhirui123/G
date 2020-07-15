@@ -138,6 +138,30 @@ public class WaybillService {
 
 
 
+
+    /**
+     * 根据货物名称查询
+     * @param goodsName
+     * @param userId
+     * @return
+     */
+
+     public List<Waybill> queryByGoodsNameAndUserId(String goodsName,String userId){
+         return  this.waybillMapper.queryByGoodsNameAndUserId(goodsName, userId);
+     }
+
+
+    /**
+     * 根据用户UserId
+     * 查询
+     * @param userId
+     * @return
+     */
+    public List<Waybill> queryByUserId(String userId){
+        return  this.waybillMapper.queryByUserId(userId);
+    }
+
+
 //
 //
 //    public void  deleteWaybillById(Long id) throws Exception{

@@ -106,4 +106,15 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
     List<Waybill> queryByEscortNameAndUserId(String escortName,String userId);
 
 
+    /**
+     * 根据货物名称查询
+     * @param goodsName
+     * @param userId
+     * @return
+     */
+
+    @Select("select * from tb_eway where goods_name LIKE concat('%',#{goodsName},'%') and user_id = #{userId}")
+    List<Waybill> queryByGoodsNameAndUserId(String goodsName,String userId);
+
+
 }

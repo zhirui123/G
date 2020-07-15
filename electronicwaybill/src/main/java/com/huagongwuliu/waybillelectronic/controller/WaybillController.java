@@ -1,7 +1,6 @@
 package com.huagongwuliu.waybillelectronic.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.huagongwuliu.waybillelectronic.pojo.Goods;
 import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.service.GoodsService;
@@ -189,7 +188,7 @@ public class WaybillController {
 
 
     /**
-     * 根据装货人查询
+     * 根据托运人查询
      * @param shipperName
      * @param userId
      * @return
@@ -200,7 +199,15 @@ public class WaybillController {
     public   ResultInfo queryByShipperNameAndUserId(@RequestParam("shipperName") String shipperName,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Waybill>  waybills =  this.waybillService.queryByShipperNameAndUserId(shipperName, userId);
+        List<Waybill>  waybills = null;
+
+        if (shipperName.length() == 0 || shipperName == null){
+            waybills = this.waybillService.queryByUserId(userId);
+        }else{
+            waybills = this.waybillService.queryByShipperNameAndUserId(shipperName, userId);
+        }
+
+
         try {
             info.setResult_code(0);
             info.setResult_data(waybills);
@@ -226,7 +233,17 @@ public class WaybillController {
     public   ResultInfo queryByShiptoNameAndUserId(@RequestParam("shiptoName") String shiptoName,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Waybill>  waybills =  this.waybillService.queryByShiptoNameAndUserId(shiptoName,userId);
+
+        List<Waybill>  waybills = null;
+
+        if (shiptoName.length() == 0 || shiptoName == null){
+            waybills = this.waybillService.queryByUserId(userId);
+        }else{
+            waybills = this.waybillService.queryByShiptoNameAndUserId(shiptoName,userId);
+        }
+
+
+
         try {
             info.setResult_code(0);
             info.setResult_data(waybills);
@@ -252,7 +269,14 @@ public class WaybillController {
     public   ResultInfo queryByShipmentNameAndUserId(@RequestParam("shipmentName") String shipmentName,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Waybill>  waybills =  this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
+        List<Waybill>  waybills =   null;
+        if (shipmentName.length() == 0 || shipmentName == null){
+            waybills = this.waybillService.queryByUserId(userId);
+        }else{
+            waybills = this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
+        }
+
+
         try {
             info.setResult_code(0);
             info.setResult_data(waybills);
@@ -277,7 +301,14 @@ public class WaybillController {
     public   ResultInfo queryByCarriageNameAndUserId(@RequestParam("carriageName") String carriageName,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Waybill>  waybills =  this.waybillService.queryByCarriageNameAndUserId(carriageName, userId);
+        List<Waybill>  waybills =   null;
+        if (carriageName.length() == 0 || carriageName == null){
+            waybills = this.waybillService.queryByUserId(userId);
+        }else{
+            waybills = this.waybillService.queryByCarriageNameAndUserId(carriageName, userId);
+        }
+
+
         try {
             info.setResult_code(0);
             info.setResult_data(waybills);
@@ -303,7 +334,15 @@ public class WaybillController {
     public   ResultInfo queryByLicensePlateNumAndUserId(@RequestParam("licensePlateNum") String licensePlateNum,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Waybill>  waybills =  this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
+
+        List<Waybill>  waybills =   null;
+        if (licensePlateNum.length() == 0 || licensePlateNum == null){
+            waybills = this.waybillService.queryByUserId(userId);
+        }else{
+            waybills = this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
+        }
+
+
         try {
             info.setResult_code(0);
             info.setResult_data(waybills);
@@ -328,7 +367,16 @@ public class WaybillController {
     public   ResultInfo queryByCanbodyNumAndUserId(@RequestParam("canbodyNum") String canbodyNum,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Waybill>  waybills =  this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
+
+        List<Waybill>  waybills =   null;
+        if (canbodyNum.length() == 0 || canbodyNum == null){
+            waybills = this.waybillService.queryByUserId(userId);
+        }else{
+            waybills = this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
+        }
+
+
+
         try {
             info.setResult_code(0);
             info.setResult_data(waybills);
@@ -353,7 +401,15 @@ public class WaybillController {
     public   ResultInfo queryByEscortNameAndUserId(@RequestParam("escortName") String escortName,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Waybill>  waybills =  this.waybillService.queryByEscortNameAndUserId(escortName, userId);
+
+        List<Waybill>  waybills =   null;
+        if (escortName.length() == 0 || escortName == null){
+            waybills = this.waybillService.queryByUserId(userId);
+        }else{
+            waybills =  this.waybillService.queryByEscortNameAndUserId(escortName, userId);
+        }
+
+
         try {
             info.setResult_code(0);
             info.setResult_data(waybills);
@@ -366,24 +422,53 @@ public class WaybillController {
         return info;
     }
 
-
-
-    @PostMapping("/findbygoodname")
+    @PostMapping("/findbyegoodsname")
     @ResponseBody
-    public   ResultInfo queryByGoodsName(@RequestParam("goodsName") String goodsName) throws  Exception{
+    public   ResultInfo queryByGoodsNameAndUserId(@RequestParam("goodsName") String goodsName,@RequestParam("userId") String userId) throws  Exception{
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Goods> goodsList = this.goodsService.queryByGoodsName(goodsName);
+
+        List<Waybill>  waybills =   null;
+        if (goodsName.length() == 0 || goodsName == null){
+            waybills = this.waybillService.queryByUserId(userId);
+        }else{
+            waybills =  this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
+        }
+
+
+
         try {
             info.setResult_code(0);
-            info.setResult_data(goodsList);
+            info.setResult_data(waybills);
             info.setResult_msg("成功");
         }catch (Exception e){
             info.setResult_code(1);
-            info.setResult_data(goodsList);
+            info.setResult_data(waybills);
             info.setResult_msg("失败");
         }
         return info;
     }
+
+
+
+
+
+//    @PostMapping("/findbygoodname")
+//    @ResponseBody
+//    public   ResultInfo queryByGoodsName(@RequestParam("goodsName") String goodsName) throws  Exception{
+//        //验证码错误
+//        ResultInfo info = new ResultInfo();
+//        List<Goods> goodsList = this.goodsService.queryByGoodsName(goodsName);
+//        try {
+//            info.setResult_code(0);
+//            info.setResult_data(goodsList);
+//            info.setResult_msg("成功");
+//        }catch (Exception e){
+//            info.setResult_code(1);
+//            info.setResult_data(goodsList);
+//            info.setResult_msg("失败");
+//        }
+//        return info;
+//    }
 
 }
