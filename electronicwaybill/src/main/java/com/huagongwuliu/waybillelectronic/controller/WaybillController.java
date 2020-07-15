@@ -107,7 +107,16 @@ public class WaybillController {
                 info.setResult_code(0);
                 info.setResult_msg("成功");
             }
-            info.setResult_data(recode);
+
+            List<Waybill> waybillList = this.waybillService.queryByWaybillCodeAndUserId(waybill.getWaybillCode(),waybill.getUserId());
+            if (waybillList.size() > 0){
+                Waybill waybill1 = waybillList.get(0);
+                info.setResult_data(waybill1);
+            }else{
+                info.setResult_data(recode);
+            }
+
+
             return info;
         }catch (Exception e){
             info.setResult_code(1);
@@ -241,8 +250,6 @@ public class WaybillController {
         }else{
             waybills = this.waybillService.queryByShiptoNameAndUserId(shiptoName,userId);
         }
-
-
 
         try {
             info.setResult_code(0);

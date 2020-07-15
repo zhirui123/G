@@ -162,6 +162,20 @@ public class WaybillService {
     }
 
 
+
+    /**
+     * 根据运单编号查询
+     * @param waybillCode
+     * @param userId
+     * @return
+     */
+
+    public   List<Waybill> queryByWaybillCodeAndUserId(String waybillCode,String userId){
+        return this.waybillMapper.queryByWaybillCodeAndUserId(waybillCode, userId);
+    }
+
+
+
 //
 //
 //    public void  deleteWaybillById(Long id) throws Exception{
