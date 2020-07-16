@@ -162,6 +162,7 @@ public class WaybillController {
             info.setResult_data(recode);
             return info;
         }catch (Exception e){
+            e.printStackTrace();
             info.setResult_code(1);
             info.setResult_data(0);
             info.setResult_msg("失败");
