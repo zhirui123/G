@@ -69,6 +69,7 @@ public class Waybill {
 
     private  String userId;//
     private  String waybillCode;//电子运单编号
+    private  String status;//电子运单编号
 
 
 
