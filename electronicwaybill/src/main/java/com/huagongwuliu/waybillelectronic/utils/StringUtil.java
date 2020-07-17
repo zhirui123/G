@@ -17,6 +17,7 @@ public class StringUtil {
         return str == null || str.length() == 0;
     }
 
+
     /**
      * 非空
      *
