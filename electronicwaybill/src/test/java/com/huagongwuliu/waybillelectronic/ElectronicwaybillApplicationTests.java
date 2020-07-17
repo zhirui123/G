@@ -8,6 +8,7 @@ class ElectronicwaybillApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

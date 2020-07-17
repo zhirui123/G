@@ -174,12 +174,15 @@ public class WaybillController {
 
     @PostMapping("/status")
     @ResponseBody
-    public ResultInfo changeWaybillStatus(@RequestParam String status, @RequestParam(defaultValue = "0") int goodsNum, @RequestParam Long id)  {
+    public ResultInfo changeWaybillStatus(@RequestParam String status, @RequestParam(defaultValue = "0") int goodsNum, @RequestParam Long id) {
         //验证码错误
         ResultInfo info = new ResultInfo();
 
         if (status == null || status.length() == 0) {
             status = "0";
+        }
+        if (!"5".equals(status)) {
+            status = String.valueOf(Integer.parseInt(status) + 1);
         }
 
         try {
@@ -188,7 +191,23 @@ public class WaybillController {
                 info.setResult_code(1);
                 info.setResult_msg("失败");
             } else {
+                String str = "接单完成，等待装货";
+                switch (status) {
+                    case "1":
+                        str = "接单完成，等待装货";
+                        break;
+                    case "2":
+                        str = "开始装货";
+                        break;
+                    case "3":
+                        str = "装货完成，开始运输";
+                        break;
+                    case "4":
+                        str = "卸货完成，任务结束";
+                        break;
+                }
                 info.setResult_code(0);
+                info.setResult_data(str);
                 info.setResult_msg("成功");
             }
             info.setResult_data(recode);
