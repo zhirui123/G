@@ -522,7 +522,7 @@ public class WaybillController {
 
         byte[] qrcode = null;
         try {
-            qrcode = QRCodeGenerator.getQRCodeImage(info, 360, 360);
+            qrcode = QRCodeGenerator.getQRCodeImage(info, 200, 200);
         } catch (WriterException e) {
             e.printStackTrace();
         } catch (IOException e) {

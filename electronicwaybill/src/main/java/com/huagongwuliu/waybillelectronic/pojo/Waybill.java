@@ -69,4 +69,5 @@ public class Waybill {
     private String status = "0";//电子运单编号
 
 
+
 }
