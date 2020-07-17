@@ -57,6 +57,17 @@ public class WaybillService {
 
 
     /**
+     * 修改货物运输的数量
+     * @param goodsNum
+     * @param id
+     * @param userId
+     * @return
+     */
+    public int changeGoodsNum(String goodsNum,Long id,String userId){
+        return  this.waybillMapper.changeGoodsNum(goodsNum, id, userId);
+    }
+
+    /**
      * 根据托运人，模糊查询
      * @param shipperName
      * @param userId

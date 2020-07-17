@@ -43,6 +43,15 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
             "</script>")
     int changeStatus(@Param("status") String status,@Param("goodsNum") int goodsNum, Long id);
 
+    /**
+     * 更改货物运输的数量
+     * @param goodsNum
+     * @param id
+     * @param userId
+     * @return
+     */
+    @Update("UPDATE tb_eway SET goods_num = #{goodsNum}  where id = #{id} and  user_id = #{userId}")
+    int changeGoodsNum(String goodsNum,Long id,String userId);
 
 
     /**
