@@ -2,6 +2,7 @@ package com.huagongwuliu.waybillelectronic.mapper;
 
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -32,8 +33,15 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
     @Select("select * from tb_eway  where user_id = #{userId} ")
     List<Waybill> queryByUserId(String userId);
 
-    @Update("UPDATE tb_eway SET status = #{status}  where id = #{id}")
-    int changeStatus(String status,Long id);
+    @Update("<script>" +
+            " UPDATE tb_eway " +
+            "<set>" +
+            "<if test=' status != null '> status = #{status}, </if>" +
+            "<if test=' goodsNum != 0 '> goods_num = #{goodsNum} </if>" +
+            "</set>" +
+            "where id = #{id}" +
+            "</script>")
+    int changeStatus(@Param("status") String status,@Param("goodsNum") int goodsNum, Long id);
 
 
 

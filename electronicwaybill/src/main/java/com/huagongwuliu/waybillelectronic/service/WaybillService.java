@@ -51,8 +51,8 @@ public class WaybillService {
     }
 
 
-    public  int changeStatusAction(String status,Long id) throws Exception{
-        return  this.waybillMapper.changeStatus(status,id);
+    public int changeStatusAction(String status,int goodsNum,Long id) {
+        return  this.waybillMapper.changeStatus(status,goodsNum,id);
     }
 
 
