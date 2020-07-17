@@ -3,7 +3,6 @@ package com.huagongwuliu.waybillelectronic.controller;
 import com.github.pagehelper.PageInfo;
 import com.google.zxing.WriterException;
 import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
-import com.huagongwuliu.waybillelectronic.pojo.Shipper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.service.ShipperService;
 import com.huagongwuliu.waybillelectronic.service.WaybillService;
@@ -202,7 +201,7 @@ public class WaybillController {
         if (status == null || status.length() == 0) {
             status = "0";
         }
-        if (!"5".equals(status)) {
+        if (!"4".equals(status)) {
             status = String.valueOf(Integer.parseInt(status) + 1);
         }
 
@@ -255,15 +254,21 @@ public class WaybillController {
     public ResultInfo queryByShipperNameAndUserId(@RequestParam("shipperName") String shipperName, @RequestParam("userId") String userId) throws Exception {
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Shipper> shipperList = null;
-        shipperList = this.shipperService.queryByShipperNameAndUserId(shipperName,userId);
+        List<Waybill> waybills = null;
+
+        if (StringUtil.isNotEmpty(shipperName)){
+            waybills = this.waybillService.queryByShipperNameAndUserId(shipperName,userId);
+        }else{
+            waybills = this.waybillService.queryByUserId(userId);
+        }
+
         try {
             info.setResult_code(0);
-            info.setResult_data(shipperList);
+            info.setResult_data(waybills);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(shipperList);
+            info.setResult_data(waybills);
             info.setResult_msg("失败");
         }
         return info;
@@ -319,11 +324,14 @@ public class WaybillController {
         //验证码错误
         ResultInfo info = new ResultInfo();
         List<Waybill> waybills = null;
+
+
         if (shipmentName.length() == 0 || shipmentName == null) {
             waybills = this.waybillService.queryByUserId(userId);
         } else {
             waybills = this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
         }
+
 
 
         try {

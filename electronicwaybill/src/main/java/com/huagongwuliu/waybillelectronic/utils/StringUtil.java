@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 public class StringUtil {
     private static Pattern UNDERLINE_TO_CAMELHUMP_PATTERN = Pattern.compile("_[a-z]");
-
     /**
      * 空
      *
