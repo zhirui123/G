@@ -210,7 +210,7 @@ public class WaybillController {
                 info.setResult_data(str);
                 info.setResult_msg("成功");
             }
-            info.setResult_data(recode);
+//            info.setResult_data(recode);
             return info;
         } catch (Exception e) {
             info.setResult_code(1);
