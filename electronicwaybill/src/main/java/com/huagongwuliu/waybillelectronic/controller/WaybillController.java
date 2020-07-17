@@ -3,10 +3,12 @@ package com.huagongwuliu.waybillelectronic.controller;
 import com.github.pagehelper.PageInfo;
 import com.google.zxing.WriterException;
 import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
+import com.huagongwuliu.waybillelectronic.pojo.Shipper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
-import com.huagongwuliu.waybillelectronic.service.GoodsService;
+import com.huagongwuliu.waybillelectronic.service.ShipperService;
 import com.huagongwuliu.waybillelectronic.service.WaybillService;
 import com.huagongwuliu.waybillelectronic.utils.QRCodeGenerator;
+import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import com.huagongwuliu.waybillelectronic.utils.WaybillUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import tk.mybatis.mapper.util.StringUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +32,7 @@ public class WaybillController {
     private WaybillService waybillService;
 
     @Autowired
-    private GoodsService goodsService;
+    private ShipperService shipperService;
 
     @GetMapping("/show")
     public String show() {
@@ -105,6 +106,14 @@ public class WaybillController {
 
         try {
             waybill.setWaybillCode(WaybillUtils.getCode());
+            if (!StringUtil.isEmpty(waybill.getLicensePlateNum())){
+                waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
+            }
+
+            if (!StringUtil.isEmpty(waybill.getTrailerNum())){
+                waybill.setTrailerNum(waybill.getTrailerNum().toUpperCase());
+            }
+
             int recode = this.waybillService.insertWaybillByWaubillObj(waybill);
 
             if (recode == 0) {
@@ -152,6 +161,18 @@ public class WaybillController {
             return info;
         }
         try {
+
+            if (!StringUtil.isEmpty(waybill.getLicensePlateNum())){
+                waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
+            }
+
+            if (!StringUtil.isEmpty(waybill.getTrailerNum())){
+                waybill.setTrailerNum(waybill.getTrailerNum().toUpperCase());
+            }
+
+
+
+
             int recode = this.waybillService.updateWaybillByWaubillObj(waybill);
             if (recode == 0) {
                 info.setResult_code(1);
@@ -234,22 +255,15 @@ public class WaybillController {
     public ResultInfo queryByShipperNameAndUserId(@RequestParam("shipperName") String shipperName, @RequestParam("userId") String userId) throws Exception {
         //验证码错误
         ResultInfo info = new ResultInfo();
-        List<Waybill> waybills = null;
-
-        if (shipperName.length() == 0 || shipperName == null) {
-            waybills = this.waybillService.queryByUserId(userId);
-        } else {
-            waybills = this.waybillService.queryByShipperNameAndUserId(shipperName, userId);
-        }
-
-
+        List<Shipper> shipperList = null;
+        shipperList = this.shipperService.queryByShipperNameAndUserId(shipperName,userId);
         try {
             info.setResult_code(0);
-            info.setResult_data(waybills);
+            info.setResult_data(shipperList);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(waybills);
+            info.setResult_data(shipperList);
             info.setResult_msg("失败");
         }
         return info;

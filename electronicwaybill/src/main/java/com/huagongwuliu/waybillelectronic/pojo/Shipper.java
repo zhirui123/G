@@ -17,6 +17,8 @@ public class Shipper {
     private  String shipperName;//托运方
     private  String shipperContact;//托运方联系人
     private  String shipperPhone;//托运方 联系电话
+    private  String userId;
+    private  String ydId;
 
 
 }

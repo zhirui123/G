@@ -3,7 +3,9 @@ package com.huagongwuliu.waybillelectronic.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillMapper;
+import com.huagongwuliu.waybillelectronic.pojo.Shipper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
+import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +16,12 @@ public class WaybillService {
 
     @Resource
     private WaybillMapper waybillMapper;
+
+    @Resource
+    private ShipperService shipperService;
+
+
+
 
     public List<Waybill> findAll() throws Exception{
         return  this.waybillMapper.findAll();
@@ -47,6 +55,10 @@ public class WaybillService {
         return this.waybillMapper.updateByPrimaryKeySelective(waybill);
     }
     public Integer  insertWaybillByWaubillObj(Waybill waybill) throws Exception{
+
+
+        this.addToRelatedTables(waybill);
+
         return this.waybillMapper.insert(waybill);
     }
 
@@ -184,6 +196,40 @@ public class WaybillService {
     public   List<Waybill> queryByWaybillCodeAndUserId(String waybillCode,String userId){
         return this.waybillMapper.queryByWaybillCodeAndUserId(waybillCode, userId);
     }
+
+
+
+
+    void   addToRelatedTables(Waybill waybill){
+
+        try {
+
+           if (StringUtil.isNotEmpty(waybill.getShipperName())){
+
+               Shipper shipper = new Shipper();
+               shipper.setShipperName(waybill.getShipperName());
+               shipper.setShipperContact(waybill.getShipperContact());
+               shipper.setShipperPhone(waybill.getShipperPhone());
+               shipper.setUserId(waybill.getUserId());
+               shipper.setYdId(waybill.getWaybillCode());
+
+               System.out.println("阿萨德红粉金刚就爱上的看法");
+               this.shipperService.insertShipper(shipper);
+               System.out.println("1324567890、、、、、、、、、");
+
+
+           }
+
+
+
+
+        }catch (Exception e){
+
+
+
+        }
+    }
+
 
 
 
