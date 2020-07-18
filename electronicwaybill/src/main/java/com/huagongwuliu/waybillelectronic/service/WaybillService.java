@@ -41,11 +41,7 @@ public class WaybillService {
 
 
     public PageInfo<Waybill> queryByUserId(String userId, int pageNum, int pageSize) {
-
-
-
-        PageHelper.startPage(pageNum,pageSize,"id desc");
-
+        PageHelper.startPage(pageNum,pageSize);
         List<Waybill> waybills =  this.waybillMapper.queryByUserId(userId);
         PageInfo<Waybill> pageInfo = new PageInfo<>(waybills);
         return pageInfo;

@@ -30,7 +30,7 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
     @Select("select * from tb_eway where id = #{id} and user_id = #{userId}")
     List<Waybill> queryByIdAndUserId(Long id,String userId);
 
-    @Select("select * from tb_eway  where user_id = #{userId} ")
+    @Select("select * from tb_eway where user_id = #{userId} order by add_time desc")
     List<Waybill> queryByUserId(String userId);
 
     @Update("<script>" +
