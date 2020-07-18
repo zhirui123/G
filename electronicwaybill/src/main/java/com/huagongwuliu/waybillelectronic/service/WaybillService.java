@@ -6,6 +6,7 @@ import com.huagongwuliu.waybillelectronic.mapper.WaybillMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Shipper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +20,9 @@ public class WaybillService {
 
     @Resource
     private ShipperService shipperService;
+
+    @Autowired
+    private GoodsService goodsService;
 
 
 
@@ -52,10 +56,8 @@ public class WaybillService {
     }
     public Integer  insertWaybillByWaubillObj(Waybill waybill) throws Exception{
 
+       return  this.waybillMapper.insert(waybill);
 
-        this.addToRelatedTables(waybill);
-
-        return this.waybillMapper.insert(waybill);
     }
 
 

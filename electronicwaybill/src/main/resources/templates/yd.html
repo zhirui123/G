@@ -1,18 +1,13 @@
 <!DOCTYPE html>
-<!-- saved from url=(0108)http://yd.huagongwuliu.com/action/s.php?img=/images/yinzhang.png&key=&order=MzcxNDAwMDAzNTIwMDcxMzAwMDU2Mjc0 -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <title>电子运单系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <link rel="stylesheet" href="./电子运单系统_files/plus.css" media="all">
-    <link rel="stylesheet" href="./电子运单系统_files/common.css" media="all">
 </head>
-<body style="margin: 5px;font-size:10px;">
-<div style="margin: 5px;" id="yd" class="ddr">
+<body style="font-size:8px; margin: 0;">
+<div style="margin:0" id="yd" class="ddr">
     <style>
         #yd .font-weight {
             font-weight: bolder;
@@ -21,7 +16,7 @@
         }
 
         #yd td {
-            padding: 5px;
+            padding: 3px;
         }
 
         .div2 {
@@ -32,168 +27,124 @@
             left: 10%;
         }
     </style>
-<!--    <a class="layui-btn layui-btn-primary" href="javascript:mobilePdf();"><font color="#01AAED">下载PDF文件</font></a>&nbsp;&nbsp;-->
-<!--    <a href="javascript:doPrint();" class="layui-btn layui-btn-primary print_table"><font color="#01AAED">打印</font></a>-->
-    <div class="ddr">
+    <!--    <a class="layui-btn layui-btn-primary" href="javascript:mobilePdf();"><font color="#01AAED">下载PDF文件</font></a>&nbsp;&nbsp;-->
+    <!--    <a href="javascript:doPrint();" class="layui-btn layui-btn-primary print_table"><font color="#01AAED">打印</font></a>-->
+    <div class="ddr" style="margin-top: 20px">
         <!--startprint-->
-<!--        <div class="div2"><img src="/img/yinzhang.png" border="0" width="160px;height=160px;"></div>-->
+        <!--        <div class="div2"><img src="/img/yinzhang.png" border="0" width="160px;height=160px;"></div>-->
 
-        <table style="table-layout: fixed;border-collapse:collapse;" border="1" width="100%" cellspacing="0"
-               cellpadding="1">
+        <table style="border-collapse:collapse;" border="1" width="100%" cellspacing="0" cellpadding="1">
             <tbody>
             <tr>
-                <td colspan="8" align="center" style="font-weight:bolder;text-align:center;">危险货物道路运输运单</td>
+                <td colspan="7" align="center" style="font-weight:bolder;text-align:center;">危险货物道路运输运单</td>
             </tr>
             <tr>
-                <td th:text="运单编号 + ${yd.waybillCode}" colspan="8" style="font-weight:bolder;text-align:left;">
+                <td th:text="运单编号 + ':'+${yd.waybillCode}" colspan="7" style="text-align:center;text-align:left;">
                     运单编号：371400003520071300056274
                 </td>
             </tr>
-            <!--            th:each="yd1 : ${yd}"-->
-            <!--            th:text="${yd1.shipperName}"-->
             <tr>
-                <td rowspan="2" style="font-weight:bolder;text-align:left;width:10%">托运人</td>
-                <td style="font-weight:bolder;text-align:left;">名称</td>
+                <td rowspan="2" style="text-align:center;text-align:center;" width="30">托运人</td>
+                <td style="text-align:center;text-align:center;">名称</td>
                 <td th:text="${yd.shipperName}" colspan="2">中石化天津</td>
-                <td rowspan="2" style="font-weight:bolder;text-align:left;">收货人</td>
-                <td style="font-weight:bolder;text-align:left;">名称</td>
-                <td th:text="${yd.shiptoName}" colspan="2"> 闫升化</td>
+                <td rowspan="2" style="text-align:center;text-align:center;" width="30">收货人</td>
+                <td style="text-align:center;text-align:center;" width="40">名称</td>
+                <td th:text="${yd.shiptoName}"> 闫升化</td>
             </tr>
             <tr>
-                <td style="font-weight:bolder;text-align:left;">联系电话</td>
+                <td style="text-align:center;text-align:center;" width="30">联系电话</td>
                 <td th:text="${yd.shipperPhone}" colspan="2">15032208852</td>
-                <td style="font-weight:bolder;text-align:left;">联系电话</td>
-                <td th:text="${yd.shiptoPhone}" colspan="2">13630868852</td>
+                <td style="text-align:center;text-align:center;" width="30">联系电话</td>
+                <td th:text="${yd.shiptoPhone}">13630868852</td>
             </tr>
             <tr>
-                <td rowspan="2" style="font-weight:bolder;text-align:left;">装货人</td>
-                <td style="font-weight:bolder;text-align:left;">名称</td>
+                <td rowspan="2" style="text-align:center;text-align:center;">装货人</td>
+                <td style="text-align:center;text-align:center;">名称</td>
                 <td th:text="${yd.shipmentName}" colspan="2"> 李刚磊</td>
-                <td style="font-weight:bolder;text-align:left;">起运日期</td>
-                <td th:text="${yd.shipmentStarttime}" colspan="3">2020-07-13</td>
+                <td style="text-align:center;text-align:center;">起运日期</td>
+                <td th:text="${yd.shipmentStarttime}" colspan="2">2020-07-13</td>
             </tr>
             <tr>
-                <td style="font-weight:bolder;text-align:left;">联系电话</td>
+                <td style="text-align:center;text-align:center;">联系电话</td>
                 <td th:text="${yd.shipmentPhone}" colspan="2"> 18925556666</td>
-                <td style="font-weight:bolder;text-align:left;">起运地</td>
-                <td th:text="${yd.shipmentFromAddress}" colspan="3"> 济南</td>
+                <td style="text-align:center;text-align:center;">起运地</td>
+                <td th:text="${yd.shipmentFromAddress}" colspan="2"> 济南</td>
             </tr>
             <tr>
-                <td style="font-weight:bolder;text-align:left;">目的地</td>
-                <td th:text="${yd.shipmentToAddress}" colspan="5"> 沧州</td>
-                <td colspan="2" style="font-weight:bolder;text-align:left;">
+                <td style="text-align:center;text-align:center;">目的地</td>
+                <td th:text="${yd.shipmentToAddress}" colspan="4"> 沧州</td>
+                <td colspan="2" style="text-align:center;text-align:left;">城市配送
                 </td>
             </tr>
             <tr>
-                <td rowspan="5" style="font-weight:bolder;text-align:left;">承运人</td>
-                <td style="font-weight:bolder;text-align:left;">单位名称</td>
+                <td rowspan="8" style="text-align:center;text-align:center;">承运人</td>
+                <td style="text-align:center;text-align:center;">单位名称</td>
                 <td th:text="${yd.carriageName}" colspan="2">山东易罐云物流有限公司</td>
-                <td style="font-weight:bolder;text-align:left;">联系电话</td>
-                <td th:text="${yd.carriagePhone}" colspan="3">18053407653</td>
+                <td style="text-align:center;text-align:center;">联系电话</td>
+                <td th:text="${yd.carriagePhone}" colspan="2">18053407653</td>
             </tr>
             <tr>
-                <td style="font-weight:bolder;text-align:left;">许可证号</td>
-                <td th:text="${yd.carriageLicensekey}" colspan="6"> 371401000035</td>
+                <td style="text-align:center;text-align:center;">许可证号</td>
+                <td th:text="${yd.carriageLicensekey}" colspan="5"> 371401000035</td>
             </tr>
             <tr>
-                <td colspan="7" cellpadding="0" cellspacing="0">
-                    <table width="100%" border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
-                        <tbody>
-                        <tr>
-                            <td rowspan="2" style="font-weight:bolder;text-align:left;" width="15%">车辆信息</td>
-                            <td colspan="2" style="font-weight:bolder;text-align:left;" width="25%">车牌号码（颜色）</td>
-                            <td th:text="${yd.licensePlateNum}+(${yd.licensePlateColor})">鲁NE8899(黄牌)</td>
-                            <td rowspan="2" style="font-weight:bolder;text-align:left;" width="15%">挂车信息</td>
-                            <td style="font-weight:bolder;text-align:left;" width="25%">车牌号码</td>
-                            <td th:text="${yd.licensePlateNum}">鲁NE5522挂</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="font-weight:bolder;text-align:left;" width="25%">道路运输证号</td>
-                            <td th:text="${yd.trailerRoadRansportPermit}" width="15%">3216541265456</td>
-                            <td style="font-weight:bolder;text-align:left;width:10%" width="25%">道路运输证号</td>
-                            <td th:text="${yd.trailerRoadRansportPermit}" width="15%">313216921322</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <td rowspan="2" style="text-align:center;text-align:center;">车辆信息</td>
+                <td style="text-align:center;text-align:center;">车牌号码(颜色)</td>
+                <td th:text="|${yd.licensePlateNum}(${yd.licensePlateColor})|">鲁NE8899(黄牌)</td>
+                <td rowspan="2" style="text-align:center;text-align:center;">挂车信息</td>
+                <td style="text-align:center;text-align:center;">车牌号码</td>
+                <td th:text="${yd.licensePlateNum}">鲁NE5522挂</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;text-align:center;">道路运输证号</td>
+                <td th:text="${yd.trailerRoadRansportPermit}">3216541265456</td>
+                <td style="text-align:center;text-align:center;">道路运输证号</td>
+                <td th:text="${yd.trailerRoadRansportPermit}">313216921322</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;text-align:center;">罐体信息</td>
+                <td style="text-align:center;text-align:center;">罐体编号</td>
+                <td th:text="${yd.canbodyNum}" colspan="2">5131325321</td>
+                <td style="text-align:center;text-align:center;">罐体容积</td>
+                <td th:text="${yd.canbodyVolume}">36</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="text-align:center;text-align:center;">驾驶员</td>
+                <td style="text-align:center;text-align:center;">姓名</td>
+                <td th:text="${yd.driverName}">杜立辉</td>
+                <td rowspan="3" style="text-align:center;text-align:center;">押运员</td>
+                <td style="text-align:center;text-align:center;">姓名</td>
+                <td th:text="${yd.escortCertificate}">34531561222</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;text-align:center;">从业资格证</td>
+                <td th:text="${yd.driverCertificate}">3714221999999</td>
+                <td style="text-align:center;text-align:center;">从业资格证</td>
+                <td th:text="${yd.escortCertificate}">34531561222</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;text-align:center;">联系电话</td>
+                <td th:text="${yd.driverPhone}">15668321122</td>
+                <td style="text-align:center;text-align:center;">联系电话</td>
+                <td th:text="${yd.escortPhone}">15822335555</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;text-align:center;">货物信息</td>
+                <td th:text="|${yd.unNum},${yd.goodsName}, ${yd.goodsType},${yd.goodsPackingType},${yd.goodsNum} ,${yd.goodsCompany}|"
+                    style="text-align:center;text-align:center;" colspan="6">UN编号
                 </td>
             </tr>
-
             <tr>
-                <td colspan="7">
-                    <table width="100%" border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
-                        <tbody>
-                        <tr>
-                            <td width="15%" style="font-weight:bolder;text-align:left;">罐体信息</td>
-                            <td colspan="2" style="font-weight:bolder;text-align:left;" width="15%">罐体编号</td>
-                            <td th:text="${yd.canbodyNum}" width="20%">5131325321</td>
-                            <td width="15%" style="font-weight:bolder;text-align:left;">罐体容积</td>
-                            <td th:text="${yd.canbodyVolume}" colspan="2" width="15%">36</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
+                <td style="text-align:center;text-align:center;">备注</td>
+                <td th:text="${yd.remarks}" colspan="4">-</td>
+                <td colspan="2" valign="middle" align="center" class="img-w" id="qrcode">
+                    <img id="imagesqrcode" width="60" height="60"></td>
             </tr>
             <tr>
-                <td colspan="7" cellpadding="0" cellspacing="0">
-                    <table width="98%" border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
-                        <tbody>
-                        <tr>
-                            <td rowspan="3" style="font-weight:bolder;text-align:left;">驾驶员</td>
-                            <td colspan="2" style="font-weight:bolder;text-align:left;" width="20%">姓名</td>
-                            <td th:text="${yd.driverName}" width="20%">杜立辉</td>
-                            <td rowspan="3" style="font-weight:bolder;text-align:left;" width="20%">押运员</td>
-                            <td style="font-weight:bolder;text-align:left;" width="20%">姓名</td>
-                            <td th:text="${yd.escortName}" width="20%">王明柱</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="font-weight:bolder;text-align:left;" width="20%">从业资格证</td>
-                            <td th:text="${yd.driverCertificate}" width="20%">3714221999999</td>
-                            <td style="font-weight:bolder;text-align:left;" width="20%">从业资格证</td>
-                            <td th:text="${yd.escortCertificate}" width="20%">34531561222</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="font-weight:bolder;text-align:left;" width="20%">联系电话</td>
-                            <td th:text="${yd.driverPhone}" width="20%">15668321122</td>
-                            <td style="font-weight:bolder;text-align:left;" width="20%">联系电话</td>
-                            <td th:text="${yd.escortPhone}" width="20%">15822335555</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td rowspan="2" style="font-weight:bolder;text-align:left;">货物信息</td>
-                <td style="font-weight:bolder;text-align:left;">UN编号</td>
-                <td th:text="${yd.unNum}"  width="10%">1203</td>
-                <td style="font-weight:bolder;text-align:left;">类别及项别</td>
-                <td th:text="${yd.goodsType}">3类</td>
-                <td  style="font-weight:bolder;text-align:left;">包装规格</td>
-                <td th:text="${yd.goodsPackingNorms}" colspan="2">罐装</td>
-            </tr>
-            <tr>
-                <td style="font-weight:bolder;text-align:left;">危险货物运输名称</td>
-                <td th:text="${yd.goodsName}">汽油</td>
-                <td style="font-weight:bolder;text-align:left;">包装类别</td>
-                <td th:text="${yd.goodsPackingType}" width="50%">1</td>
-                <td style="font-weight:bolder;text-align:left;">数量/单位</td>
-                <td th:text="${yd.goodsNum} + ${yd.goodsCompany}" colspan="2">30/吨</td>
-            </tr>
-            <tr>
-                <td style="font-weight:bolder;text-align:left;">备注</td>
-                <td th:text="${yd.remarks}" colspan="4" width="50%">泄漏处理： 发生泄漏，应迅速撤离泄漏污染区人员至安全区，并进行隔离，严格限制出入；切断火源，尽可能切断泄漏源，防止流入下水道、排水沟。 急救：
-                    皮肤接触，应脱去污染衣着，用清水冲洗皮肤。吸入中毒，应脱离现场至安全区，将患者平卧、给输氧。食入中毒，禁止催吐，发生呕吐时，应将患者左侧卧且头向下低，保持张口，以防止呕吐物被吸入；可用清水清洗口腔，并行当饮水，若患者不清醒，不能给予任何液体。
-                    灭火方法： 喷水冷却容器，将容器从火场中转移出来。灭火应用泡沫、干粉、二氧化碳灭火器 防护措施： 操作人员必须经过专门培训，严格遵守操作规程，并配备相应的劳动防护用品。
-                    运输作业应尽量选于早晚、避免高温作业，作业中严禁任何火种、氧化剂、静电。
-                </td>
-               <td colspan="3" valign="middle" align="center" class="img-w" id="qrcode">
-                    <img id="imagesqrcode" width="110" height="110"></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="font-weight:bolder;text-align:left;">调度人:</td>
+                <td style="text-align:center;" colspan="2">调度人:</td>
                 <td th:text="${yd.dispatcherName}" colspan="2">李明</td>
-                <td colspan="2" style="font-weight:bolder;text-align:left;">调度日期:</td>
-                <td th:text="${yd.dispatcherDate}" colspan="2">2020-07-13</td>
+                <td colspan="2" style="text-align:left;">调度日期:</td>
+                <td th:text="${yd.dispatcherDate}">2020-07-13</td>
             </tr>
             </tbody>
         </table>
@@ -206,13 +157,13 @@
     let url = ''
 
     function getlianjie() {
-        url = '/waybill/qrimage?codestr='+window.location.href
+        url = '/waybill/qrimage?codestr=' + window.location.href
         document.getElementById('imagesqrcode').src = url
         console.log(url)
-        return   window.location.href;
+        return window.location.href;
     }
-    getlianjie()
 
+    getlianjie()
 
 
     //转pdf文件
