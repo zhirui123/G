@@ -1,0 +1,30 @@
+server:
+  port: 8099
+spring:
+  application:
+    name: electronicwaybill
+  datasource:
+    url: jdbc:mysql://121.42.229.106:3306/waybill?autoReconnect=true&characterEncoding=utf-8
+    username: root
+    password: yiguan888
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  type-aliases-package: com.huagongwuliu.waybillelectronic.pojo
+  configuration:
+    #开启自动下划线格式转驼峰格式
+    map-underscore-to-camel-case: true
+#mybatis-plus:
+#  typeAliasesPackage: com.huagongwuliu.waybillelectronic.pojo
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+logging:
+  level:
+    com.huagongwuliu.waybillelectronic.mapper : debug
+
+
+
