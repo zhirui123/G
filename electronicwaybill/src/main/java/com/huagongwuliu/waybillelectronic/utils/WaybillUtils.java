@@ -92,7 +92,7 @@ public class WaybillUtils {
             sortNum2 = buLing+sortNum;
         }else{
             String buLing = "";
-            String letter = String.valueOf(65 + (sortNum / 1000) - 10);
+            String letter = String.valueOf((char)(65 + (sortNum / 1000) - 10));
             int i =  sortNum % 1000;
             if (i >= 100){
                 buLing = String.valueOf(i);
@@ -105,11 +105,7 @@ public class WaybillUtils {
 
         }
         String s = licenseKey.substring(0, 4) + licenseKey.substring(licenseKey.length() - 6) + DateUtil.format1(new Date(),DateUtil.DATEFORMAT1) + sortNum2 + getRandom(3);
-        System.out.println(licenseKey.substring(0, 4));
-        System.out.println(licenseKey.substring(licenseKey.length() - 6));
-        System.out.println(DateUtil.format1(new Date(),DateUtil.DATEFORMAT1));
-        System.out.println(sortNum2);
-        System.out.println(getRandom(3));
+
 
         byte[] bytes = s.getBytes();
         byte temp = bytes[0];
@@ -123,16 +119,21 @@ public class WaybillUtils {
 
 
 
-
-
-
     public static void main(String[] args) {
 
           creatYDOrderNum("1234567890",11);
 
 
-        System.out.println(creatYDOrderNum("1020102010201020",3));
+        System.out.println(creatYDOrderNum("1020102010201020",11));
 
+        ; //获取当前0点的时间戳
+        DateUtil.getDayEndTimestamp();
+        DateUtil.getNowTimestamp();
+
+
+        System.out.println("0点的时间 " + DateUtil.getDayStartTimestamp());
+        System.out.println("当前时间  " + DateUtil.getNowTimestamp());
+        System.out.println("晚上时间  " + DateUtil.getDayEndTimestamp());
 
     }
 

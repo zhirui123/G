@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Shipper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
+import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -199,12 +200,12 @@ public class WaybillService {
     /**
      * 根据userId和create_date 查询所有数量
      * @param userId
-     * @param createDate
      * @return
      * @throws Exception
      */
-    public   Integer queryCountByUserIdAndCreteDate(String userId,String createDate) throws  Exception{
-        return  this.waybillMapper.queryCountByUserIdAndCreteDate(userId,createDate);
+    public   Integer queryCountByUserIdAndCreteDate(String userId) throws  Exception{
+
+        return  this.waybillMapper.queryCountByUserIdAndCreteDate(userId,DateUtil.getDayStartTimestamp(),DateUtil.getDayEndTimestamp());
     }
 
 
