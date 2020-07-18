@@ -104,9 +104,18 @@ public class WaybillController {
             return info;
         }
 
+        if (waybill.getCarriageLicensekey().length() < 7){
+            info.setResult_code(1);
+            info.setResult_msg("请正确输入承运人许可证号");
+            return info;
+        }
+
+
+
         try {
             waybill.setAddTime(DateUtil.getNowTimestamp());
             waybill.setWaybillCode(WaybillUtils.getCode());
+            waybill.setWaybillCode(WaybillUtils.getCode("123",waybill.getCarriageLicensekey()));
             if (!StringUtil.isEmpty(waybill.getLicensePlateNum())){
                 waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
             }
