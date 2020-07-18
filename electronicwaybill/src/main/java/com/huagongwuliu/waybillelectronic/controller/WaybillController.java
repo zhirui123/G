@@ -324,7 +324,7 @@ public class WaybillController {
 
     @PostMapping("/findbyshiptoname")
     @ResponseBody
-    public ResultInfo queryByShiptoNameAndUserId(@RequestParam("shiptoName") String shiptoName, @RequestParam("userId") String userId) throws Exception {
+    public ResultInfo queryByShiptoNameAndUserId(@RequestParam("shiptoName") String shiptoName, @RequestParam("userId") String userId) {
         //验证码错误
         ResultInfo info = new ResultInfo();
 
@@ -335,10 +335,11 @@ public class WaybillController {
 //        } else {
 //            waybills = this.waybillService.queryByShiptoNameAndUserId(shiptoName, userId);
 //        }
-
+        List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getShiptoName() + ";"
+                + o.getShiptoPhone()))), ArrayList::new));//o代表属性值，根据此属性值去重
         try {
             info.setResult_code(0);
-            info.setResult_data(waybills);
+            info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
@@ -359,9 +360,9 @@ public class WaybillController {
 
     @PostMapping("/findbyshipmentname")
     @ResponseBody
-    public ResultInfo queryByShipmentNameAndUserId(@RequestParam("shipmentName") String shipmentName, @RequestParam("userId") String userId) throws Exception {
+    public Result queryByShipmentNameAndUserId(@RequestParam("shipmentName") String shipmentName, @RequestParam("userId") String userId) throws Exception {
         //验证码错误
-        ResultInfo info = new ResultInfo();
+        Result info = new Result();
         List<Waybill> waybills = null;
 
 
@@ -370,15 +371,16 @@ public class WaybillController {
 //        } else {
 //            waybills = this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
 //        }
-
+        List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getShipmentName() + ";"
+                + o.getShipmentPhone() + ";" + o.getShipmentFromAddress() + ";" + o.getShipmentStarttime() + ";" + o.getShipmentFromDetails() + ";" + o.getCityExpress() + ";" + o.getShipmentToAddress() + ";" + o.getShipmentToDetails()))), ArrayList::new));//o代表属性值，根据此属性值去重
 
         try {
             info.setResult_code(0);
-            info.setResult_data(waybills);
+            info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(waybills);
+            info.setResult_data(list);
             info.setResult_msg("失败");
         }
         return info;
@@ -532,15 +534,16 @@ public class WaybillController {
 //        } else {
         waybills = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
 //        }
-
+        List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
+                + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
 
         try {
             info.setResult_code(0);
-            info.setResult_data(waybills);
+            info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(waybills);
+            info.setResult_data(list);
             info.setResult_msg("失败");
         }
         return info;
