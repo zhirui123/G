@@ -85,13 +85,13 @@ public class WaybillUtils {
         String sortNum2 = null;
         if(0 < sortNum && sortNum <=9999){
             int i = (4 - (String.valueOf(sortNum)).length()) > 0 ? 4 - (String.valueOf(sortNum)).length() : 0;
-            String buLing = null;
+            String buLing = "";
             for(int j = 0;j <= i; j++){
                 buLing +="0";
             }
             sortNum2 = buLing+sortNum;
         }else{
-            String buLing = null;
+            String buLing = "";
             String letter = String.valueOf(65 + (sortNum / 1000) - 10);
             int i =  sortNum % 1000;
             if (i >= 100){
@@ -124,7 +124,7 @@ public class WaybillUtils {
           creatYDOrderNum("1234567890",11);
 
 
-        System.out.println(DateUtil.format1(new Date(),DateUtil.DATE_FORMAT));
+        System.out.println(creatYDOrderNum("1020102010201020",3));
 
 
     }
