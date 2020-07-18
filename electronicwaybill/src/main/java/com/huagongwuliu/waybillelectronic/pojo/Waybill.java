@@ -78,6 +78,8 @@ public class Waybill {
     private Integer addTime;//插入时间
     private Integer updateTime;//更新时间
 
+    private String createDate; //创建日期  yyyy-MM-dd
+
 
 
 }

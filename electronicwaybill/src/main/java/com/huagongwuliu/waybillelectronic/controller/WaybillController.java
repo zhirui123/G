@@ -21,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -113,9 +114,19 @@ public class WaybillController {
 
 
         try {
+
+
+            Integer serialNum = this.waybillService.queryCountByUserIdAndCreteDate(waybill.getUserId(),DateUtil.format1(new Date(),DateUtil.DATE_FORMAT));
+
+            System.out.println("--------------------" + serialNum);
+
+
             waybill.setAddTime(DateUtil.getNowTimestamp());
-            waybill.setWaybillCode(WaybillUtils.getCode());
-            waybill.setWaybillCode(WaybillUtils.getCode("123",waybill.getCarriageLicensekey()));
+//            getCode(serialNum,waybill.getCarriageLicensekey()
+            waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(waybill.getCarriageLicensekey(),15 + 1));
+            waybill.setCreateDate(DateUtil.format1(new Date(),DateUtil.DATE_FORMAT));
+
+
             if (!StringUtil.isEmpty(waybill.getLicensePlateNum())){
                 waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
             }

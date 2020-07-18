@@ -196,6 +196,18 @@ public class WaybillService {
     }
 
 
+    /**
+     * 根据userId和create_date 查询所有数量
+     * @param userId
+     * @param createDate
+     * @return
+     * @throws Exception
+     */
+    public   Integer queryCountByUserIdAndCreteDate(String userId,String createDate) throws  Exception{
+        return  this.waybillMapper.queryCountByUserIdAndCreteDate(userId,createDate);
+    }
+
+
 
 
     void   addToRelatedTables(Waybill waybill){
@@ -227,6 +239,8 @@ public class WaybillService {
 
         }
     }
+
+
 
 
 

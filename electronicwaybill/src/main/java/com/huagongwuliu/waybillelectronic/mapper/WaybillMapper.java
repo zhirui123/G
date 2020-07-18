@@ -33,6 +33,10 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
     @Select("select * from tb_eway where user_id = #{userId}  order by add_time desc")
     List<Waybill> queryByUserId(String userId);
 
+    @Select("SELECT COUNT(user_id)  FROM tb_eway  WHERE user_id = #{userId} and create_date = #{createDate}")
+    Integer queryCountByUserIdAndCreteDate(String userId,String createDate);
+
+
     @Update("<script>" +
             " UPDATE tb_eway " +
             "<set>" +

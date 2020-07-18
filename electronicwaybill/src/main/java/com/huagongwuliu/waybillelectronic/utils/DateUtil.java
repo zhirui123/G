@@ -225,7 +225,7 @@ public class DateUtil {
         if ("".equals(date))
             return "";
 
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(date);
     }
 

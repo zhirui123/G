@@ -37,32 +37,96 @@ public class WaybillUtils {
      * @param carriageLicensekey 承运人许可证号
      * @return
      */
-    public static synchronized String getCode(String serialNum, String carriageLicensekey)
+    public static synchronized String getCode(Integer serialNum, String carriageLicensekey)
     {
 
-        String  areaCode; //地区标号
-        String  enterpriseCode;// 企业标号
-        String  timeCode =  getDateTime(); //时间戳
+        StringBuffer sBuffer = new StringBuffer();
 
-//        String serialNumber = "123"; //顺序号
-        Long randomNumber =   getRandom(3);
+        sBuffer.append(carriageLicensekey.substring(0,4)); //区域代码
+        sBuffer.append(carriageLicensekey.substring(carriageLicensekey.length() - 6,carriageLicensekey.length())); //企业编码
+        sBuffer.append(getDateTime()); //生成时间
+        if (serialNum <10){
+            sBuffer.append("000" + serialNum);
+        }else if (serialNum < 100){
+            sBuffer.append("00" + serialNum);
+        }else  if (serialNum < 1000){
+            sBuffer.append("0" + serialNum);
+        }else  if (serialNum < 10000){
+            sBuffer.append(serialNum);
+        }else  if (serialNum >= 10000){
+            sBuffer.append((char)(65 + serialNum / 1000  -10));
+            int i =  serialNum % 1000;
+            if (i >= 100){
+                sBuffer.append(i);
+            }else if (i >= 10){
+                sBuffer.append("0");
+                sBuffer.append(i);
+            }else  if (i > 0){
+                sBuffer.append("00");
+                sBuffer.append(i);
+            }else{
+                sBuffer.append("0000");
+            }
+        }else{
+            sBuffer.append(0000);
+        }   //顺序号
+
+        sBuffer.append(getRandom(3)); //3位随机数
+
+        byte[] sb = sBuffer.toString().getBytes();
 
 
-        areaCode = carriageLicensekey.substring(0,4);
-        enterpriseCode = carriageLicensekey.substring(carriageLicensekey.length() - 6,carriageLicensekey.length());
-
-        System.out.println(areaCode + "-------------" + enterpriseCode);
+        return sBuffer.toString();
+    }
 
 
-        return getDateTime() + getRandom(6);
+
+    public static String creatYDOrderNum(String licenseKey,int sortNum){
+        String sortNum2 = null;
+        if(0 < sortNum && sortNum <=9999){
+            int i = (4 - (String.valueOf(sortNum)).length()) > 0 ? 4 - (String.valueOf(sortNum)).length() : 0;
+            String buLing = null;
+            for(int j = 0;j <= i; j++){
+                buLing +="0";
+            }
+            sortNum2 = buLing+sortNum;
+        }else{
+            String buLing = null;
+            String letter = String.valueOf(65 + (sortNum / 1000) - 10);
+            int i =  sortNum % 1000;
+            if (i >= 100){
+                buLing = String.valueOf(i);
+            }else if (i >= 10){
+                buLing = "0"+ String.valueOf(i);
+            }else  if (i > 0){
+                buLing = "00"+ String.valueOf(i);
+            }
+            sortNum2 = letter + buLing;
+
+        }
+        String s = licenseKey.substring(0, 4) + licenseKey.substring(licenseKey.length() - 6) + DateUtil.format1(new Date(),DateUtil.DATEFORMAT) + sortNum2 + getRandom(3);
+        byte[] bytes = s.getBytes();
+        byte temp = bytes[0];
+        for(int i=1;i<bytes.length;i++){
+            temp^=bytes[i];
+        }
+        int y = temp % 10;
+        return s + String.valueOf(y);
     }
 
 
 
 
 
+
     public static void main(String[] args) {
-        System.out.println(getCode("123","12345678901222"));
+
+          creatYDOrderNum("1234567890",11);
+
+
+        System.out.println(DateUtil.format1(new Date(),DateUtil.DATE_FORMAT));
+
+
     }
 
 
