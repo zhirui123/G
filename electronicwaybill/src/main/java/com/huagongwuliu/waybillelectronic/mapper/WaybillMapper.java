@@ -69,8 +69,6 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
 
 
 
-
-
     @Select( "<script>" +
             " select * from tb_eway where  user_id = #{userId} and shipper_status = 0" +
             "<if test=' shipperName != null '> and shipper_name like concat('%',#{shipperName},'%') </if>" +
