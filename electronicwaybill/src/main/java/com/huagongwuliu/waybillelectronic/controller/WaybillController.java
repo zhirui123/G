@@ -123,7 +123,7 @@ public class WaybillController {
 
             waybill.setAddTime(DateUtil.getNowTimestamp());
 //            getCode(serialNum,waybill.getCarriageLicensekey()
-            waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(waybill.getCarriageLicensekey(),15 + 1));
+            waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(waybill.getCarriageLicensekey(),serialNum + 1));
             waybill.setCreateDate(DateUtil.format1(new Date(),DateUtil.DATE_FORMAT));
 
 
