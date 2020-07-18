@@ -256,11 +256,11 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
         List<Waybill> waybills = null;
 
-        if (StringUtil.isNotEmpty(shipperName)){
+//        if (StringUtil.isNotEmpty(shipperName)){
             waybills = this.waybillService.queryByShipperNameAndUserId(shipperName,userId);
-        }else{
-            waybills = this.waybillService.queryByUserId(userId);
-        }
+//        }else{
+//            waybills = this.waybillService.queryByUserId(userId);
+//        }
 
         try {
             info.setResult_code(0);
@@ -291,11 +291,11 @@ public class WaybillController {
 
         List<Waybill> waybills = null;
 
-        if (shiptoName.length() == 0 || shiptoName == null) {
+//        if (shiptoName.length() == 0 || shiptoName == null) {
             waybills = this.waybillService.queryByUserId(userId);
-        } else {
-            waybills = this.waybillService.queryByShiptoNameAndUserId(shiptoName, userId);
-        }
+//        } else {
+//            waybills = this.waybillService.queryByShiptoNameAndUserId(shiptoName, userId);
+//        }
 
         try {
             info.setResult_code(0);
@@ -326,11 +326,11 @@ public class WaybillController {
         List<Waybill> waybills = null;
 
 
-        if (shipmentName.length() == 0 || shipmentName == null) {
+//        if (shipmentName.length() == 0 || shipmentName == null) {
             waybills = this.waybillService.queryByUserId(userId);
-        } else {
-            waybills = this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
-        }
+//        } else {
+//            waybills = this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
+//        }
 
 
 
@@ -360,11 +360,11 @@ public class WaybillController {
         //验证码错误
         ResultInfo info = new ResultInfo();
         List<Waybill> waybills = null;
-        if (carriageName.length() == 0 || carriageName == null) {
+//        if (carriageName.length() == 0 || carriageName == null) {
             waybills = this.waybillService.queryByUserId(userId);
-        } else {
-            waybills = this.waybillService.queryByCarriageNameAndUserId(carriageName, userId);
-        }
+//        } else {
+//            waybills = this.waybillService.queryByCarriageNameAndUserId(carriageName, userId);
+//        }
 
 
         try {
@@ -395,11 +395,11 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-        if (licensePlateNum.length() == 0 || licensePlateNum == null) {
+//        if (licensePlateNum.length() == 0 || licensePlateNum == null) {
             waybills = this.waybillService.queryByUserId(userId);
-        } else {
-            waybills = this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
-        }
+//        } else {
+//            waybills = this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
+//        }
 
 
         try {
@@ -429,11 +429,11 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-        if (canbodyNum.length() == 0 || canbodyNum == null) {
+//        if (canbodyNum.length() == 0 || canbodyNum == null) {
             waybills = this.waybillService.queryByUserId(userId);
-        } else {
-            waybills = this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
-        }
+//        } else {
+//            waybills = this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
+//        }
 
 
         try {
@@ -463,11 +463,11 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-        if (escortName.length() == 0 || escortName == null) {
+//        if (escortName.length() == 0 || escortName == null) {
             waybills = this.waybillService.queryByUserId(userId);
-        } else {
-            waybills = this.waybillService.queryByEscortNameAndUserId(escortName, userId);
-        }
+//        } else {
+//            waybills = this.waybillService.queryByEscortNameAndUserId(escortName, userId);
+//        }
 
 
         try {
@@ -489,11 +489,11 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-        if (goodsName.length() == 0 || goodsName == null) {
-            waybills = this.waybillService.queryByUserId(userId);
-        } else {
+//        if (goodsName.length() == 0 || goodsName == null) {
+//            waybills = this.waybillService.queryByUserId(userId);
+//        } else {
             waybills = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
-        }
+//        }
 
 
         try {

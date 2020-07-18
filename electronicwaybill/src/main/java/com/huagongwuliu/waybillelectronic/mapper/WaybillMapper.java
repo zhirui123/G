@@ -30,7 +30,7 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
     @Select("select * from tb_eway where id = #{id} and user_id = #{userId}")
     List<Waybill> queryByIdAndUserId(Long id,String userId);
 
-    @Select("select * from tb_eway where user_id = #{userId} order by add_time desc")
+    @Select("select * from tb_eway where user_id = #{userId}  order by add_time desc")
     List<Waybill> queryByUserId(String userId);
 
     @Update("<script>" +
@@ -60,7 +60,16 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where shipper_name like concat('%',#{shipperName},'%') and user_id = #{userId} and shipper_status = 0")
+
+
+
+
+
+    @Select( "<script>" +
+            " select * from tb_eway where  user_id = #{userId} and shipper_status = 0" +
+            "<if test=' shipperName != null '> and shipper_name like concat('%',#{shipperName},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
     List<Waybill> queryByShipperNameAndUserId(String shipperName,String userId);
 
 
@@ -70,7 +79,14 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where shipto_name LIKE concat('%',#{shiptoName},'%') and user_id = #{userId}  and shipto_status = 0")
+//    @Select("select * from tb_eway where shipto_name LIKE concat('%',#{shiptoName},'%') and user_id = #{userId}  and shipto_status = 0 order by add_time desc")
+
+
+    @Select( "<script>" +
+            " select * from tb_eway where  user_id = #{userId} and shipto_status = 0" +
+            "<if test=' shiptoName != null '> and shipto_name like concat('%',#{shiptoName},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
     List<Waybill> queryByShiptoNameAndUserId(String shiptoName,String userId);
 
 
@@ -80,7 +96,13 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where shipment_name LIKE concat('%',#{shipmentName},'%') and user_id = #{userId}  and shipment_status = 0")
+//    @Select("select * from tb_eway where shipment_name LIKE concat('%',#{shipmentName},'%') and user_id = #{userId}  and shipment_status = 0 order by add_time desc")
+
+    @Select( "<script>" +
+            " select * from tb_eway where  user_id = #{userId} and shipment_status = 0" +
+            "<if test=' shipmentName != null '> and shipment_name like concat('%',#{shipmentName},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
     List<Waybill> queryByShipmentNameAndUserId(String shipmentName,String userId);
 
 
@@ -90,7 +112,12 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where carriage_name LIKE concat('%',#{carriageName},'%') and user_id = #{userId}  and carriage_status = 0")
+//    @Select("select * from tb_eway where carriage_name LIKE concat('%',#{carriageName},'%') and user_id = #{userId}  and carriage_status = 0 order by add_time desc")
+    @Select( "<script>" +
+            " select * from tb_eway where  user_id = #{userId} and carriage_status = 0" +
+            "<if test=' carriageName != null '> and carriage_name like concat('%',#{carriageName},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
     List<Waybill> queryByCarriageNameAndUserId(String carriageName,String userId);
 
     /**
@@ -99,7 +126,12 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where license_plate_num LIKE concat('%',#{licensePlateNum},'%') and user_id = #{userId}  and vehicle_status = 0")
+//    @Select("select * from tb_eway where license_plate_num LIKE concat('%',#{licensePlateNum},'%') and user_id = #{userId}  and vehicle_status = 0 order by add_time desc")
+    @Select( "<script>" +
+            " select * from tb_eway where  user_id = #{userId} and vehicle_status = 0" +
+            "<if test=' licensePlateNum != null '> and license_plate_num like concat('%',#{licensePlateNum},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
     List<Waybill> queryByLicensePlateNumAndUserId(String licensePlateNum,String userId);
 
 
@@ -109,7 +141,13 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where canbody_num LIKE concat('%',#{canbodyNum},'%') and user_id = #{userId}  and vehicle_status = 0")
+//    @Select("select * from tb_eway where canbody_num LIKE concat('%',#{canbodyNum},'%') and user_id = #{userId}  and vehicle_status = 0 order by add_time desc")
+
+    @Select( "<script>" +
+            " select * from tb_eway where  user_id = #{userId} and vehicle_status = 0" +
+            "<if test=' canbodyNum != null '> and canbody_num like concat('%',#{canbodyNum},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
     List<Waybill> queryByCanbodyNumAndUserId(String canbodyNum,String userId);
 
 
@@ -119,7 +157,13 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where escort_name LIKE concat('%',#{escortName},'%') and user_id = #{userId}  and vehicle_status = 0")
+//    @Select("select * from tb_eway where escort_name LIKE concat('%',#{escortName},'%') and user_id = #{userId}  and vehicle_status = 0 order by add_time desc")
+
+    @Select( "<script>" +
+            " select * from tb_eway where  user_id = #{userId} and vehicle_status = 0" +
+            "<if test=' escortName != null '> and escort_name like concat('%',#{escortName},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
     List<Waybill> queryByEscortNameAndUserId(String escortName,String userId);
 
 
@@ -130,7 +174,13 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @return
      */
 
-    @Select("select * from tb_eway where goods_name LIKE concat('%',#{goodsName},'%') and user_id = #{userId}  and goods_status = 0")
+//    @Select("select * from tb_eway where goods_name LIKE concat('%',#{goodsName},'%') and user_id = #{userId}  and goods_status = 0 order by add_time desc")
+
+    @Select( "<script>" +
+            " select * from tb_eway where  user_id = #{userId} and goods_status = 0" +
+            "<if test=' goodsName != null '> and goods_name like concat('%',#{goodsName},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
     List<Waybill> queryByGoodsNameAndUserId(String goodsName,String userId);
 
 
@@ -141,7 +191,7 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
      * @param userId
      * @return
      */
-    @Select("select * from tb_eway where waybill_code LIKE concat('%',#{waybillCode},'%') and user_id = #{userId}")
+    @Select("select * from tb_eway where waybill_code LIKE concat('%',#{waybillCode},'%') and user_id = #{userId} order by add_time desc")
     List<Waybill> queryByWaybillCodeAndUserId(String waybillCode,String userId);
 
 
