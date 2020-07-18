@@ -2,6 +2,9 @@ package com.huagongwuliu.waybillelectronic.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.google.zxing.WriterException;
+import com.huagongwuliu.waybillelectronic.constant.Constants;
+import com.huagongwuliu.waybillelectronic.constant.ErrorCode;
+import com.huagongwuliu.waybillelectronic.pojo.Result;
 import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.service.ShipperService;
@@ -21,7 +24,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -34,20 +41,29 @@ public class WaybillController {
     @Autowired
     private ShipperService shipperService;
 
-    @GetMapping("/show")
-    public String show() {
-        return "第一个测试入口";
-    }
-
     @GetMapping("/findall")
-    public List<Waybill> findAll() throws Exception {
-        return this.waybillService.findAll();
+    public Result findAll() {
+        log.info(Constants.REQ + ErrorCode.SUCCESS.getCode() + "|waybill/findall|运单findall接口");
+        try {
+            List<Waybill> waybills = waybillService.findAll();
+            return new Result(ErrorCode.SUCCESS, waybills);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/findall|运单findall接口报错：", e);
+            return new Result(ErrorCode.E_10001);
+        }
     }
 
     @PostMapping("/findwaybillsbyid")
     @ResponseBody
-    public Waybill findwaybillsById(@RequestParam("id") Long id) throws Exception {
-        return this.waybillService.queryById(id);
+    public Result findwaybillsById(@RequestParam("id") Long id) throws Exception {
+        log.info(Constants.REQ + ErrorCode.SUCCESS.getCode() + "|waybill/findwaybillsbyid|运单findwaybillsbyid接口");
+        try {
+            Waybill waybill = waybillService.queryById(id);
+            return new Result(ErrorCode.SUCCESS, waybill);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/findwaybillsbyid|运单findwaybillsbyid接口报错：", e);
+            return new Result(ErrorCode.E_10001);
+        }
     }
 
     @RequestMapping("/yd")
@@ -68,6 +84,7 @@ public class WaybillController {
             info.setResult_data(waybills);
             info.setResult_msg("成功");
         } catch (Exception e) {
+            log.error("报错:" + e.getMessage());
             info.setResult_code(1);
             info.setResult_data(waybills);
             info.setResult_msg("失败");
@@ -78,38 +95,49 @@ public class WaybillController {
 
     @PostMapping("/list")
     @ResponseBody
-    public ResultInfo findwaybillsUserId(@RequestParam String userId, @RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result findwaybillsUserId(@RequestParam String userId, @RequestParam int pageNum, @RequestParam int pageSize) {
 
         if (userId.length() == 0 || userId == null) {
-            return new ResultInfo(1001, null, "请输入用户id");
+            return new Result(1001, "请输入用户id", null);
         }
         try {
             PageInfo<Waybill> waybills = this.waybillService.queryByUserId(userId, pageNum, pageSize);
-            return new ResultInfo(0, waybills, "成功");
+            return new Result(ErrorCode.SUCCESS, waybills);
         } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/list|获取列表：", e);
+            return new Result(ErrorCode.E_10001);
+        }
+    }
 
-            return new ResultInfo(1001, null, "失败");
+    @GetMapping("/findall1")
+    public Result findAll1() {
+        log.info(Constants.REQ + ErrorCode.SUCCESS.getCode() + "|waybill/findall|运单findall接口");
+        try {
+            List<Waybill> waybills = waybillService.findAll();
+            return new Result(ErrorCode.SUCCESS, waybills);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/findall|运单findall接口报错：", e);
+            return new Result(ErrorCode.E_10001);
         }
     }
 
     @PostMapping("/addwaybill")
     @ResponseBody
-    public ResultInfo findwaybillsUserId(@RequestBody Waybill waybill) throws Exception {
+    public Result findwaybillsUserId(@RequestBody Waybill waybill) throws Exception {
         //验证码错误
-        ResultInfo info = new ResultInfo();
-
+        Result info = new Result();
+        log.info(Constants.REQ + ErrorCode.SUCCESS.getCode() + "|waybill/findall|运单findall接口");
         if (waybill.getUserId() == null || waybill.getUserId().length() == 0) {
             info.setResult_code(1);
             info.setResult_msg("请输入用户id");
             return info;
         }
 
-        if (waybill.getCarriageLicensekey().length() < 7){
+        if (waybill.getCarriageLicensekey().length() < 7) {
             info.setResult_code(1);
             info.setResult_msg("请正确输入承运人许可证号");
             return info;
         }
-
 
 
         try {
@@ -119,15 +147,14 @@ public class WaybillController {
 
 
             waybill.setAddTime(DateUtil.getNowTimestamp());
-            waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(waybill.getCarriageLicensekey(),serialNum + 1));
+            waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(waybill.getCarriageLicensekey(), serialNum + 1));
 
 
-
-            if (!StringUtil.isEmpty(waybill.getLicensePlateNum())){
+            if (!StringUtil.isEmpty(waybill.getLicensePlateNum())) {
                 waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
             }
 
-            if (!StringUtil.isEmpty(waybill.getTrailerNum())){
+            if (!StringUtil.isEmpty(waybill.getTrailerNum())) {
                 waybill.setTrailerNum(waybill.getTrailerNum().toUpperCase());
             }
 
@@ -137,7 +164,7 @@ public class WaybillController {
                 info.setResult_code(1);
                 info.setResult_msg("失败");
             } else {
-                info.setResult_code(0);
+                info.setResult_code(ErrorCode.SUCCESS.getCode());
                 info.setResult_msg("成功");
             }
 
@@ -150,10 +177,8 @@ public class WaybillController {
             }
             return info;
         } catch (Exception e) {
-            info.setResult_code(1);
-            info.setResult_data(0);
-            info.setResult_msg("失败");
-            return info;
+            log.error(Constants.RES + "|waybill/addwaybill|插入数据的接口：", e);
+            return new Result(ErrorCode.E_10001);
         }
 
     }
@@ -161,9 +186,9 @@ public class WaybillController {
 
     @PostMapping("/updatewaybill")
     @ResponseBody
-    public ResultInfo updateWaybill(@RequestBody Waybill waybill) throws Exception {
+    public Result updateWaybill(@RequestBody Waybill waybill) throws Exception {
         //验证码错误
-        ResultInfo info = new ResultInfo();
+        Result info = new Result();
 
         if (waybill.getUserId() == null || waybill.getUserId().length() == 0) {
             info.setResult_code(1);
@@ -179,21 +204,18 @@ public class WaybillController {
         }
         try {
             waybill.setUpdateTime(DateUtil.getNowTimestamp());
-            if (!StringUtil.isEmpty(waybill.getLicensePlateNum())){
+            if (!StringUtil.isEmpty(waybill.getLicensePlateNum())) {
                 waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
             }
 
-            if (!StringUtil.isEmpty(waybill.getTrailerNum())){
+            if (!StringUtil.isEmpty(waybill.getTrailerNum())) {
                 waybill.setTrailerNum(waybill.getTrailerNum().toUpperCase());
             }
-
-
-
 
             int recode = this.waybillService.updateWaybillByWaubillObj(waybill);
             if (recode == 0) {
                 info.setResult_code(1);
-                info.setResult_msg("失败");
+                info.setResult_msg("请求失败");
             } else {
                 info.setResult_code(0);
                 info.setResult_msg("成功");
@@ -201,20 +223,17 @@ public class WaybillController {
             info.setResult_data(recode);
             return info;
         } catch (Exception e) {
-            e.printStackTrace();
-            info.setResult_code(1);
-            info.setResult_data(0);
-            info.setResult_msg("失败");
-            return info;
+            log.error(Constants.RES + "|waybill/updatewaybill|更新数据的接口：", e);
+            return new Result(ErrorCode.E_10001);
         }
 
     }
 
     @PostMapping("/status")
     @ResponseBody
-    public ResultInfo changeWaybillStatus(@RequestParam String status, @RequestParam(defaultValue = "0") int goodsNum, @RequestParam Long id) {
+    public Result changeWaybillStatus(@RequestParam String status, @RequestParam(defaultValue = "0") int goodsNum, @RequestParam Long id) {
         //验证码错误
-        ResultInfo info = new ResultInfo();
+        Result info = new Result();
 
         if (status == null || status.length() == 0) {
             status = "0";
@@ -251,10 +270,8 @@ public class WaybillController {
 //            info.setResult_data(recode);
             return info;
         } catch (Exception e) {
-            info.setResult_code(1);
-            info.setResult_data(0);
-            info.setResult_msg("失败");
-            return info;
+            log.error(Constants.RES + "|waybill/status|运单状态：", e);
+            return new Result(ErrorCode.E_10001);
         }
     }
 
@@ -269,23 +286,27 @@ public class WaybillController {
      */
     @PostMapping("/findbyshippername")
     @ResponseBody
-    public ResultInfo queryByShipperNameAndUserId(@RequestParam("shipperName") String shipperName, @RequestParam("userId") String userId) throws Exception {
+    public Result queryByShipperNameAndUserId(@RequestParam("shipperName") String shipperName, @RequestParam("userId") String userId) throws Exception {
         //验证码错误
-        ResultInfo info = new ResultInfo();
+        Result info = new Result();
         List<Waybill> waybills = null;
 
 //        if (StringUtil.isNotEmpty(shipperName)){
-            waybills = this.waybillService.queryByShipperNameAndUserId(shipperName,userId);
+        waybills = this.waybillService.queryByShipperNameAndUserId(shipperName, userId);
 //        }else{
 //            waybills = this.waybillService.queryByUserId(userId);
 //        }
 
+        List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getShipperName() + ";"
+                + o.getShipperContact() + ";" + o.getShipperPhone()))), ArrayList::new));//o代表属性值，根据此属性值去重
+
         try {
             info.setResult_code(0);
-            info.setResult_data(waybills);
+            info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
-            info.setResult_code(1);
+            log.error(Constants.RES + "|waybill/status|运单状态：", e);
+            info.setResult_code(ErrorCode.E_10001.getCode());
             info.setResult_data(waybills);
             info.setResult_msg("失败");
         }
@@ -310,7 +331,7 @@ public class WaybillController {
         List<Waybill> waybills = null;
 
 //        if (shiptoName.length() == 0 || shiptoName == null) {
-            waybills = this.waybillService.queryByUserId(userId);
+        waybills = this.waybillService.queryByUserId(userId);
 //        } else {
 //            waybills = this.waybillService.queryByShiptoNameAndUserId(shiptoName, userId);
 //        }
@@ -345,11 +366,10 @@ public class WaybillController {
 
 
 //        if (shipmentName.length() == 0 || shipmentName == null) {
-            waybills = this.waybillService.queryByUserId(userId);
+        waybills = this.waybillService.queryByUserId(userId);
 //        } else {
 //            waybills = this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
 //        }
-
 
 
         try {
@@ -379,7 +399,7 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
         List<Waybill> waybills = null;
 //        if (carriageName.length() == 0 || carriageName == null) {
-            waybills = this.waybillService.queryByUserId(userId);
+        waybills = this.waybillService.queryByUserId(userId);
 //        } else {
 //            waybills = this.waybillService.queryByCarriageNameAndUserId(carriageName, userId);
 //        }
@@ -414,7 +434,7 @@ public class WaybillController {
 
         List<Waybill> waybills = null;
 //        if (licensePlateNum.length() == 0 || licensePlateNum == null) {
-            waybills = this.waybillService.queryByUserId(userId);
+        waybills = this.waybillService.queryByUserId(userId);
 //        } else {
 //            waybills = this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
 //        }
@@ -448,7 +468,7 @@ public class WaybillController {
 
         List<Waybill> waybills = null;
 //        if (canbodyNum.length() == 0 || canbodyNum == null) {
-            waybills = this.waybillService.queryByUserId(userId);
+        waybills = this.waybillService.queryByUserId(userId);
 //        } else {
 //            waybills = this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
 //        }
@@ -482,7 +502,7 @@ public class WaybillController {
 
         List<Waybill> waybills = null;
 //        if (escortName.length() == 0 || escortName == null) {
-            waybills = this.waybillService.queryByUserId(userId);
+        waybills = this.waybillService.queryByUserId(userId);
 //        } else {
 //            waybills = this.waybillService.queryByEscortNameAndUserId(escortName, userId);
 //        }
@@ -510,7 +530,7 @@ public class WaybillController {
 //        if (goodsName.length() == 0 || goodsName == null) {
 //            waybills = this.waybillService.queryByUserId(userId);
 //        } else {
-            waybills = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
+        waybills = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
 //        }
 
 
