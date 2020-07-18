@@ -6,6 +6,7 @@ import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.service.ShipperService;
 import com.huagongwuliu.waybillelectronic.service.WaybillService;
+import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.QRCodeGenerator;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import com.huagongwuliu.waybillelectronic.utils.WaybillUtils;
@@ -104,6 +105,7 @@ public class WaybillController {
         }
 
         try {
+            waybill.setAddTime(DateUtil.getNowTimestamp());
             waybill.setWaybillCode(WaybillUtils.getCode());
             if (!StringUtil.isEmpty(waybill.getLicensePlateNum())){
                 waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
@@ -160,7 +162,7 @@ public class WaybillController {
             return info;
         }
         try {
-
+            waybill.setUpdateTime(DateUtil.getNowTimestamp());
             if (!StringUtil.isEmpty(waybill.getLicensePlateNum())){
                 waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
             }
