@@ -28,6 +28,8 @@ public class DateUtil {
 
     public static final String DATEFORMAT = "yyyyMMdd";
 
+    public static final String DATEFORMAT1 = "yyMMdd";
+
     public static final String START_FORMAT = "yyyy-MM-dd 00:00:00";
 
     public static final String DATE_NIAN_YU_RI_FORMART = "yyyy年MM月dd日";

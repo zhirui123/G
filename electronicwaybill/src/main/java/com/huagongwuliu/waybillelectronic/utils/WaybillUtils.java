@@ -86,7 +86,7 @@ public class WaybillUtils {
         if(0 < sortNum && sortNum <=9999){
             int i = (4 - (String.valueOf(sortNum)).length()) > 0 ? 4 - (String.valueOf(sortNum)).length() : 0;
             String buLing = "";
-            for(int j = 0;j <= i; j++){
+            for(int j = 0;j < i; j++){
                 buLing +="0";
             }
             sortNum2 = buLing+sortNum;
@@ -104,14 +104,21 @@ public class WaybillUtils {
             sortNum2 = letter + buLing;
 
         }
-        String s = licenseKey.substring(0, 4) + licenseKey.substring(licenseKey.length() - 6) + DateUtil.format1(new Date(),DateUtil.DATEFORMAT) + sortNum2 + getRandom(3);
+        String s = licenseKey.substring(0, 4) + licenseKey.substring(licenseKey.length() - 6) + DateUtil.format1(new Date(),DateUtil.DATEFORMAT1) + sortNum2 + getRandom(3);
+        System.out.println(licenseKey.substring(0, 4));
+        System.out.println(licenseKey.substring(licenseKey.length() - 6));
+        System.out.println(DateUtil.format1(new Date(),DateUtil.DATEFORMAT1));
+        System.out.println(sortNum2);
+        System.out.println(getRandom(3));
+
         byte[] bytes = s.getBytes();
         byte temp = bytes[0];
         for(int i=1;i<bytes.length;i++){
             temp^=bytes[i];
         }
         int y = temp % 10;
-        return s + String.valueOf(y);
+        System.out.println(String.valueOf(y));
+        return s + y;
     }
 
 
