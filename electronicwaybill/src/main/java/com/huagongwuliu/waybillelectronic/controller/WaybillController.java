@@ -291,23 +291,19 @@ public class WaybillController {
         Result info = new Result();
         List<Waybill> waybills = null;
 
-//        if (StringUtil.isNotEmpty(shipperName)){
-        waybills = this.waybillService.queryByShipperNameAndUserId(shipperName, userId);
-//        }else{
-//            waybills = this.waybillService.queryByUserId(userId);
-//        }
-
-        List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getShipperName() + ";"
-                + o.getShipperContact() + ";" + o.getShipperPhone()))), ArrayList::new));//o代表属性值，根据此属性值去重
 
         try {
+            waybills = this.waybillService.queryByShipperNameAndUserId(shipperName, userId);
+            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getShipperName() + ";"
+                    + o.getShipperContact() + ";" + o.getShipperPhone()))), ArrayList::new));//o代表属性值，根据此属性值去重
+
             info.setResult_code(0);
             info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             log.error(Constants.RES + "|waybill/status|运单状态：", e);
             info.setResult_code(ErrorCode.E_10001.getCode());
-            info.setResult_data(waybills);
+            info.setResult_data(null);
             info.setResult_msg("失败");
         }
         return info;
@@ -329,10 +325,6 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-
-//        if (shiptoName.length() == 0 || shiptoName == null) {
-//        waybills = this.waybillService.queryByUserId(userId);
-//        } else {
 
         try {
             waybills = this.waybillService.queryByShiptoNameAndUserId(shiptoName, userId);
@@ -366,22 +358,17 @@ public class WaybillController {
         Result info = new Result();
         List<Waybill> waybills = null;
 
-
-//        if (shipmentName.length() == 0 || shipmentName == null) {
-//        waybills = this.waybillService.queryByUserId(userId);
-//        } else {
-        waybills = this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
-//        }
-        List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getShipmentName() + ";"
-                + o.getShipmentPhone() + ";" + o.getShipmentFromAddress() + ";" + o.getShipmentStarttime() + ";" + o.getShipmentFromDetails() + ";" + o.getCityExpress() + ";" + o.getShipmentToAddress() + ";" + o.getShipmentToDetails()))), ArrayList::new));//o代表属性值，根据此属性值去重
-
         try {
+            waybills = this.waybillService.queryByShipmentNameAndUserId(shipmentName, userId);
+            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getShipmentName() + ";"
+                    + o.getShipmentPhone() + ";" + o.getShipmentFromAddress() + ";" + o.getShipmentStarttime() + ";" + o.getShipmentFromDetails() + ";" + o.getCityExpress() + ";" + o.getShipmentToAddress() + ";" + o.getShipmentToDetails()))), ArrayList::new));//o代表属性值，根据此属性值去重
+
             info.setResult_code(0);
             info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(list);
+            info.setResult_data(null);
             info.setResult_msg("失败");
         }
         return info;
@@ -401,8 +388,6 @@ public class WaybillController {
         //验证码错误
         ResultInfo info = new ResultInfo();
         List<Waybill> waybills = null;
-
-
 
         try {
 
@@ -436,25 +421,18 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-//        if (licensePlateNum.length() == 0 || licensePlateNum == null) {
-//        waybills = this.waybillService.queryByUserId(userId);
-//        } else {
-            waybills = this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
-//        }
-
-
-        List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getLicensePlateNum() + ";"
-                + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit()+ ";" + o.getCanbodyNum()+ ";"
-                + o.getCanbodyVolume()+ ";" + o.getDriverName()+ ";" + o.getDriverCertificate()+ ";" + o.getDriverPhone()+ ";"
-                + o.getEscortName()+ ";" + o.getEscortCertificate()+ ";" + o.getEscortPhone()))), ArrayList::new));
-
         try {
+            waybills = this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
+            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getLicensePlateNum() + ";"
+                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit()+ ";" + o.getCanbodyNum()+ ";"
+                    + o.getCanbodyVolume()+ ";" + o.getDriverName()+ ";" + o.getDriverCertificate()+ ";" + o.getDriverPhone()+ ";"
+                    + o.getEscortName()+ ";" + o.getEscortCertificate()+ ";" + o.getEscortPhone()))), ArrayList::new));
             info.setResult_code(0);
             info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(list);
+            info.setResult_data(waybills);
             info.setResult_msg("失败");
         }
         return info;
@@ -475,16 +453,14 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-//        if (canbodyNum.length() == 0 || canbodyNum == null) {
-//        waybills = this.waybillService.queryByUserId(userId);
-//        } else {
-            waybills = this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
-//        }
-
-
         try {
+            waybills = this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
+            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getLicensePlateNum() + ";"
+                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit()+ ";" + o.getCanbodyNum()+ ";"
+                    + o.getCanbodyVolume()+ ";" + o.getDriverName()+ ";" + o.getDriverCertificate()+ ";" + o.getDriverPhone()+ ";"
+                    + o.getEscortName()+ ";" + o.getEscortCertificate()+ ";" + o.getEscortPhone()))), ArrayList::new));
             info.setResult_code(0);
-            info.setResult_data(waybills);
+            info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
@@ -509,16 +485,15 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-//        if (escortName.length() == 0 || escortName == null) {
-//        waybills = this.waybillService.queryByUserId(userId);
-//        } else {
-            waybills = this.waybillService.queryByEscortNameAndUserId(escortName, userId);
-//        }
-
 
         try {
+            waybills = this.waybillService.queryByEscortNameAndUserId(escortName, userId);
+            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getLicensePlateNum() + ";"
+                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit()+ ";" + o.getCanbodyNum()+ ";"
+                    + o.getCanbodyVolume()+ ";" + o.getDriverName()+ ";" + o.getDriverCertificate()+ ";" + o.getDriverPhone()+ ";"
+                    + o.getEscortName()+ ";" + o.getEscortCertificate()+ ";" + o.getEscortPhone()))), ArrayList::new));
             info.setResult_code(0);
-            info.setResult_data(waybills);
+            info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
@@ -535,21 +510,19 @@ public class WaybillController {
         ResultInfo info = new ResultInfo();
 
         List<Waybill> waybills = null;
-//        if (goodsName.length() == 0 || goodsName == null) {
-//            waybills = this.waybillService.queryByUserId(userId);
-//        } else {
-        waybills = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
-//        }
-        List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
-                + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
+
 
         try {
+            waybills = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
+            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
+                    + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
+
             info.setResult_code(0);
             info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(list);
+            info.setResult_data(waybills);
             info.setResult_msg("失败");
         }
         return info;
