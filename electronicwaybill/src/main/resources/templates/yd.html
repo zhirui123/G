@@ -5,6 +5,7 @@
     <title>电子运单系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 </head>
 <body style="font-size:8px; margin: 0;">
 <div style="margin:0" id="yd" class="ddr">
@@ -33,7 +34,7 @@
         <!--startprint-->
         <!--        <div class="div2"><img src="/img/yinzhang.png" border="0" width="160px;" height="160px;"></div>-->
         <div id="sealdiv" class="div2">
-            <canvas id="canvas" width="250" height="250"></canvas>
+            <canvas id="canvas" width="160" height="160"></canvas>
         </div>
 
         <table style="border-collapse:collapse;" border="1" width="100%" cellspacing="0" cellpadding="1">
@@ -76,7 +77,7 @@
             <tr>
                 <td style="text-align:center;text-align:center;">目的地</td>
                 <td th:text="${yd.shipmentToAddress}" colspan="4"> 沧州</td>
-                <td colspan="2" style="text-align:center;text-align:left;">城市配送
+                <td colspan="2" style="text-align:center;text-align:left;"><input id="cityExpress" type="checkbox">城市配送
                 </td>
             </tr>
             <tr>
@@ -100,7 +101,7 @@
             </tr>
             <tr>
                 <td style="text-align:center;text-align:center;">道路运输证号</td>
-                <td th:text="${yd.trailerRoadRansportPermit}">3216541265456</td>
+                <td th:text="${yd.roadTransportPermitNum}">3216541265456</td>
                 <td style="text-align:center;text-align:center;">道路运输证号</td>
                 <td th:text="${yd.trailerRoadRansportPermit}">313216921322</td>
             </tr>
@@ -117,7 +118,7 @@
                 <td th:text="${yd.driverName}">杜立辉</td>
                 <td rowspan="3" style="text-align:center;text-align:center;">押运员</td>
                 <td style="text-align:center;text-align:center;">姓名</td>
-                <td th:text="${yd.escortCertificate}">34531561222</td>
+                <td th:text="${yd.escortName}">34531561222</td>
             </tr>
             <tr>
                 <td style="text-align:center;text-align:center;">从业资格证</td>
@@ -133,7 +134,7 @@
             </tr>
             <tr>
                 <td style="text-align:center;text-align:center;">货物信息</td>
-                <td th:text="|${yd.unNum}, ${yd.goodsName},${yd.goodsType},${yd.goodsPackingType},${yd.goodsPackingNorms},${yd.goodsNum} ,${yd.goodsCompany}|"
+                <td th:text="|UN: ${yd.unNum}, ${yd.goodsName},${yd.goodsType},${yd.goodsPackingType},${yd.goodsPackingNorms},${yd.goodsNum} ,${yd.goodsCompany}|"
                     style="text-align:center;text-align:center;" colspan="6">UN编号
                 </td>
             </tr>
@@ -156,7 +157,7 @@
 </div>
 <script src="/js/html2canvas.js"></script>
 <script src="/js/jspdf.debug.js"></script>
-<script>
+<script th:inline="javascript">
     let url = ''
 
     function getlianjie() {
@@ -224,19 +225,8 @@
         })
     }
 
+
     /*印章*/
-    // function createSealEx() {
-    //     var dw = document.getElementById("carriage_name");
-    //     var mdtext = "专用章";
-    //     var tuzhangdiv = document.getElementById("sealdiv");
-    //     tuzhangdiv.innerHTML = "<canvas id='canvas' width='160' height='160'></canvas>";
-    //     console.log(dw.value)
-    //     createSeal('canvas', dw.value, mdtext);
-    //
-    // }
-
-    // createSealEx()
-
     function createSealEx2() {
         var dw = document.getElementById("carriage_name");
 
@@ -327,6 +317,29 @@
         context.fill();
         context.restore();
     }
+
+
+    function city() {
+
+        var test = [[${yd}]];
+
+        // alert(single.cityExpress)
+        console.log(test.cityExpress)
+        //var city = document.getElementById("cityExpress")
+
+        if ("1" == test.cityExpress) {
+            alert('1');
+            $("#cityExpress").attr("checked", 1);
+        } else {
+            alert('2');
+            $("#cityExpress").removeAttr("checked");
+        }
+        // var date = document.getElementById("city").value;
+        // console.log(date)
+        // alert(date)
+    }
+
+    city()
 </script>
 
 </body>
