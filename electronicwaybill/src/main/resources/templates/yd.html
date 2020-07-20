@@ -134,8 +134,8 @@
             </tr>
             <tr>
                 <td style="text-align:center;text-align:center;">货物信息</td>
-                <td th:text="|UN: ${yd.unNum}, ${yd.goodsName},${yd.goodsType},${yd.goodsPackingType},${yd.goodsPackingNorms},${yd.goodsNum} ,${yd.goodsCompany}|"
-                    style="text-align:center;text-align:center;" colspan="6">UN编号
+                <td th:text="|UN: ${yd.unNum}, ${yd.goodsName},${yd.goodsType},${#strings.substring(yd.goodsPackingType,0,5)},${yd.goodsPackingNorms},${yd.goodsNum} ,${yd.goodsCompany}|"
+                    style="text-align:center;text-align:center;" colspan="6">
                 </td>
             </tr>
             <tr>
@@ -328,10 +328,10 @@
         //var city = document.getElementById("cityExpress")
 
         if ("1" == test.cityExpress) {
-            alert('1');
+            // alert('1');
             $("#cityExpress").attr("checked", 1);
         } else {
-            alert('2');
+            // alert('2');
             $("#cityExpress").removeAttr("checked");
         }
         // var date = document.getElementById("city").value;
