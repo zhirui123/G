@@ -18,7 +18,6 @@ public interface GoodsMapper {
     @Select( "<script>" +
             " select * from tb_goods " +
             "<if test=' goodName != null '> where goods_name like concat('%',#{goodName},'%') </if>" +
-            "order by id desc" +
             "</script>")
      List<Goods> queryByGoodsName(String goodName);
 
