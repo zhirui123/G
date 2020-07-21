@@ -4,9 +4,11 @@ import com.github.pagehelper.PageInfo;
 import com.google.zxing.WriterException;
 import com.huagongwuliu.waybillelectronic.constant.Constants;
 import com.huagongwuliu.waybillelectronic.constant.ErrorCode;
+import com.huagongwuliu.waybillelectronic.pojo.Goods;
 import com.huagongwuliu.waybillelectronic.pojo.Result;
 import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
+import com.huagongwuliu.waybillelectronic.service.GoodsService;
 import com.huagongwuliu.waybillelectronic.service.ShipperService;
 import com.huagongwuliu.waybillelectronic.service.WaybillService;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
@@ -40,6 +42,10 @@ public class WaybillController {
 
     @Autowired
     private ShipperService shipperService;
+
+
+    @Autowired
+    private GoodsService goodsService;
 
     @GetMapping("/findall")
     public Result findAll() {
@@ -509,12 +515,18 @@ public class WaybillController {
         //验证码错误
         ResultInfo info = new ResultInfo();
 
-        List<Waybill> waybills = null;
+        List<Goods> goodsList = null;
 
 
         try {
-            waybills = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
-            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
+//            goo = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
+//            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
+//                    + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
+            goodsList = this.goodsService.queryByGoodsName(goodsName);
+
+            System.out.println(goodsName);
+
+            List<Goods> list = goodsList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
                     + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
 
             info.setResult_code(0);
@@ -522,7 +534,7 @@ public class WaybillController {
             info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(waybills);
+            info.setResult_data(goodsList);
             info.setResult_msg("失败");
         }
         return info;
@@ -535,7 +547,8 @@ public class WaybillController {
      * @return
      */
     @GetMapping(value = "/qrimage")
-    public ResponseEntity<byte[]> getQRImage(@RequestParam String codestr) {
+    public ResponseEntity<byte[]> getQRImage(@RequestParam String codestr) throws Exception {
+
 //
         //二维码内的信息
         String info = codestr;

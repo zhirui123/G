@@ -22,8 +22,7 @@ public class WaybillService {
     @Resource
     private ShipperService shipperService;
 
-    @Autowired
-    private GoodsService goodsService;
+
 
 
 
@@ -167,6 +166,8 @@ public class WaybillService {
      */
 
      public List<Waybill> queryByGoodsNameAndUserId(String goodsName,String userId){
+
+
          return  this.waybillMapper.queryByGoodsNameAndUserId(goodsName, userId);
      }
 

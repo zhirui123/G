@@ -1,11 +1,20 @@
 package com.huagongwuliu.waybillelectronic.utils;
 
+import com.huagongwuliu.waybillelectronic.pojo.Goods;
+import jxl.Sheet;
+import jxl.Workbook;
+
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class WaybillUtils {
+
+
 
     /**
      * 生成时间戳
@@ -119,21 +128,76 @@ public class WaybillUtils {
 
 
 
+
+
+    public static List<Goods> getAllByExcel(){
+        List<Goods> list=new ArrayList<Goods>();
+        try {
+            Workbook rwb=Workbook.getWorkbook(new File("/Users/mac/Desktop/product.xls"));
+            Sheet rs=rwb.getSheet(0);//表
+            int clos=rs.getColumns();//得到所有的列
+            int rows=rs.getRows();//得到所有的行
+
+            System.out.println("表的列数："+clos+" 表的行数:"+rows);
+            for (int i = 1; i < rows; i++) {
+                for (int j = 0; j < clos; j++) {
+                    //第一个是列数，第二个是行数
+                    String goods_name=rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
+
+                    String un_num=rs.getCell(j++, i).getContents();
+                    String goods_type=rs.getCell(j++, i).getContents();
+                    String goods_packing_type=rs.getCell(j++, i).getContents();
+
+                    System.out.println("goods_name:"+goods_name+" un_num:"+un_num+" goods_type:"+goods_type+" goods_packing_type:"+goods_packing_type);
+//
+                    Goods goods = new Goods();
+                    goods.setGoodsName(goods_name);
+                    goods.setUnNum(un_num);
+                    goods.setGoodsType(goods_type);
+                    goods.setGoodsPackingType(goods_packing_type);
+//
+//
+
+
+                    list.add(goods);
+                }
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return list;
+
+    }
+
+
+
+
+
+
+
     public static void main(String[] args) {
 
-          creatYDOrderNum("1234567890",11);
+//          creatYDOrderNum("1234567890",11);
+//
+//
+//        System.out.println(creatYDOrderNum("1020102010201020",11));
+//
+//        ; //获取当前0点的时间戳
+//        DateUtil.getDayEndTimestamp();
+//        DateUtil.getNowTimestamp();
+//
+//
+//        System.out.println("0点的时间 " + DateUtil.getDayStartTimestamp());
+//        System.out.println("当前时间  " + DateUtil.getNowTimestamp());
+//        System.out.println("晚上时间  " + DateUtil.getDayEndTimestamp());
 
 
-        System.out.println(creatYDOrderNum("1020102010201020",11));
-
-        ; //获取当前0点的时间戳
-        DateUtil.getDayEndTimestamp();
-        DateUtil.getNowTimestamp();
 
 
-        System.out.println("0点的时间 " + DateUtil.getDayStartTimestamp());
-        System.out.println("当前时间  " + DateUtil.getNowTimestamp());
-        System.out.println("晚上时间  " + DateUtil.getDayEndTimestamp());
+
+
+
 
     }
 
