@@ -524,8 +524,6 @@ public class WaybillController {
 //                    + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
             goodsList = this.goodsService.queryByGoodsName(goodsName);
 
-            System.out.println(goodsName);
-
             List<Goods> list = goodsList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
                     + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
 
