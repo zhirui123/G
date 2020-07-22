@@ -73,7 +73,7 @@ public class WaybillController {
     }
 
     @RequestMapping("/yd")
-    public String aa(@RequestParam("id") Long id, ModelMap modelMap) throws Exception {
+    public String aa(@RequestParam("id") Long id,@RequestParam("isAuth") String isAuth, ModelMap modelMap) throws Exception {
         Waybill waybill = this.waybillService.queryById(id);
         modelMap.addAttribute("yd", waybill);
         return "yd";
