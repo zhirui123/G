@@ -73,9 +73,16 @@ public class WaybillController {
     }
 
     @RequestMapping("/yd")
-    public String aa(@RequestParam("id") Long id,@RequestParam("isAuth") String isAuth, ModelMap modelMap) throws Exception {
-        Waybill waybill = this.waybillService.queryById(id);
-        modelMap.addAttribute("yd", waybill);
+    public String aa(@RequestParam("id") Long id,@RequestParam("isAuth") String isAuth, ModelMap modelMap)   {
+        Waybill waybill = null;
+        try {
+            waybill = this.waybillService.queryById(id);
+            modelMap.addAttribute("yd", waybill);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/yd| ：运单界面", e);
+            e.printStackTrace();
+        }
+
         return "yd";
     }
 
@@ -326,9 +333,9 @@ public class WaybillController {
 
     @PostMapping("/findbyshiptoname")
     @ResponseBody
-    public ResultInfo queryByShiptoNameAndUserId(@RequestParam("shiptoName") String shiptoName, @RequestParam("userId") String userId) {
+    public Result queryByShiptoNameAndUserId(@RequestParam("shiptoName") String shiptoName, @RequestParam("userId") String userId) {
         //验证码错误
-        ResultInfo info = new ResultInfo();
+        Result info = new Result();
 
         List<Waybill> waybills = null;
 
@@ -341,7 +348,8 @@ public class WaybillController {
             info.setResult_data(list);
             info.setResult_msg("成功");
         } catch (Exception e) {
-            info.setResult_code(1);
+            log.error(Constants.RES + "|waybill/findbyshiptoname|根据收货人查询：", e);
+            info.setResult_code(ErrorCode.E_10001.getCode());
             info.setResult_data(waybills);
             info.setResult_msg("失败");
         }

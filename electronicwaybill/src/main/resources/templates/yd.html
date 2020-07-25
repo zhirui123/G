@@ -166,7 +166,7 @@
     function getlianjie() {
         url = '/waybill/qrimage?codestr=' + window.location.href
         document.getElementById('imagesqrcode').src = url
-        console.log(url)
+        // console.log(url)
         return window.location.href;
     }
 
@@ -229,13 +229,13 @@
     // }
 
     function test() {
-        console.log(window.location.href);
+        // console.log(window.location.href);
         var url = window.location.href ;
         var url1 = url.substr(url.length - 1);
         if ('3' === url1){
             createSealEx2()
         }
-        console.log(url1);
+        // console.log(url1);
     }
     test();
 
@@ -246,7 +246,7 @@
         var mdtext = "专用章";
         var tuzhangdiv = document.getElementById("sealdiv");
         tuzhangdiv.innerHTML = "<canvas id='canvas' width='160' height='160'></canvas>";
-        console.log(dw.innerHTML)
+        // console.log(dw.innerHTML)
         createSeal11('canvas', dw.innerHTML, mdtext);
 
     }
@@ -364,7 +364,7 @@
         var test = [[${yd}]];
 
         // alert(single.cityExpress)
-        console.log(test.cityExpress)
+        // console.log(test.cityExpress)
         //var city = document.getElementById("cityExpress")
 
         if ("1" == test.cityExpress) {
