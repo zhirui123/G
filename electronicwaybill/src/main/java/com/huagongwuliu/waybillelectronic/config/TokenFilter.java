@@ -39,10 +39,17 @@ public class TokenFilter extends OncePerRequestFilter {
         String url = "/waybill/**";
         boolean match = pathMatcher.match(url, request.getServletPath());
 
+        //以下是放开的接口权限
+        //
+        if (request.getServletPath().equals("/waybill/yd")){
+            match = pathMatcher.matchStart("/waybill/yd", url);
+        }
+
         return match;
     }
 
     private void  validateToken(String token){
+
         if (!Constants.DEFAULT_TOKEN.equals(token)){
             throw new IllegalStateException("Invalid Token:"+token);
         }
