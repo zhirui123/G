@@ -44,6 +44,11 @@ public class TokenFilter extends OncePerRequestFilter {
         if (request.getServletPath().equals("/waybill/yd")){
             match = pathMatcher.matchStart("/waybill/yd", url);
         }
+    //以下是放开的接口权限
+        //
+        if (request.getServletPath().equals("/waybill/qrimage")){
+            match = pathMatcher.matchStart("/waybill/qrimage", url);
+        }
 
         return match;
     }

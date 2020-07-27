@@ -17,10 +17,6 @@ mybatis:
     #  typeAliasesPackage: com.huagongwuliu.waybillelectronic.pojo
 
 
-
-
-
-
 pagehelper:
   helperDialect: mysql
   reasonable: true
