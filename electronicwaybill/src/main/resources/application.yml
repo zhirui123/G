@@ -13,8 +13,13 @@ mybatis:
   configuration:
     #开启自动下划线格式转驼峰格式
     map-underscore-to-camel-case: true
-#mybatis-plus:
-#  typeAliasesPackage: com.huagongwuliu.waybillelectronic.pojo
+    #mybatis-plus:
+    #  typeAliasesPackage: com.huagongwuliu.waybillelectronic.pojo
+
+
+
+
+
 
 pagehelper:
   helperDialect: mysql
@@ -24,7 +29,7 @@ pagehelper:
 
 logging:
   level:
-    com.huagongwuliu.waybillelectronic.mapper : debug
+    com.huagongwuliu.waybillelectronic.mapper: debug
 
 
 
