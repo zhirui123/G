@@ -143,23 +143,19 @@ public class WaybillUtils {
                 for (int j = 0; j < clos; j++) {
                     //第一个是列数，第二个是行数
                     String goods_name=rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
-
                     String un_num=rs.getCell(j++, i).getContents();
                     String goods_type=rs.getCell(j++, i).getContents();
-                    String goods_packing_type=rs.getCell(j++, i).getContents();
+                    String goods_packing_type= "PG "  + rs.getCell(j++, i).getContents();
+
 
                     System.out.println("goods_name:"+goods_name+" un_num:"+un_num+" goods_type:"+goods_type+" goods_packing_type:"+goods_packing_type);
-//
                     Goods goods = new Goods();
                     goods.setGoodsName(goods_name);
                     goods.setUnNum(un_num);
                     goods.setGoodsType(goods_type);
                     goods.setGoodsPackingType(goods_packing_type);
-//
-//
-
-
                     list.add(goods);
+
                 }
             }
         } catch (Exception e) {

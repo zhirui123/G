@@ -523,24 +523,19 @@ public class WaybillController {
         //验证码错误
         ResultInfo info = new ResultInfo();
 
-        List<Goods> goodsList = null;
-
 
         try {
-//            goo = this.waybillService.queryByGoodsNameAndUserId(goodsName, userId);
-//            List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
-//                    + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
-            goodsList = this.goodsService.queryByGoodsName(goodsName);
 
-            List<Goods> list = goodsList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
-                    + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
+                List<Goods>  goodsList = this.goodsService.queryByGoodsName(goodsName);
+//                List<Goods> list = goodsList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
+//                        + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
 
-            info.setResult_code(0);
-            info.setResult_data(list);
-            info.setResult_msg("成功");
+                info.setResult_code(0);
+                info.setResult_data(goodsList);
+                info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
-            info.setResult_data(goodsList);
+            info.setResult_data(null);
             info.setResult_msg("失败");
         }
         return info;
@@ -555,7 +550,24 @@ public class WaybillController {
     @GetMapping(value = "/qrimage")
     public ResponseEntity<byte[]> getQRImage(@RequestParam String codestr) throws Exception {
 
+////
 //
+////        List<Goods>
+//
+//        List<Goods> allByExcel = WaybillUtils.getAllByExcel();
+//        for (Goods goods : allByExcel) {
+//
+//            this.goodsService.addGoodsData(goods);
+//
+//        }
+//
+//
+//
+//
+//
+//
+
+
         //二维码内的信息
         String info = codestr;
 
