@@ -77,6 +77,7 @@ public class Waybill {
     private String goodsStatus = "0";//货物状态
     private Integer addTime;//插入时间
     private Integer updateTime;//更新时间
+    private String userCompanyName;// 认证用户公司名称
 
 
 

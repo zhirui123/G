@@ -239,13 +239,13 @@
 
     /*印章*/
     function createSealEx2() {
-        var dw = document.getElementById("carriage_name");
-
+        // var dw = document.getElementById("carriage_name");
+        var test = [[${yd}]];
         var mdtext = "专用章";
         var tuzhangdiv = document.getElementById("sealdiv");
         tuzhangdiv.innerHTML = "<canvas id='canvas' width='160' height='160'></canvas>";
         // console.log(dw.innerHTML)
-        createSeal11('canvas', dw.innerHTML, mdtext);
+        createSeal11('canvas', test.userCompanyName, mdtext);
 
     }
 
