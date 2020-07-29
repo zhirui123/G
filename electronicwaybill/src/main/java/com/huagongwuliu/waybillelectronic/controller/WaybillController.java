@@ -106,6 +106,16 @@ public class WaybillController {
     }
 
 
+    /**
+     * 后台查询所有数据
+     * @param waybill  运单模型
+     * @param startTime 开始时间
+     * @param endTime
+     * @param pageNum
+     * @param pageSize
+     * @param desc 是否倒序
+     * @return
+     */
     @PostMapping("/backstagelist")
     @ResponseBody
     public Result querylistbackstagelist(Waybill waybill,
@@ -127,12 +137,6 @@ public class WaybillController {
 
 
 
-
-
-
-
-
-
     @PostMapping("/list")
     @ResponseBody
     public Result findwaybillsUserId(@RequestParam String userId, @RequestParam int pageNum, @RequestParam int pageSize) {
@@ -148,8 +152,6 @@ public class WaybillController {
             return new Result(ErrorCode.E_10001);
         }
     }
-
-
 
 
 
