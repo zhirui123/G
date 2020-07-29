@@ -154,8 +154,11 @@ public class WaybillController {
     }
 
 
-
-
+    /**
+     * 根据用户id，查询搜索
+     * @param waybill
+     * @return
+     */
     @PostMapping("/querywaybilllist")
     @ResponseBody
     public Result queryByWaybill(@RequestBody Waybill waybill) {
@@ -332,6 +335,7 @@ public class WaybillController {
                     case "4":
                         str = "卸货完成，任务结束";
                         break;
+
                 }
                 info.setResult_code(0);
                 info.setResult_data(str);
