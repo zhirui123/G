@@ -7,7 +7,6 @@ import com.huagongwuliu.waybillelectronic.pojo.Shipper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -241,7 +240,34 @@ public class WaybillService {
     }
 
 
+    /**
+     * 后台查询所有数据
+     * @param waybill
+     * @param startTime
+     * @param endTime
+     * @param pageNum
+     * @param pageSize
+     * @param desc
+     * @return
+     */
+    public PageInfo<Waybill> querylistbackstagelist(Waybill waybill, Long startTime, Long endTime, Integer pageNum, Integer pageSize, Boolean desc) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Waybill> waybills =  this.waybillMapper.queryallbackstage(waybill,startTime,endTime,desc);
+        PageInfo<Waybill> pageInfo = new PageInfo<>(waybills);
+        return pageInfo;
 
+    }
+
+
+    /**
+     * 根据Waybill对象中的内容，查询，userId必传
+     * @param waybill
+     * @return
+     */
+
+    public   List<Waybill> queryByWaybill(Waybill waybill) throws  Exception{
+        return  this.waybillMapper.queryByWaybill(waybill);
+    };
 
 
 

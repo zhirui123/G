@@ -106,6 +106,33 @@ public class WaybillController {
     }
 
 
+    @PostMapping("/backstagelist")
+    @ResponseBody
+    public Result querylistbackstagelist(Waybill waybill,
+                                         @RequestParam(value = "startTime",defaultValue = "0") Long startTime,
+                                         @RequestParam(value = "endTime",defaultValue = "0") Long endTime,
+                                         @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                                         @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize,
+                                         @RequestParam(value = "desc",required = false) Boolean desc) {
+
+        try {
+            PageInfo<Waybill> waybills = this.waybillService.querylistbackstagelist(waybill,startTime,endTime,pageNum,pageSize,desc);
+            return new Result(ErrorCode.SUCCESS, waybills);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/list|获取列表：", e);
+            return new Result(ErrorCode.E_10001);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     @PostMapping("/list")
     @ResponseBody
     public Result findwaybillsUserId(@RequestParam String userId, @RequestParam int pageNum, @RequestParam int pageSize) {
@@ -121,6 +148,34 @@ public class WaybillController {
             return new Result(ErrorCode.E_10001);
         }
     }
+
+
+
+
+
+
+    @PostMapping("/querywaybilllist")
+    @ResponseBody
+    public Result queryByWaybill(@RequestBody Waybill waybill) {
+
+        if (waybill.getUserId() == null || waybill.getUserId().length() == 0) {
+            new Result(ErrorCode.E_10001,"请输入用户id");
+        }
+        try {
+            List<Waybill> waybills = this.waybillService.queryByWaybill(waybill);
+            return new Result(ErrorCode.SUCCESS, waybills);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/list|获取列表：", e);
+            return new Result(ErrorCode.E_10001);
+        }
+    }
+
+
+
+
+
+
+
 
     @GetMapping("/findall1")
     public Result findAll1() {
