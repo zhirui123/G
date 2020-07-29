@@ -73,7 +73,7 @@ public class WaybillController {
     }
 
     @RequestMapping("/yd")
-    public String aa(@RequestParam("id") Long id,@RequestParam("isAuth") String isAuth, ModelMap modelMap)   {
+    public String aa(@RequestParam("id") Long id, @RequestParam("isAuth") String isAuth, ModelMap modelMap) {
         Waybill waybill = null;
         try {
             waybill = this.waybillService.queryById(id);
@@ -495,9 +495,9 @@ public class WaybillController {
         try {
             waybills = this.waybillService.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
             List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getLicensePlateNum() + ";"
-                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit()+ ";" + o.getCanbodyNum()+ ";"
-                    + o.getCanbodyVolume()+ ";" + o.getDriverName()+ ";" + o.getDriverCertificate()+ ";" + o.getDriverPhone()+ ";"
-                    + o.getEscortName()+ ";" + o.getEscortCertificate()+ ";" + o.getEscortPhone()))), ArrayList::new));
+                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit() + ";" + o.getCanbodyNum() + ";"
+                    + o.getCanbodyVolume() + ";" + o.getDriverName() + ";" + o.getDriverCertificate() + ";" + o.getDriverPhone() + ";"
+                    + o.getEscortName() + ";" + o.getEscortCertificate() + ";" + o.getEscortPhone()))), ArrayList::new));
             info.setResult_code(0);
             info.setResult_data(list);
             info.setResult_msg("成功");
@@ -527,9 +527,9 @@ public class WaybillController {
         try {
             waybills = this.waybillService.queryByCanbodyNumAndUserId(canbodyNum, userId);
             List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getLicensePlateNum() + ";"
-                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit()+ ";" + o.getCanbodyNum()+ ";"
-                    + o.getCanbodyVolume()+ ";" + o.getDriverName()+ ";" + o.getDriverCertificate()+ ";" + o.getDriverPhone()+ ";"
-                    + o.getEscortName()+ ";" + o.getEscortCertificate()+ ";" + o.getEscortPhone()))), ArrayList::new));
+                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit() + ";" + o.getCanbodyNum() + ";"
+                    + o.getCanbodyVolume() + ";" + o.getDriverName() + ";" + o.getDriverCertificate() + ";" + o.getDriverPhone() + ";"
+                    + o.getEscortName() + ";" + o.getEscortCertificate() + ";" + o.getEscortPhone()))), ArrayList::new));
             info.setResult_code(0);
             info.setResult_data(list);
             info.setResult_msg("成功");
@@ -560,9 +560,9 @@ public class WaybillController {
         try {
             waybills = this.waybillService.queryByEscortNameAndUserId(escortName, userId);
             List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getLicensePlateNum() + ";"
-                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit()+ ";" + o.getCanbodyNum()+ ";"
-                    + o.getCanbodyVolume()+ ";" + o.getDriverName()+ ";" + o.getDriverCertificate()+ ";" + o.getDriverPhone()+ ";"
-                    + o.getEscortName()+ ";" + o.getEscortCertificate()+ ";" + o.getEscortPhone()))), ArrayList::new));
+                    + o.getLicensePlateColor() + ";" + o.getRoadTransportPermitNum() + ";" + o.getTrailerNum() + ";" + o.getTrailerRoadRansportPermit() + ";" + o.getCanbodyNum() + ";"
+                    + o.getCanbodyVolume() + ";" + o.getDriverName() + ";" + o.getDriverCertificate() + ";" + o.getDriverPhone() + ";"
+                    + o.getEscortName() + ";" + o.getEscortCertificate() + ";" + o.getEscortPhone()))), ArrayList::new));
             info.setResult_code(0);
             info.setResult_data(list);
             info.setResult_msg("成功");
@@ -598,6 +598,19 @@ public class WaybillController {
         return info;
     }
 
+    @PostMapping("/select")
+    @ResponseBody
+    public Result selectByPojo(@RequestBody Waybill waybill) {
+        List<Waybill> waybills = null;
+        try {
+            waybills = waybillService.selectByWaybillByPojo(waybill);
+            return new Result(ErrorCode.SUCCESS, waybills);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/select|运营后台的查询接口：", e);
+            return new Result(ErrorCode.E_10001);
+        }
+
+    }
 
     /**
      * 生成二维码

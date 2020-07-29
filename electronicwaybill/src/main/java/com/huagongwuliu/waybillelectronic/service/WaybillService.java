@@ -22,100 +22,102 @@ public class WaybillService {
     private ShipperService shipperService;
 
 
-
-
-
-
-    public List<Waybill> findAll() throws Exception{
-        return  this.waybillMapper.findAll();
+    public List<Waybill> findAll() throws Exception {
+        return this.waybillMapper.findAll();
     }
 
-    public Waybill queryById(Long id) throws  Exception{
-        return  this.waybillMapper.queryById(id);
+    public Waybill queryById(Long id) throws Exception {
+        return this.waybillMapper.queryById(id);
     }
 
-    public  List<Waybill> queryByIdAndUserId(Long id,String userId) throws  Exception{
-        List<Waybill>  ws =  this.waybillMapper.queryByIdAndUserId(id,userId);
+    public List<Waybill> queryByIdAndUserId(Long id, String userId) throws Exception {
+        List<Waybill> ws = this.waybillMapper.queryByIdAndUserId(id, userId);
         System.out.println(ws);
-        return  ws;
+        return ws;
     }
 
 
     public PageInfo<Waybill> queryByUserId(String userId, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<Waybill> waybills =  this.waybillMapper.queryByUserId(userId);
+        PageHelper.startPage(pageNum, pageSize);
+        List<Waybill> waybills = this.waybillMapper.queryByUserId(userId);
         PageInfo<Waybill> pageInfo = new PageInfo<>(waybills);
         return pageInfo;
     }
 
-    public int  updateWaybillByWaubillObj(Waybill waybill) throws Exception{
+    public int updateWaybillByWaubillObj(Waybill waybill) throws Exception {
         return this.waybillMapper.updateByPrimaryKeySelective(waybill);
     }
-    public Integer  insertWaybillByWaubillObj(Waybill waybill) throws Exception{
 
-       return  this.waybillMapper.insert(waybill);
+    public Integer insertWaybillByWaubillObj(Waybill waybill) throws Exception {
+
+        return this.waybillMapper.insert(waybill);
 
     }
 
 
-    public int changeStatusAction(String status,int goodsNum,Long id) {
-        return  this.waybillMapper.changeStatus(status,goodsNum,id);
+    public int changeStatusAction(String status, int goodsNum, Long id) {
+        return this.waybillMapper.changeStatus(status, goodsNum, id);
     }
 
 
     /**
      * 修改货物运输的数量
+     *
      * @param goodsNum
      * @param id
      * @param userId
      * @return
      */
-    public int changeGoodsNum(String goodsNum,Long id,String userId){
-        return  this.waybillMapper.changeGoodsNum(goodsNum, id, userId);
+    public int changeGoodsNum(String goodsNum, Long id, String userId) {
+        return this.waybillMapper.changeGoodsNum(goodsNum, id, userId);
     }
 
     /**
      * 根据托运人，模糊查询
+     *
      * @param shipperName
      * @param userId
      * @return
      * @throws Exception
      */
-    public   List<Waybill> queryByShipperNameAndUserId(String shipperName,String userId) throws  Exception{
-        return  this.waybillMapper.queryByShipperNameAndUserId(shipperName,userId);
+    public List<Waybill> queryByShipperNameAndUserId(String shipperName, String userId) throws Exception {
+        return this.waybillMapper.queryByShipperNameAndUserId(shipperName, userId);
     }
 
 
     /**
      * 根据收货人查询
+     *
      * @param shiptoName
      * @param userId
      * @return
      */
-    public   List<Waybill> queryByShiptoNameAndUserId(String shiptoName,String userId) throws  Exception{
-        return  this.waybillMapper.queryByShiptoNameAndUserId(shiptoName, userId);
+    public List<Waybill> queryByShiptoNameAndUserId(String shiptoName, String userId) throws Exception {
+        return this.waybillMapper.queryByShiptoNameAndUserId(shiptoName, userId);
     }
 
     /**
      * 根据装货人查询
+     *
      * @param shipmentName
      * @param userId
      * @return
      * @throws Exception
      */
-    public   List<Waybill> queryByShipmentNameAndUserId(String shipmentName,String userId)throws Exception{
-        return  this.waybillMapper.queryByShipmentNameAndUserId(shipmentName, userId);
+    public List<Waybill> queryByShipmentNameAndUserId(String shipmentName, String userId) throws Exception {
+        return this.waybillMapper.queryByShipmentNameAndUserId(shipmentName, userId);
     }
 
     /**
      * 根据承运人查询
+     *
      * @param carriageName
      * @param userId
      * @return
      * @throws Exception
      */
-    public   List<Waybill> queryByCarriageNameAndUserId(String carriageName,String userId)throws  Exception{
-        return  this.waybillMapper.queryByCarriageNameAndUserId(carriageName, userId);
+    public List<Waybill> queryByCarriageNameAndUserId(String carriageName, String userId) throws Exception {
+        return this.waybillMapper.queryByCarriageNameAndUserId(carriageName, userId);
     }
 
 
@@ -206,7 +208,14 @@ public class WaybillService {
         return  this.waybillMapper.queryCountByUserIdAndCreteDate(userId,DateUtil.getDayStartTimestamp(),DateUtil.getDayEndTimestamp());
     }
 
-
+    /**
+     * 运营后台的查询接口
+     * @param waybill
+     * @return
+     */
+    public List<Waybill> selectByWaybillByPojo(Waybill waybill) {
+        return this.waybillMapper.selectByWaybillByPojo(waybill);
+    }
 
 
     void   addToRelatedTables(Waybill waybill){

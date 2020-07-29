@@ -136,7 +136,7 @@
             </tr>
             <tr>
                 <td style="text-align:center;text-align:center;">货物信息</td>
-                <td th:text="|UN: ${yd.unNum}, ${yd.goodsName},${yd.goodsType},${#strings.substring(yd.goodsPackingType,0,5)},${yd.goodsPackingNorms},${yd.goodsNum} ,${yd.goodsCompany}|"
+                <td th:text="|UN: ${yd.unNum}, ${yd.goodsName},${yd.goodsType},${#strings.substring(yd.goodsPackingType,0,#strings.indexOf(yd.goodsPackingType,'类')+1)},${yd.goodsPackingNorms},${yd.goodsNum} ,${yd.goodsCompany}|"
                     style="text-align:center;text-align:center;" colspan="6">
                 </td>
             </tr>

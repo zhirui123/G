@@ -66,7 +66,7 @@ public class Waybill {
 
     private String userId;//
     private String waybillCode;//电子运单编号
-    private String status = "0";//电子运单编号
+    private String status = "0";//状态值
 
 
     private String shipperStatus = "0";//托运人状态
@@ -77,6 +77,7 @@ public class Waybill {
     private String goodsStatus = "0";//货物状态
     private Integer addTime;//插入时间
     private Integer updateTime;//更新时间
+    private Integer endTime;//结束时间
     private String userCompanyName;// 认证用户公司名称
 
 
