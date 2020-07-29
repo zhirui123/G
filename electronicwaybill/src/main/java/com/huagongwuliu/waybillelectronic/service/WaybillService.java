@@ -208,15 +208,6 @@ public class WaybillService {
         return  this.waybillMapper.queryCountByUserIdAndCreteDate(userId,DateUtil.getDayStartTimestamp(),DateUtil.getDayEndTimestamp());
     }
 
-    /**
-     * 运营后台的查询接口
-     * @param waybill
-     * @return
-     */
-    public List<Waybill> selectByWaybillByPojo(Waybill waybill) {
-        return this.waybillMapper.selectByWaybillByPojo(waybill);
-    }
-
 
     void   addToRelatedTables(Waybill waybill){
 

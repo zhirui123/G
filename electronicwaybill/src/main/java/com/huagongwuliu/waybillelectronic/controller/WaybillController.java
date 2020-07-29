@@ -598,20 +598,6 @@ public class WaybillController {
         return info;
     }
 
-    @PostMapping("/select")
-    @ResponseBody
-    public Result selectByPojo(@RequestBody Waybill waybill) {
-        List<Waybill> waybills = null;
-        try {
-            waybills = waybillService.selectByWaybillByPojo(waybill);
-            return new Result(ErrorCode.SUCCESS, waybills);
-        } catch (Exception e) {
-            log.error(Constants.RES + "|waybill/select|运营后台的查询接口：", e);
-            return new Result(ErrorCode.E_10001);
-        }
-
-    }
-
     /**
      * 生成二维码
      *

@@ -319,4 +319,6 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
             " order by add_time desc" +
             "</script>")
     List<Waybill> queryByWaybill(Waybill waybill);
+
+
 }
