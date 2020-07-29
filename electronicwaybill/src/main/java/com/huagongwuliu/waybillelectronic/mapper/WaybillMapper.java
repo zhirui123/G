@@ -249,10 +249,10 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
             "<if test=' waybill.dispatcherDate != null '>and dispatcher_date like concat('%',#{waybill.dispatcherDate},'%') </if>" +
             "<if test=' waybill.remarks != null '>and remarks like concat('%',#{waybill.remarks},'%') </if>" +
 
-            "<if test=' waybill.userId != null '>and user_id like concat('%',#{waybill.userId},'%') </if>" +
+            "<if test=' waybill.userId != null '>and user_id = #{waybill.userId} </if>" +
             "<if test=' waybill.waybillCode != null '>and waybill_code like concat('%',#{waybill.waybillCode},'%') </if>" +
 
-            "<if test=' waybill.status != null '>and status like concat('%',#{waybill.status},'%') </if>" +
+            "<if test=' waybill.status >= 0 '>and status like concat('%',#{waybill.status},'%') </if>" +
             "<if test=' waybill.userCompanyName != null '>and user_company_name like concat('%',#{waybill.userCompanyName},'%') </if>" +
 
             "<if test=' waybill.id > 0 '>and id = #{waybill.id} </if>" +
@@ -314,7 +314,7 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
             "<if test=' waybill.remarks != null '>and remarks like concat('%',#{waybill.remarks},'%') </if>" +
             "<if test=' waybill.userId != null '>and user_id like concat('%',#{waybill.userId},'%') </if>" +
             "<if test=' waybill.waybillCode != null '>and waybill_code like concat('%',#{waybill.waybillCode},'%') </if>" +
-            "<if test=' waybill.status != null '>and status like concat('%',#{waybill.status},'%') </if>" +
+            "<if test=' waybill.status >=0 '>and status like concat('%',#{waybill.status},'%') </if>" +
             "<if test=' waybill.userCompanyName != null '>and user_company_name like concat('%',#{waybill.userCompanyName},'%') </if>" +
             " order by add_time desc" +
             "</script>")
