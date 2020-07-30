@@ -223,6 +223,7 @@ public class WaybillController {
 
 
             waybill.setAddTime(DateUtil.getNowTimestamp());
+            waybill.setStatus("0");
             waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(waybill.getCarriageLicensekey(), serialNum + 1));
 
 

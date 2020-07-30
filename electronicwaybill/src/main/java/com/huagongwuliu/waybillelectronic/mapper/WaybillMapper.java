@@ -252,7 +252,7 @@ public interface WaybillMapper   extends tk.mybatis.mapper.common.Mapper<Waybill
             "<if test=' waybill.userId != null '>and e.user_id = #{waybill.userId} </if>" +
             "<if test=' waybill.waybillCode != null '>and e.waybill_code like concat('%',#{waybill.waybillCode},'%') </if>" +
 
-            "<if test=' waybill.status >= 0 '>and e.status like concat('%',#{waybill.status},'%') </if>" +
+            "<if test=' waybill.status != null '>and e.status like concat('%',#{waybill.status},'%') </if>" +
             "<if test=' waybill.userCompanyName != null '>and e.user_company_name like concat('%',#{waybill.userCompanyName},'%') </if>" +
 
             "<if test=' waybill.id > 0 '>and e.id = #{waybill.id} </if>" +
