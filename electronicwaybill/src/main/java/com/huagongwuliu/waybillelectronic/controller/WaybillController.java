@@ -109,27 +109,15 @@ public class WaybillController {
     /**
      * 后台查询所有数据
      * @param waybill  运单模型
-     * @param startTime 开始时间
-     * @param endTime
-     * @param pageNum
-     * @param pageSize
-     * @param desc 是否倒序
-     * @param userPhone 用户电话
      * @return
      */
     @CrossOrigin
     @PostMapping("/backstagelist")
     @ResponseBody
-    public Result querylistbackstagelist(Waybill waybill,
-                                         @RequestParam(value = "startTime",defaultValue = "0") Long startTime,
-                                         @RequestParam(value = "endTime",defaultValue = "0") Long endTime,
-                                         @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
-                                         @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize,
-                                         @RequestParam(value = "desc",required = false) Boolean desc,
-                                         @RequestParam(value = "userPhone",required = false) String userPhone) {
+    public Result querylistbackstagelist(@RequestBody Waybill waybill) {
 
         try {
-            PageInfo<Waybill> waybills = this.waybillService.querylistbackstagelist(waybill,startTime,endTime,pageNum,pageSize,desc,userPhone);
+            PageInfo<Waybill> waybills = this.waybillService.querylistbackstagelist(waybill );
             return new Result(ErrorCode.SUCCESS, waybills);
         } catch (Exception e) {
             log.error(Constants.RES + "|waybill/list|获取列表：", e);
