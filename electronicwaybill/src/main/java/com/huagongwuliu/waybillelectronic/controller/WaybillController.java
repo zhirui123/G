@@ -126,7 +126,7 @@ public class WaybillController {
                                          @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                                          @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize,
                                          @RequestParam(value = "desc",required = false) Boolean desc,
-                                         @RequestParam(value = "desc",required = false) String userPhone) {
+                                         @RequestParam(value = "userPhone",required = false) String userPhone) {
 
         try {
             PageInfo<Waybill> waybills = this.waybillService.querylistbackstagelist(waybill,startTime,endTime,pageNum,pageSize,desc,userPhone);
