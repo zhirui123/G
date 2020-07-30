@@ -80,7 +80,4 @@ public class Waybill {
     private Integer endTime;//结束时间
     private String userCompanyName;// 认证用户公司名称
 
-
-
-
 }

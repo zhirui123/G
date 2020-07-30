@@ -250,9 +250,9 @@ public class WaybillService {
      * @param desc
      * @return
      */
-    public PageInfo<Waybill> querylistbackstagelist(Waybill waybill, Long startTime, Long endTime, Integer pageNum, Integer pageSize, Boolean desc) {
+    public PageInfo<Waybill> querylistbackstagelist(Waybill waybill, Long startTime, Long endTime, Integer pageNum, Integer pageSize, Boolean desc,String userPhone) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Waybill> waybills =  this.waybillMapper.queryallbackstage(waybill,startTime,endTime,desc);
+        List<Waybill> waybills =  this.waybillMapper.queryallbackstage(waybill,startTime,endTime,desc,userPhone);
         PageInfo<Waybill> pageInfo = new PageInfo<>(waybills);
         return pageInfo;
 

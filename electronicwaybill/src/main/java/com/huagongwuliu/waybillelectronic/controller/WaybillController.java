@@ -114,8 +114,10 @@ public class WaybillController {
      * @param pageNum
      * @param pageSize
      * @param desc 是否倒序
+     * @param userPhone 用户电话
      * @return
      */
+    @CrossOrigin
     @PostMapping("/backstagelist")
     @ResponseBody
     public Result querylistbackstagelist(Waybill waybill,
@@ -123,10 +125,11 @@ public class WaybillController {
                                          @RequestParam(value = "endTime",defaultValue = "0") Long endTime,
                                          @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                                          @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize,
-                                         @RequestParam(value = "desc",required = false) Boolean desc) {
+                                         @RequestParam(value = "desc",required = false) Boolean desc,
+                                         @RequestParam(value = "desc",required = false) String userPhone) {
 
         try {
-            PageInfo<Waybill> waybills = this.waybillService.querylistbackstagelist(waybill,startTime,endTime,pageNum,pageSize,desc);
+            PageInfo<Waybill> waybills = this.waybillService.querylistbackstagelist(waybill,startTime,endTime,pageNum,pageSize,desc,userPhone);
             return new Result(ErrorCode.SUCCESS, waybills);
         } catch (Exception e) {
             log.error(Constants.RES + "|waybill/list|获取列表：", e);
