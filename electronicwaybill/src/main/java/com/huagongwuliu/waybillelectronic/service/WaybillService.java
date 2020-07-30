@@ -166,11 +166,11 @@ public class WaybillService {
      * @return
      */
 
-     public List<Waybill> queryByGoodsNameAndUserId(String goodsName,String userId){
+    public List<Waybill> queryByGoodsNameAndUserId(String goodsName,String userId){
 
 
-         return  this.waybillMapper.queryByGoodsNameAndUserId(goodsName, userId);
-     }
+        return  this.waybillMapper.queryByGoodsNameAndUserId(goodsName, userId);
+    }
 
 
     /**
@@ -213,21 +213,21 @@ public class WaybillService {
 
         try {
 
-           if (StringUtil.isNotEmpty(waybill.getShipperName())){
+            if (StringUtil.isNotEmpty(waybill.getShipperName())){
 
-               Shipper shipper = new Shipper();
-               shipper.setShipperName(waybill.getShipperName());
-               shipper.setShipperContact(waybill.getShipperContact());
-               shipper.setShipperPhone(waybill.getShipperPhone());
-               shipper.setUserId(waybill.getUserId());
-               shipper.setYdId(waybill.getWaybillCode());
+                Shipper shipper = new Shipper();
+                shipper.setShipperName(waybill.getShipperName());
+                shipper.setShipperContact(waybill.getShipperContact());
+                shipper.setShipperPhone(waybill.getShipperPhone());
+                shipper.setUserId(waybill.getUserId());
+                shipper.setYdId(waybill.getWaybillCode());
 
-               System.out.println("阿萨德红粉金刚就爱上的看法");
-               this.shipperService.insertShipper(shipper);
-               System.out.println("1324567890、、、、、、、、、");
+                System.out.println("阿萨德红粉金刚就爱上的看法");
+                this.shipperService.insertShipper(shipper);
+                System.out.println("1324567890、、、、、、、、、");
 
 
-           }
+            }
 
 
 

@@ -590,13 +590,13 @@ public class WaybillController {
 
         try {
 
-                List<Goods>  goodsList = this.goodsService.queryByGoodsName(goodsName);
+            List<Goods>  goodsList = this.goodsService.queryByGoodsName(goodsName);
 //                List<Goods> list = goodsList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
 //                        + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
 
-                info.setResult_code(0);
-                info.setResult_data(goodsList);
-                info.setResult_msg("成功");
+            info.setResult_code(0);
+            info.setResult_data(goodsList);
+            info.setResult_msg("成功");
         } catch (Exception e) {
             info.setResult_code(1);
             info.setResult_data(null);
