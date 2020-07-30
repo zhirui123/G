@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name="tb_user")
+@Table(name="app_user_info")
 @Data
 public class User {
 
@@ -19,12 +19,11 @@ public class User {
     private Long id;
 
     // 用户名
-    private String username;
+    private String roleName;
     private String password;
     private String phone;
-    private Date created;
-    private String salt;
-    private  String userTime;
+    private Date addTime;
+
 
 
 //    public static long getSerialVersionUID() {
