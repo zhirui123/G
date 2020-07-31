@@ -145,7 +145,12 @@ public class WaybillUtils {
                     String goods_name=rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
                     String un_num=rs.getCell(j++, i).getContents();
                     String goods_type=rs.getCell(j++, i).getContents();
-                    String goods_packing_type= "PG "  + rs.getCell(j++, i).getContents();
+                    String goods_packing_type= rs.getCell(j++, i).getContents();
+                    if (!StringUtils.isEmpty(goods_packing_type)){
+                         goods_packing_type= "PG "  + goods_packing_type;
+                    }
+
+
 
 
                     System.out.println("goods_name:"+goods_name+" un_num:"+un_num+" goods_type:"+goods_type+" goods_packing_type:"+goods_packing_type);

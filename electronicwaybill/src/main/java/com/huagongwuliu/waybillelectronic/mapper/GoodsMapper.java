@@ -21,6 +21,12 @@ public interface GoodsMapper {
             "</script>")
      List<Goods> queryByGoodsName(String goodName);
 
+    @Select( "<script>" +
+            " select * from tb_goods " +
+            "<if test=' goodName != null '> where goods_name= #{goodName} </if>" +
+            "</script>")
+    List<Goods> queryByGoodsName2(String goodName);
+
 
 
     @Insert("insert into tb_goods (goods_name,un_num,goods_type,goods_packing_norms,goods_packing_type,goods_num,goods_company,user_id) VALUES" +
@@ -36,19 +42,22 @@ public interface GoodsMapper {
 
 
 
-    @Update("<script>" +
-            " UPDATE tb_goods " +
-            "<set>" +
-            "<if test=' goods_name != null '> goods_name = #{goods.goodsName}, </if>" +
-            "<if test=' un_num != null '> un_num = #{goods.unNum} , </if>" +
-            "<if test=' goods_type != null '> goods_type = #{goods.goodsType} , </if>" +
-            "<if test=' goods_packing_norms != null '> goods_packing_norms = #{goods.goodsPackingNorms} , </if>" +
-            "<if test=' goods_packing_type != null '> goods_packing_type = #{goods.goodsPackingType} , </if>" +
-            "<if test=' goods_num != null '> goods_num = #{goods.goodsNum} , </if>" +
-            "<if test=' goods_company != null '> goods_company = #{goods.goodsCompany}  </if>" +
-            "</set>" +
-            "where id = #{id}" +
-            "</script>")
+//    @Update("<script>" +
+//            " UPDATE tb_goods " +
+//            "<set>" +
+//            "<if test=' goods.goodsName != null '> goods_name = #{goods.goodsName}, </if>" +
+//            "<if test=' goods.unNum != null '> un_num = #{goods.unNum} , </if>" +
+//            "<if test=' goods.goodsType != null '> goods_type = #{goods.goodsType} , </if>" +
+//            "<if test=' goods.goodsPackingNorms != null '> goods_packing_norms = #{goods.goodsPackingNorms} , </if>" +
+//            "<if test=' goods.goodsPackingType != null '> goods_packing_type = #{goods.goodsPackingType} , </if>" +
+//            "<if test=' goods.goodsNum != null '> goods_num = #{goods.goodsNum} , </if>" +
+//            "<if test=' goods.goodsCompany != null '> goods_company = #{goods.goodsCompany}  </if>" +
+//            "</set>" +
+//            "where id = #{goods.id}" +
+//            "</script>")
+    @Update("UPDATE tb_goods set goods_name = #{goods.goodsName},un_num = #{goods.unNum} ,goods_type = #{goods.goodsType} " +
+            ",goods_packing_norms = #{goods.goodsPackingNorms} ,goods_packing_type = #{goods.goodsPackingType} ," +
+            "goods_num = #{goods.goodsNum} ,goods_company = #{goods.goodsCompany} where id = #{goods.id}")
     int changeGoodsData(@Param("goods") Goods goods);
 
     /**

@@ -21,7 +21,21 @@ public class GoodsService {
 
      public Goods addGoodsData(@Param("goods") Goods goods) throws  Exception{
 
-         this.goodsMapper.addGoodsData(goods);
+
+         List<Goods> goodsList = this.goodsMapper.queryByGoodsName2(goods.getGoodsName());
+
+         if (goodsList.size() > 0){
+             Goods g = goodsList.get(0);
+             goods.setId(g.getId());
+
+
+             System.out.println("更新数据了开始 " + goods);
+             this.goodsMapper.changeGoodsData(goods);
+
+         }else{
+             this.goodsMapper.addGoodsData(goods);
+         }
+
         return  goods;
 
      }

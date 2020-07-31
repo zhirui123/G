@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 @Table(name = "app_user_info")
 @Data
@@ -22,7 +21,8 @@ public class User {
     private String roleName;
     private String password;
     private String phone;
-    private Date addTime;
+    private String addTime;
+    private String companyName;
 
 
 //    public static long getSerialVersionUID() {
