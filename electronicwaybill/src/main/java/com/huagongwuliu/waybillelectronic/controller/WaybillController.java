@@ -600,28 +600,14 @@ public class WaybillController {
      * @return
      */
     @GetMapping(value = "/qrimage")
-    public ResponseEntity<byte[]> getQRImage(@RequestParam String codestr) throws Exception {
-
-////
-//
-////        List<Goods>
-//
+    public ResponseEntity<byte[]> getQRImage(@RequestParam String codestr, @RequestParam("isAuth") String isAuth) throws Exception {
 //        List<Goods> allByExcel = WaybillUtils.getAllByExcel();
 //        for (Goods goods : allByExcel) {
-//
 //            this.goodsService.addGoodsData(goods);
-//
 //        }
-//
-//
-//
-//
-//
-//
-
-
         //二维码内的信息
-        String info = codestr;
+
+        String info = codestr + "&isAuth=" + isAuth;
 
         byte[] qrcode = null;
         try {

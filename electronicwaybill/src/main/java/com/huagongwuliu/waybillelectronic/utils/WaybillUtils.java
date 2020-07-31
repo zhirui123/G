@@ -146,9 +146,9 @@ public class WaybillUtils {
                     String un_num=rs.getCell(j++, i).getContents();
                     String goods_type=rs.getCell(j++, i).getContents();
                     String goods_packing_type= rs.getCell(j++, i).getContents();
-                    if (!StringUtils.isEmpty(goods_packing_type)){
-                         goods_packing_type= "PG "  + goods_packing_type;
-                    }
+//                    if (!StringUtils.isEmpty(goods_packing_type)){
+//                         goods_packing_type= "PG "  + goods_packing_type;
+//                    }
 
 
 
