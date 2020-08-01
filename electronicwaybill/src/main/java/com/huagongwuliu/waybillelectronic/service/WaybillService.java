@@ -55,7 +55,7 @@ public class WaybillService {
     }
 
 
-    public int changeStatusAction(String status, int goodsNum, Long id) {
+    public int changeStatusAction(String status, String goodsNum, Long id) {
         return this.waybillMapper.changeStatus(status, goodsNum, id);
     }
 

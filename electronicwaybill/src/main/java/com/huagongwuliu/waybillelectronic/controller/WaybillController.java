@@ -296,7 +296,7 @@ public class WaybillController {
 
     @PostMapping("/status")
     @ResponseBody
-    public Result changeWaybillStatus(@RequestParam String status, @RequestParam(defaultValue = "0") int goodsNum, @RequestParam Long id) {
+    public Result changeWaybillStatus(@RequestParam String status, @RequestParam(defaultValue = "0") String goodsNum, @RequestParam Long id) {
         //验证码错误
         Result info = new Result();
 
