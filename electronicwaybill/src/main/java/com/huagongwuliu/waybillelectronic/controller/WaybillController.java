@@ -108,24 +108,23 @@ public class WaybillController {
 
     /**
      * 后台查询所有数据
-     * @param waybill  运单模型
+     *
+     * @param waybill 运单模型
      * @return
      */
-    @CrossOrigin
+    @CrossOrigin(methods = {RequestMethod.POST, RequestMethod.OPTIONS})
     @PostMapping("/backstagelist")
     @ResponseBody
     public Result querylistbackstagelist(@RequestBody Waybill waybill) {
 
         try {
-            PageInfo<Waybill> waybills = this.waybillService.querylistbackstagelist(waybill );
+            PageInfo<Waybill> waybills = this.waybillService.querylistbackstagelist(waybill);
             return new Result(ErrorCode.SUCCESS, waybills);
         } catch (Exception e) {
             log.error(Constants.RES + "|waybill/list|获取列表：", e);
             return new Result(ErrorCode.E_10001);
         }
     }
-
-
 
 
     @PostMapping("/list")
@@ -147,6 +146,7 @@ public class WaybillController {
 
     /**
      * 根据用户id，查询搜索
+     *
      * @param waybill
      * @return
      */
@@ -155,7 +155,7 @@ public class WaybillController {
     public Result queryByWaybill(@RequestBody Waybill waybill) {
 
         if (waybill.getUserId() == null || waybill.getUserId().length() == 0) {
-            new Result(ErrorCode.E_10001,"请输入用户id");
+            new Result(ErrorCode.E_10001, "请输入用户id");
         }
         try {
             List<Waybill> waybills = this.waybillService.queryByWaybill(waybill);
@@ -165,12 +165,6 @@ public class WaybillController {
             return new Result(ErrorCode.E_10001);
         }
     }
-
-
-
-
-
-
 
 
     @GetMapping("/findall1")
@@ -579,7 +573,7 @@ public class WaybillController {
 
         try {
 
-            List<Goods>  goodsList = this.goodsService.queryByGoodsName(goodsName);
+            List<Goods> goodsList = this.goodsService.queryByGoodsName(goodsName);
 //                List<Goods> list = goodsList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getGoodsName() + ";"
 //                        + o.getUnNum() + ";" + o.getGoodsType() + ";" + o.getGoodsPackingNorms() + ";" + o.getGoodsPackingType() + ";" + o.getGoodsNum() + ";" + o.getGoodsCompany()))), ArrayList::new));//o代表属性值，根据此属性值去重
 
