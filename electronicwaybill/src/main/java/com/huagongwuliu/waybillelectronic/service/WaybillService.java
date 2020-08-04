@@ -30,6 +30,12 @@ public class WaybillService {
         return this.waybillMapper.queryById(id);
     }
 
+    public  Waybill queryByWaybillCode(String waybillCode) throws  Exception{
+        return  this.waybillMapper.queryByWaybillCode(waybillCode);
+    }
+
+
+
     public List<Waybill> queryByIdAndUserId(Long id, String userId) throws Exception {
         List<Waybill> ws = this.waybillMapper.queryByIdAndUserId(id, userId);
         System.out.println(ws);

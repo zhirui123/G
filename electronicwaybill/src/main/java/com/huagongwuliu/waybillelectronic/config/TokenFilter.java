@@ -50,6 +50,13 @@ public class TokenFilter extends OncePerRequestFilter {
             match = pathMatcher.matchStart("/waybill/qrimage", url);
         }
 
+
+        //以下是放开的接口权限
+        //
+//        if (request.getServletPath().equals("/waybill/backstagelist")){
+//            match = pathMatcher.matchStart("/waybill/backstagelist", url);
+//        }
+
         return match;
     }
 

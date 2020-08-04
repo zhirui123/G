@@ -20,7 +20,7 @@ public class WaybillUtils {
      * 生成时间戳
      */
     private static String getDateTime() {
-        DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        DateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
         return sdf.format(new Date());
     }
 
@@ -39,6 +39,16 @@ public class WaybillUtils {
         long rangeLong = (((long) (new Random().nextDouble() * (max - min)))) + min;
         return rangeLong;
     }
+
+
+     public static synchronized Long getUserCode(){
+
+        String code =  getDateTime() + getRandom(7);
+        return   Long.parseLong(code);
+
+    }
+
+
 
     /**
      *

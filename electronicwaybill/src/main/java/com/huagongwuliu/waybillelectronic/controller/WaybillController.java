@@ -86,6 +86,28 @@ public class WaybillController {
         return "yd";
     }
 
+
+    @RequestMapping("/yundan")
+    public String queryYundan(@RequestParam("waybillCode") String waybillCode, @RequestParam("isAuth") String isAuth, ModelMap modelMap) {
+        Waybill waybill = null;
+        try {
+            waybill = this.waybillService.queryByWaybillCode(waybillCode);
+            modelMap.addAttribute("yd", waybill);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/yd| ：运单界面", e);
+            e.printStackTrace();
+        }
+
+        return "yd";
+    }
+
+
+
+
+
+
+
+
     @PostMapping("/findbyidanduserid")
     @ResponseBody
     public ResultInfo findwaybillsByIdAndUserId(@RequestParam("id") Long id, @RequestParam("userId") String userId) throws Exception {
@@ -203,6 +225,10 @@ public class WaybillController {
 
             Integer serialNum = this.waybillService.queryCountByUserIdAndCreteDate(waybill.getUserId());
 
+            waybill.setId(WaybillUtils.getUserCode());
+
+
+            System.out.println(" 当前设置的UserId为" + waybill.getId());
 
             waybill.setAddTime(DateUtil.getNowTimestamp());
             waybill.setStatus("0");
@@ -222,18 +248,20 @@ public class WaybillController {
             if (recode == 0) {
                 info.setResult_code(1);
                 info.setResult_msg("失败");
+
             } else {
                 info.setResult_code(ErrorCode.SUCCESS.getCode());
                 info.setResult_msg("成功");
+                info.setResult_data(waybill);
             }
 
-            List<Waybill> waybillList = this.waybillService.queryByWaybillCodeAndUserId(waybill.getWaybillCode(), waybill.getUserId());
-            if (waybillList.size() > 0) {
-                Waybill waybill1 = waybillList.get(0);
-                info.setResult_data(waybill1);
-            } else {
-                info.setResult_data(recode);
-            }
+//            List<Waybill> waybillList = this.waybillService.queryByWaybillCodeAndUserId(waybill.getWaybillCode(), waybill.getUserId());
+//            if (waybillList.size() > 0) {
+//                Waybill waybill1 = waybillList.get(0);
+//                info.setResult_data(waybill1);
+//            } else {
+//                info.setResult_data(recode);
+//            }
             return info;
         } catch (Exception e) {
             log.error(Constants.RES + "|waybill/addwaybill|插入数据的接口：", e);
@@ -618,6 +646,13 @@ public class WaybillController {
 
         return new ResponseEntity<byte[]>(qrcode, headers, HttpStatus.CREATED);
     }
+
+
+
+
+
+
+
 
 
 //    @PostMapping("/findbygoodname")
