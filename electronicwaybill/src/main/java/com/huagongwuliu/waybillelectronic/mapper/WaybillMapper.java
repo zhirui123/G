@@ -19,7 +19,7 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
      *
      * @return
      */
-    @Select("select * from tb_eway")
+    @Select("select e.*,u.type isAuth,u.company_name userCompanyName from tb_eway e LEFT JOIN app_user_authentication u ON e.user_id = u.user_id")
     List<Waybill> findAll();
 
     @Insert("INSERT INTO tb_eway (id, shipper_name,shipper_contact,shipper_phone,shipto_name,shipto_phone,shipment_name,shipment_phone," +
@@ -38,14 +38,17 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
             "#{shipmentStatus},#{vehicleStatus},#{goodsStatus},#{addTime},#{updateTime},#{userCompanyName} )")
     int insertWay(Waybill waybill);
 
-    @Select("select * from tb_eway where id = #{id}")
+    @Select("select  e.*,u.type isAuth,u.company_name userCompanyName from tb_eway e LEFT JOIN app_user_authentication u ON e.user_id = u.user_id where e.id = #{id}")
     Waybill queryById(Long id);
 
     @Select("select * from tb_eway where waybill_code = #{waybillCode}")
     Waybill queryByWaybillCode(String waybillCode);
 
-    @Select("select * from tb_eway where id = #{id} and user_id = #{userId}")
+    @Select("select  e.*,u.type isAuth,u.company_name userCompanyName from tb_eway e LEFT JOIN app_user_authentication u ON e.user_id = u.user_id where e.id = #{id} and e.user_id = #{userId}")
     List<Waybill> queryByIdAndUserId(Long id, String userId);
+
+
+//    @Select("select  e.*,u.type isAuth,u.company_name userCompanyName from tb_eway e LEFT JOIN app_user_authentication u ON e.user_id = u.user_id where e.user_id = #{userId}  order by add_time desc")
 
     @Select("select * from tb_eway where user_id = #{userId}  order by add_time desc")
     List<Waybill> queryByUserId(String userId);

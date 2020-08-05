@@ -1,9 +1,11 @@
 package com.huagongwuliu.waybillelectronic.pojo;
 
 import lombok.Data;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Table(name = "tb_eway")
 @Data
@@ -79,6 +81,8 @@ public class Waybill {
     private Integer addTime;//插入时间
     private Integer updateTime;//更新时间
 
+
+
     private String userCompanyName;// 认证用户公司名称
 
     private Long startTime;
@@ -86,5 +90,9 @@ public class Waybill {
     public Integer pageNum;
     public Integer pageSize = 20;
     private String userPhone;
+
+    @Transient
+    @Column(name = "`type`")
+    private  String isAuth;// 是否认证
 
 }
