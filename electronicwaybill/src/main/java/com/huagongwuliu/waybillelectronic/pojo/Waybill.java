@@ -94,5 +94,7 @@ public class Waybill {
     @Transient
     @Column(name = "`type`")
     private  String isAuth;// 是否认证
+    @Transient
+    private  String isOfficeSealLicense;//是否上传公章授权书
 
 }
