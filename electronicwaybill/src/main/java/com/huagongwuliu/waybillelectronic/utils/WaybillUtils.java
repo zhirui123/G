@@ -20,7 +20,7 @@ public class WaybillUtils {
      * 生成时间戳
      */
     private static String getDateTime() {
-        DateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+        DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         return sdf.format(new Date());
     }
 

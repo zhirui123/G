@@ -22,14 +22,14 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
     @Select("select * from tb_eway")
     List<Waybill> findAll();
 
-    @Insert("INSERT INTO tb_eway (id, shipper_name,shipper_contact,shipper_phone,shipto_name,shipto_phone,shipment_name,shipment_phone," +
+    @Insert("INSERT INTO tb_eway ( shipper_name,shipper_contact,shipper_phone,shipto_name,shipto_phone,shipment_name,shipment_phone," +
             "shipment_starttime,shipment_from_address,shipment_from_details,city_express,shipment_to_address,shipment_to_details," +
             "carriage_name,carriage_phone,carriage_licensekey,license_plate_num,license_plate_color,road_transport_permit_num," +
             "trailer_num,trailer_road_ransport_permit,canbody_num,canbody_volume,driver_name,driver_certificate,driver_phone," +
             "escort_name,escort_phone,escort_certificate,goods_name,un_num,goods_type,goods_packing_norms,goods_packing_type,goods_num," +
             "goods_company,dispatcher_name,dispatcher_date,remarks,user_id,waybill_code,status,shipper_status,shipto_status,carriage_status," +
             "shipment_status,vehicle_status,goods_status,add_time,update_time,user_company_name " +
-            " ) VALUES(#{id}, #{shipperName},#{shipperContact},#{shipperPhone},#{shiptoName},#{shiptoPhone},#{shipmentName},#{shipmentPhone}," +
+            " ) VALUES( #{shipperName},#{shipperContact},#{shipperPhone},#{shiptoName},#{shiptoPhone},#{shipmentName},#{shipmentPhone}," +
             "#{shipmentStarttime},#{shipmentFromAddress},#{shipmentFromDetails},#{cityExpress},#{shipmentToAddress},#{shipmentToDetails}," +
             "#{carriageName},#{carriagePhone},#{carriageLicensekey},#{licensePlateNum},#{licensePlateColor},#{roadTransportPermitNum}," +
             "#{trailerNum},#{trailerRoadRansportPermit},#{canbodyNum},#{canbodyVolume},#{driverName},#{driverCertificate},#{driverPhone}," +
