@@ -15,14 +15,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     // 用户名
     private String roleName;
     private String password;
     private String phone;
     private String addTime;
-    private String companyName;
+
+
+    private String isAuthentication;
+    private String recommenderId;
+    private String wechatOpenId;
 
 
 //    public static long getSerialVersionUID() {

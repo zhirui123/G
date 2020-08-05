@@ -38,13 +38,13 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
             "#{shipmentStatus},#{vehicleStatus},#{goodsStatus},#{addTime},#{updateTime},#{userCompanyName} )")
     int insertWay(Waybill waybill);
 
-    @Select("select  e.*,u.type isAuth,u.company_name userCompanyName,u.is_office_seal_license isOfficeSealLicense from tb_eway e LEFT JOIN app_user_authentication u ON e.user_id = u.user_id where e.id = #{id}")
+    @Select("select  e.*,u.company_name userCompanyName,u.is_office_seal_license isOfficeSealLicense from tb_eway e LEFT JOIN app_user_authentication u ON e.user_id = u.user_id where e.id = #{id}")
     Waybill queryById(Long id);
 
     @Select("select * from tb_eway where waybill_code = #{waybillCode}")
     Waybill queryByWaybillCode(String waybillCode);
 
-    @Select("select  e.*,u.type isAuth,u.company_name userCompanyName from tb_eway e LEFT JOIN app_user_authentication u ON e.user_id = u.user_id where e.id = #{id} and e.user_id = #{userId}")
+    @Select("select  e.*,u.company_name userCompanyName from tb_eway e LEFT JOIN app_user_authentication u ON e.user_id = u.user_id where e.id = #{id} and e.user_id = #{userId}")
     List<Waybill> queryByIdAndUserId(Long id, String userId);
 
 

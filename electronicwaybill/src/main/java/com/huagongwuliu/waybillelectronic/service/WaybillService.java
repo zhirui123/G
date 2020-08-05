@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Shipper;
+import com.huagongwuliu.waybillelectronic.pojo.User;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
@@ -21,13 +22,32 @@ public class WaybillService {
     @Resource
     private ShipperService shipperService;
 
+    @Resource
+    private  UserService userService;
+
 
     public List<Waybill> findAll() throws Exception {
         return this.waybillMapper.findAll();
     }
 
     public Waybill queryById(Long id) throws Exception {
-        return this.waybillMapper.queryById(id);
+
+
+        Waybill waybill = this.waybillMapper.queryById(id);
+
+        if (StringUtil.isNotEmpty(waybill.getUserCompanyName()) && StringUtil.isNotEmpty(waybill.getIsOfficeSealLicense())&& StringUtil.isNotEmpty(waybill.getUserId())){
+
+
+            System.out.println("-----------------" + waybill.getUserId());
+
+            User user = this.userService.queryByUserId(waybill.getUserId());
+            waybill.setIsAuth(user.getIsAuthentication());
+
+        }
+
+        System.out.println("waybill" + waybill);
+
+        return waybill;
     }
 
     public  Waybill queryByWaybillCode(String waybillCode) throws  Exception{
