@@ -31,13 +31,13 @@ public class WaybillService {
 
     public Waybill queryById(Long id) throws Exception {
 
-
         Waybill waybill = this.waybillMapper.queryById(id);
 
 //        if (StringUtil.isNotEmpty(waybill.getUserCompanyName()) && StringUtil.isNotEmpty(waybill.getIsOfficeSealLicense())&& StringUtil.isNotEmpty(waybill.getUserId())){
 //            User user = this.userService.queryByUserId(waybill.getUserId());
 //            waybill.setIsAuth(user.getIsAuthentication());
 //        }
+
         return waybill;
     }
 

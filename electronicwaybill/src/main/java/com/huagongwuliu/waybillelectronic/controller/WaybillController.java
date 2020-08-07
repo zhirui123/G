@@ -218,9 +218,7 @@ public class WaybillController {
             return info;
         }
 
-
         String  carriageLicensekeyNum = StringUtil.getNumeric(waybill.getCarriageLicensekey()); //承运人许可证号，获取里面的数字许可证号
-
         if (carriageLicensekeyNum.length() < 7) {
             info.setResult_code(1);
             info.setResult_msg("请正确输入承运人许可证号");
@@ -231,29 +229,21 @@ public class WaybillController {
 
 
             Integer serialNum = this.waybillService.queryCountByUserIdAndCreteDate(waybill.getUserId());
-
             waybill.setId(WaybillUtils.getUserCode());
-
-
             waybill.setAddTime(DateUtil.getNowTimestamp());
             waybill.setStatus("0");
             waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(carriageLicensekeyNum, serialNum + 1));
-
-
             if (!StringUtil.isEmpty(waybill.getLicensePlateNum())) {
                 waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
             }
-
             if (!StringUtil.isEmpty(waybill.getTrailerNum())) {
                 waybill.setTrailerNum(waybill.getTrailerNum().toUpperCase());
             }
 
             int recode = this.waybillService.insertWaybillByWaubillObj(waybill);
-
             if (recode == 0) {
                 info.setResult_code(1);
                 info.setResult_msg("失败");
-
             } else {
                 info.setResult_code(ErrorCode.SUCCESS.getCode());
                 info.setResult_msg("成功");
