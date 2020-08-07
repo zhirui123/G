@@ -189,6 +189,9 @@ public class WaybillUtils {
 
     public static void main(String[] args) {
 
+
+//        System.out.println(StringUtil.getNumeric("皖交运管宿字341300400009号"));
+
 //          creatYDOrderNum("1234567890",11);
 //
 //

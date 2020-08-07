@@ -83,6 +83,8 @@ public class WaybillController {
             e.printStackTrace();
         }
 
+
+
         return "yd";
     }
 
@@ -216,12 +218,14 @@ public class WaybillController {
             return info;
         }
 
-        if (waybill.getCarriageLicensekey().length() < 7) {
+
+        String  carriageLicensekeyNum = StringUtil.getNumeric(waybill.getCarriageLicensekey()); //承运人许可证号，获取里面的数字许可证号
+
+        if (carriageLicensekeyNum.length() < 7) {
             info.setResult_code(1);
             info.setResult_msg("请正确输入承运人许可证号");
             return info;
         }
-
 
         try {
 
@@ -231,11 +235,9 @@ public class WaybillController {
             waybill.setId(WaybillUtils.getUserCode());
 
 
-            System.out.println(" 当前设置的UserId为" + waybill.getId());
-
             waybill.setAddTime(DateUtil.getNowTimestamp());
             waybill.setStatus("0");
-            waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(waybill.getCarriageLicensekey(), serialNum + 1));
+            waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(carriageLicensekeyNum, serialNum + 1));
 
 
             if (!StringUtil.isEmpty(waybill.getLicensePlateNum())) {

@@ -111,4 +111,23 @@ public class StringUtil {
         return c;
     }
 
+
+
+
+    /**
+     * 过滤非数字
+     * @param str
+     * @return
+     */
+    public static String getNumeric(String str) {
+        String regEx="[^0-9]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        return m.replaceAll("").trim();
+    }
+
+
+
+
+
 }
