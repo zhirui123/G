@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Shipper;
-import com.huagongwuliu.waybillelectronic.pojo.User;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
@@ -35,18 +34,10 @@ public class WaybillService {
 
         Waybill waybill = this.waybillMapper.queryById(id);
 
-        if (StringUtil.isNotEmpty(waybill.getUserCompanyName()) && StringUtil.isNotEmpty(waybill.getIsOfficeSealLicense())&& StringUtil.isNotEmpty(waybill.getUserId())){
-
-
-            System.out.println("-----------------" + waybill.getUserId());
-
-            User user = this.userService.queryByUserId(waybill.getUserId());
-            waybill.setIsAuth(user.getIsAuthentication());
-
-        }
-
-        System.out.println("waybill" + waybill);
-
+//        if (StringUtil.isNotEmpty(waybill.getUserCompanyName()) && StringUtil.isNotEmpty(waybill.getIsOfficeSealLicense())&& StringUtil.isNotEmpty(waybill.getUserId())){
+//            User user = this.userService.queryByUserId(waybill.getUserId());
+//            waybill.setIsAuth(user.getIsAuthentication());
+//        }
         return waybill;
     }
 
