@@ -78,8 +78,10 @@ public class WaybillController {
     public String aa(@RequestParam("id") Long id, @RequestParam("isAuth") String isAuth, ModelMap modelMap) {
         Waybill waybill = null;
         try {
+            long time = System.currentTimeMillis();
             waybill = this.waybillService.queryById(id);
             modelMap.addAttribute("yd", waybill);
+           log.info("时间" + (System.currentTimeMillis() - time));
         } catch (Exception e) {
             log.error(Constants.RES + "|waybill/yd| ：运单界面", e);
             e.printStackTrace();
