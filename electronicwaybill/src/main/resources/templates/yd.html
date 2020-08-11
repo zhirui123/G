@@ -5,10 +5,7 @@
         <title>电子运单系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <script src="/js/jquery.js"></script>
-<!--        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
-<!--        <script src="/js/html2canvas.js"></script>-->
-        <script src="/js/qrcode.min.js"></script>
+
     </head>
     <body style="font-size:8px; margin: 0;">
         <div style="margin:0" id="yd" class="ddr">
@@ -26,7 +23,7 @@
             .div2 {
                 height: 30px;
                 position: absolute;
-                top: 120px;
+                top: 50%;
                 z-index: 8;
                 left: 10%;
             }
@@ -39,10 +36,12 @@
             <!--startprint-->
             <!--        <div class="div2"><img src="/img/yinzhang.png" border="0" width="160px;" height="160px;"></div>-->
             <div id="sealdiv" class="div2">
-                <canvas id="canvas" width="160" height="160"></canvas>
+<!--                <canvas id="canvas" width="160" height="160"></canvas>-->
+                <img src="https://p0.meituan.net/movie/e08ccd949f407da4c5db2e783c4b7d0646124.jpg@128w_170h_1e_1c" border="0" width="160px;height=160px;">
             </div>
 
-            <table style="border-collapse:collapse;margin-right: 10px" border="1" width="110%" cellspacing="0"
+
+                 <table style="border-collapse:collapse;margin-right: 10px" border="1" width="110%" cellspacing="0"
                    cellpadding="1">
                 <tr>
                     <td colspan="7" align="center" style="font-weight:bolder;text-align:center;">危险货物道路运输运单</td>
@@ -162,8 +161,12 @@
 
             <!--endprint--></div>
     </div>
-
+<!--        <script src="/js/jquery.js"></script>-->
+        <!--        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
+        <!--        <script src="/js/html2canvas.js"></script>-->
+        <script src="/js/qrcode.min.js"></script>
         <script th:inline="javascript">
+
             let url = ''
 
             // function getlianjie() {
@@ -187,8 +190,8 @@
             // getlianjie()
 
             var qrcode = new QRCode(document.getElementById("imagesqrcode"), {
-                width: 80,
-                height: 80,
+                width: 100,
+                height: 100,
                 correctLevel: QRCode.CorrectLevel.H
             });
 
@@ -280,10 +283,13 @@
                 // console.log(window.location.href);
                 // var url = window.location.href;
                 var url1 = getQueryVariable("isAuth");
-
+                var img = document.getElementById('sealdiv')
                 console.log(url1);
                 if ('3' === url1) {
-                    createSealEx2()
+                    img.style.display='block';
+                    // createSealEx2()
+                }else {
+                    img.style.display='none';
                 }
                 // console.log(url1);
             }
@@ -431,16 +437,24 @@
                 // console.log(test.cityExpress)
                 //var city = document.getElementById("cityExpress")
 
+                // if ("1" == test.cityExpress) {
+                //     // alert('1');
+                //     $("#cityExpress").attr("checked", 1);
+                // } else {
+                //     // alert('2');
+                //     $("#cityExpress").removeAttr("checked");
+                // }
+                var check = document.getElementsByTagName('input')[0];
+
                 if ("1" == test.cityExpress) {
                     // alert('1');
-                    $("#cityExpress").attr("checked", 1);
+                    // $("#cityExpress").attr("checked", 1);
+                    check.checked = true;
                 } else {
                     // alert('2');
-                    $("#cityExpress").removeAttr("checked");
+                    // $("#cityExpress").removeAttr("checked");
+                    check.checked = false;
                 }
-                // var date = document.getElementById("city").value;
-                // console.log(date)
-                // alert(date)
             }
 
             city();
