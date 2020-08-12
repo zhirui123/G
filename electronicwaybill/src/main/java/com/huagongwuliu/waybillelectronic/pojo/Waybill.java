@@ -97,4 +97,9 @@ public class Waybill {
     @Transient
     private  String isOfficeSealLicense;//是否上传公章授权书
 
+    @Transient
+    private  String electronicSealId;// 电子公章的id
+    @Transient
+    private  String electronicSealI; //电子公章图片
+
 }
