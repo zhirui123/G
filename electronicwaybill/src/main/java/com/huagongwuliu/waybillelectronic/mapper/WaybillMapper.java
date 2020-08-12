@@ -38,7 +38,7 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
             "#{shipmentStatus},#{vehicleStatus},#{goodsStatus},#{addTime},#{updateTime},#{userCompanyName} )")
     int insertWay(Waybill waybill);
 
-    @Select("select  e.*,u.company_name userCompanyName,u.is_office_seal_license isOfficeSealLicense ,u.electronic_seal_id electronicSealId  ,u.electronic_seal_image   electronicSealI from tb_eway e" +
+    @Select("select  e.*,u.company_name userCompanyName,u.is_office_seal_license isOfficeSealLicense ,u.electronic_seal_id electronicSealId  ,c.electronic_seal_image   electronicSealImage from tb_eway e" +
             " LEFT JOIN app_user_authentication u ON e.user_id = u.user_id " +
             " LEFT JOIN app_company_electronic_seal c ON u.electronic_seal_id = c.id " +
             "where e.id = #{id}")

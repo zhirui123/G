@@ -100,6 +100,6 @@ public class Waybill {
     @Transient
     private  String electronicSealId;// 电子公章的id
     @Transient
-    private  String electronicSealI; //电子公章图片
+    private  String electronicSealImage; //电子公章图片
 
 }
