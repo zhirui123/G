@@ -5,10 +5,7 @@
     <title>电子运单系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
-    <script src="/js/html2canvas.js"></script>
-    <script src="/js/jspdf.debug.js"></script>
-    <script src="/js/qrcode.min.js"></script>
+
 </head>
 <body style="font-size:8px; margin: 0;">
 <div style="margin:0" id="yd" class="ddr">
@@ -26,11 +23,19 @@
         .div2 {
             height: 30px;
             position: absolute;
-            top: 120px;
+            top: 50%;
             z-index: 8;
             left: 10%;
         }
 
+        .imagesqrcodeimg{
+            height: 80px;
+            width: 80px;
+        }
+        #imagesqrcodeimg{
+            height: 80px;
+            width: 80px;
+        }
 
     </style>
     <!--    <a class="layui-btn layui-btn-primary" href="javascript:mobilePdf();"><font color="#01AAED">下载PDF文件</font></a>&nbsp;&nbsp;-->
@@ -39,8 +44,10 @@
         <!--startprint-->
         <!--        <div class="div2"><img src="/img/yinzhang.png" border="0" width="160px;" height="160px;"></div>-->
         <div id="sealdiv" class="div2">
-            <canvas id="canvas" width="160" height="160"></canvas>
+            <!--                <canvas id="canvas" width="160" height="160"></canvas>-->
+            <img th:src="${yd.electronicSealImage}" border="0" width="160px;height=160px;">
         </div>
+
 
         <table style="border-collapse:collapse;margin-right: 10px" border="1" width="110%" cellspacing="0"
                cellpadding="1">
@@ -149,7 +156,7 @@
                 <td th:text="${yd.remarks}" colspan="4">-</td>
                 <td colspan="2" valign="middle" align="center" class="img-w" id="qrcode">
                     <!--                    <img id="imagesqrcode" width="60" height="60"></td>-->
-                    <div id="imagesqrcode" width="60" height="60"></div>
+                    <div id="imagesqrcode" class="imagesqrcode" width="80" height="80"></div>
                 </td>
             </tr>
             <tr>
@@ -162,8 +169,27 @@
 
         <!--endprint--></div>
 </div>
-
+<!--        <script src="/js/jquery.js"></script>-->
+<!--        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
+<!--        <script src="/js/html2canvas.js"></script>-->
+<script src="/js/qrcode.min.js"></script>
+<script src="https://blog-static.cnblogs.com/files/xieyongbin/html2canvas.min.js"></script>
 <script th:inline="javascript">
+
+    function saveCanvas() {
+        html2canvas(document.getElementsByTagName("body")[0]).then(function(canvas) {
+            var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+            return imgUri;
+        });
+
+
+
+    }
+
+
+
+
     let url = ''
 
     // function getlianjie() {
@@ -186,9 +212,11 @@
     //
     // getlianjie()
 
+
+
     var qrcode = new QRCode(document.getElementById("imagesqrcode"), {
-        width: 80,
-        height: 80,
+        width: 300,
+        height: 300,
         correctLevel: QRCode.CorrectLevel.H
     });
 
@@ -206,9 +234,30 @@
         }
 
         qrcode.makeCode(elText);
+
+
+         settingQRCodeImageSize();
+
     }
 
+    function  settingQRCodeImageSize(){
+
+        var img =    document.getElementById("imagesqrcode").getElementsByTagName("img")[0];
+        img.setAttribute('id','imagesqrcodeimg');
+        img.setAttribute('class','imagesqrcodeimg');
+        img.setAttribute('width','80px');
+        img.setAttribute('height','80px');
+
+    }
+
+
     makeCode();
+
+
+
+
+
+
 
     // $("#text").
     // on("blur", function () {
@@ -280,10 +329,13 @@
         // console.log(window.location.href);
         // var url = window.location.href;
         var url1 = getQueryVariable("isAuth");
-
+        var img = document.getElementById('sealdiv')
         console.log(url1);
         if ('3' === url1) {
-            createSealEx2()
+            img.style.display='block';
+            // createSealEx2()
+        }else {
+            img.style.display='none';
         }
         // console.log(url1);
     }
@@ -431,16 +483,24 @@
         // console.log(test.cityExpress)
         //var city = document.getElementById("cityExpress")
 
+        // if ("1" == test.cityExpress) {
+        //     // alert('1');
+        //     $("#cityExpress").attr("checked", 1);
+        // } else {
+        //     // alert('2');
+        //     $("#cityExpress").removeAttr("checked");
+        // }
+        var check = document.getElementsByTagName('input')[0];
+
         if ("1" == test.cityExpress) {
             // alert('1');
-            $("#cityExpress").attr("checked", 1);
+            // $("#cityExpress").attr("checked", 1);
+            check.checked = true;
         } else {
             // alert('2');
-            $("#cityExpress").removeAttr("checked");
+            // $("#cityExpress").removeAttr("checked");
+            check.checked = false;
         }
-        // var date = document.getElementById("city").value;
-        // console.log(date)
-        // alert(date)
     }
 
     city();

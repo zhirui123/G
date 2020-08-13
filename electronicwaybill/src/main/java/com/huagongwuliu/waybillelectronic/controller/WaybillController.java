@@ -59,6 +59,8 @@ public class WaybillController {
         }
     }
 
+
+    @CrossOrigin(methods = {RequestMethod.POST, RequestMethod.OPTIONS})
     @PostMapping("/findwaybillsbyid")
     @ResponseBody
     public Result findwaybillsById(@RequestParam("id") Long id) throws Exception {
