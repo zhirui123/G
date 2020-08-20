@@ -310,6 +310,60 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
 
     @Select("<script>" +
             " select * from tb_eway where  user_id = #{userId}  " +
+            "<if test=' shipperName != null '>and shipper_name = #{shipperName} </if>" +
+            "<if test=' shipperContact != null '>and shipper_contact = #{shipperContact} </if>" +
+            "<if test=' shipperPhone != null '>and shipper_phone = #{shipperPhone} </if>" +
+
+            "<if test=' shiptoName != null '>and shipto_name = #{shiptoName} </if>" +
+            "<if test=' shiptoPhone != null '>and shipto_phone = #{shiptoPhone} </if>" +
+
+            "<if test=' shipmentName != null '>and shipment_name = #{shipmentName} </if>" +
+            "<if test=' shipmentPhone != null '>and shipment_phone = #{shipmentPhone} </if>" +
+            "<if test=' shipmentStarttime != null '>and shipment_starttime = #{shipmentStarttime} </if>" +
+            "<if test=' shipmentFromAddress != null '>and shipment_from_address = #{shipmentFromAddress} </if>" +
+            "<if test=' shipmentFromDetails != null '>and shipment_from_details = #{shipmentFromDetails} </if>" +
+            "<if test=' cityExpress != null '>and city_express = #{cityExpress} </if>" +
+            "<if test=' shipmentToAddress != null '>and shipment_to_address = #{shipmentToAddress} </if>" +
+            "<if test=' shipmentToDetails != null '>and shipment_to_details = #{shipmentToDetails} </if>" +
+
+            "<if test=' carriageName != null '>and carriage_name = #{carriageName} </if>" +
+            "<if test=' carriagePhone != null '>and carriage_phone = #{carriagePhone} </if>" +
+            "<if test=' carriageLicensekey != null '>and carriage_licensekey = #{carriageLicensekey} </if>" +
+
+            "<if test=' licensePlateNum != null '>and license_plate_num = #{licensePlateNum} </if>" +
+            "<if test=' licensePlateColor != null '>and license_plate_color = #{licensePlateColor} </if>" +
+            "<if test=' roadTransportPermitNum != null '>and road_transport_permit_num = #{roadTransportPermitNum} </if>" +
+            "<if test=' trailerRoadRansportPermit != null '>and trailer_road_ransport_permit = #{trailerRoadRansportPermit} </if>" +
+            "<if test=' canbodyNum != null '>and canbody_num = #{canbodyNum} </if>" +
+            "<if test=' driverName != null '>and driver_name = #{driverName} </if>" +
+            "<if test=' driverCertificate != null '>and driver_certificate = #{driverCertificate} </if>" +
+            "<if test=' driverPhone != null '>and driver_phone = #{driverPhone} </if>" +
+            "<if test=' escortName != null '>and escort_name = #{escortName} </if>" +
+            "<if test=' escortPhone != null '>and escort_phone = #{escortPhone} </if>" +
+            "<if test=' escortCertificate != null '>and escort_certificate = #{escortCertificate} </if>" +
+
+            "<if test=' goodsName != null '>and goods_name = #{goodsName} </if>" +
+            "<if test=' unNum != null '>and un_num = #{unNum} </if>" +
+            "<if test=' goodsType != null '>and goods_type = #{goodsType} </if>" +
+            "<if test=' goodsPackingNorms != null '>and goods_packing_norms = #{goodsPackingNorms} </if>" +
+            "<if test=' goodsPackingType != null '>and goods_packing_type = #{goodsPackingType} </if>" +
+            "<if test=' goodsNum != null '>and goods_num = #{goodsNum} </if>" +
+            "<if test=' goodsCompany != null '>and goods_company = #{goodsCompany} </if>" +
+            "<if test=' dispatcherName != null '>and dispatcher_name = #{dispatcherName} </if>" +
+            "<if test=' dispatcherDate != null '>and dispatcher_date = #{dispatcherDate} </if>" +
+            "<if test=' remarks != null '>and remarks = #{remarks} </if>" +
+            "<if test=' userId != null '>and user_id = #{userId} </if>" +
+            "<if test=' waybillCode != null '>and waybill_code = #{waybillCode} </if>" +
+            "<if test=' status != null '>and status = #{status} </if>" +
+            "<if test=' userCompanyName != null '>and user_company_name = #{userCompanyName} </if>" +
+            " order by add_time desc" +
+            "</script>")
+    List<Waybill> queryByWaybill(Waybill waybill);
+
+
+
+    @Select("<script>" +
+            " select * from tb_eway where  user_id = #{userId}  " +
             "<if test=' shipperName != null '>and shipper_name like concat('%',#{shipperName},'%') </if>" +
             "<if test=' shipperContact != null '>and shipper_contact like concat('%',#{shipperContact},'%') </if>" +
             "<if test=' shipperPhone != null '>and shipper_phone like concat('%',#{shipperPhone},'%') </if>" +
@@ -358,7 +412,7 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
             "<if test=' userCompanyName != null '>and user_company_name like concat('%',#{userCompanyName},'%') </if>" +
             " order by add_time desc" +
             "</script>")
-    List<Waybill> queryByWaybill(Waybill waybill);
+    List<Waybill> queryByWaybilllike(Waybill waybill);
 
 
 
