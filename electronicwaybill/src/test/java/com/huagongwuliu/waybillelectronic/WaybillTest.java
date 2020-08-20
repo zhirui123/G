@@ -25,23 +25,11 @@ public class WaybillTest {
 
     @Test
     public void findAll() {
-
-
         List<Waybill> list = this.waybillMapper.findAll();
 //        System.out.println("数据库汇总的运单" + list);
         System.out.println("数据库中共" +  list.size() + "条运单");
-
         List<Waybill> list2 = list.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getUserId() + ";"))), ArrayList::new));//o代表属性值，根据此属性值去重
-
-
         System.out.println("数据库汇总共" + list2.size() + "个用户");
-
-
-
-
-
-
-
     }
 
 

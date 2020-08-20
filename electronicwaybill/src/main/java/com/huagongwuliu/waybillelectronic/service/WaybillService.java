@@ -77,6 +77,10 @@ public class WaybillService {
     }
 
 
+    public int changeStatusAction348(String status, String goodsNum, Long id,String userId) {
+        return this.waybillMapper.changeStatus348(status, goodsNum, id,userId);
+    }
+
     /**
      * 修改货物运输的数量
      *

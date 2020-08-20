@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -74,21 +75,35 @@ public class WaybillController {
         }
     }
 
+//    @RequestMapping("/yd")
+//    public String aa(@RequestParam("id") Long id, @RequestParam("isAuth") String isAuth, ModelMap modelMap) {
+//        Waybill waybill = null;
+//        try {
+//            waybill = this.waybillService.queryById(id);
+//            modelMap.addAttribute("yd", waybill);
+//        } catch (Exception e) {
+//            log.error(Constants.RES + "|waybill/yd| ：运单界面", e);
+//            e.printStackTrace();
+//        }
+//        return "yd";
+//    }
+
+
     @RequestMapping("/yd")
-    public String aa(@RequestParam("id") Long id, @RequestParam("isAuth") String isAuth, ModelMap modelMap) {
-        Waybill waybill = null;
-        try {
-            waybill = this.waybillService.queryById(id);
-            modelMap.addAttribute("yd", waybill);
-        } catch (Exception e) {
-            log.error(Constants.RES + "|waybill/yd| ：运单界面", e);
+    public void tbbb(HttpServletResponse response,@RequestParam("id") Long id, @RequestParam("isAuth") String isAuth){
+        try{
+            String uStr = "http://tms.huagongwuliu.com/wb/#/id=" +  id;
+            response.sendRedirect(uStr);
+        }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-        return "yd";
     }
+
+
+
+
+
+
 
 
 
@@ -315,14 +330,14 @@ public class WaybillController {
 
     @PostMapping("/status")
     @ResponseBody
-    public Result changeWaybillStatus(@RequestParam String status, @RequestParam(defaultValue = "0") String goodsNum, @RequestParam Long id) {
+    public Result changeWaybillStatus(@RequestParam String status, @RequestParam(value =  "goodsNum", required = false) String goodsNum, @RequestParam Long id) {
         //验证码错误
         Result info = new Result();
 
         if (status == null || status.length() == 0) {
             status = "0";
         }
-        if (!"4".equals(status)) {
+        if ((!"4".equals(status)) && (!"6".equals(status))) {
             status = String.valueOf(Integer.parseInt(status) + 1);
         }
 
@@ -346,6 +361,9 @@ public class WaybillController {
                     case "4":
                         str = "卸货完成，任务结束";
                         break;
+                    case "6":
+                        str = "电子运单删除成功";
+                        break;
 
                 }
                 info.setResult_code(0);
@@ -359,6 +377,72 @@ public class WaybillController {
             return new Result(ErrorCode.E_10001);
         }
     }
+
+
+
+    @PostMapping("/3.4.8/status")
+    @ResponseBody
+    public Result changeWaybillStatus347(@RequestParam String status, @RequestParam(value =  "goodsNum", required = false) String goodsNum, @RequestParam(value = "id",required = true) Long id,  @RequestParam(value = "userId",required = true) String userId) {
+        //验证码错误
+        Result info = new Result();
+
+
+        if (id == 0) {
+           return   new Result(ErrorCode.E_10001, "请输入电子运单用户id");
+        }
+
+        if (userId.isEmpty()){
+            return   new Result(ErrorCode.E_10001, "请输入用户id");
+        }
+
+
+
+        if (status == null || status.length() == 0) {
+            status = "0";
+        }
+        if ((!"4".equals(status)) && (!"6".equals(status))) {
+            status = String.valueOf(Integer.parseInt(status) + 1);
+        }
+
+        try {
+            int recode = this.waybillService.changeStatusAction348(status, goodsNum, id,userId);
+            if (recode == 0) {
+                info.setResult_code(1);
+                info.setResult_msg("失败");
+            } else {
+                String str = "接单完成，等待装货";
+                switch (status) {
+                    case "1":
+                        str = "接单完成，等待装货";
+                        break;
+                    case "2":
+                        str = "开始装货";
+                        break;
+                    case "3":
+                        str = "装货完成，开始运输";
+                        break;
+                    case "4":
+                        str = "卸货完成，任务结束";
+                        break;
+                    case "6":
+                        str = "电子运单删除成功";
+                        break;
+
+                }
+                info.setResult_code(0);
+                info.setResult_data(str);
+                info.setResult_msg("成功");
+            }
+//            info.setResult_data(recode);
+            return info;
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/status|运单状态：", e);
+            return new Result(ErrorCode.E_10001);
+        }
+    }
+
+
+
 
 
     /**
