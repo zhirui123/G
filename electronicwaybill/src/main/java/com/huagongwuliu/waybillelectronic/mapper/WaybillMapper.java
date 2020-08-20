@@ -354,7 +354,7 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
             "<if test=' remarks != null '>and remarks like concat('%',#{remarks},'%') </if>" +
             "<if test=' userId != null '>and user_id like concat('%',#{userId},'%') </if>" +
             "<if test=' waybillCode != null '>and waybill_code like concat('%',#{waybillCode},'%') </if>" +
-            "<if test=' status >=0 '>and status like concat('%',#{status},'%') </if>" +
+            "<if test=' status != null '>and status like concat('%',#{status},'%') </if>" +
             "<if test=' userCompanyName != null '>and user_company_name like concat('%',#{userCompanyName},'%') </if>" +
             " order by add_time desc" +
             "</script>")

@@ -10,6 +10,7 @@ import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -287,7 +288,152 @@ public class WaybillService {
         return this.waybillMapper.queryByWaybill(waybill);
     }
 
-    ;
+
+    /**
+     *  删除电子运单，相关搜索
+     * @param wy
+     * @return
+     */
+    @Transient
+    public int deletequeryTipsWaybill(Waybill wy)  throws  Exception{
+
+        List<Waybill> waybills = this.queryByIdAndUserId(wy.getId(), wy.getUserId());
+        if (waybills.size() ==0|| waybills.get(0).getUserId().isEmpty() ) {
+            return  0;
+        }
+
+        Waybill way = new Waybill();
+        way.setUserId(waybills.get(0).getUserId());
+
+
+        if (wy.getShipperStatus().equals("1")){
+
+
+            way.setShipperName(waybills.get(0).getShipperName());
+            way.setShipperContact(waybills.get(0).getShipperContact());
+            way.setShipperPhone(waybills.get(0).getShipperPhone());
+            way.setShipperStatus("0");
+
+
+            System.out.println("88888888888888888 -------------------" + way);
+
+
+
+            List<Waybill> wayList = this.waybillMapper.queryByWaybill(way);
+            System.out.println("------ 看这里-----" + wayList);
+            for (Waybill waybill : wayList) {
+                waybill.setShipperStatus("1");
+
+                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+            }
+            return  1;
+
+        }else if(wy.getShiptoStatus().equals("1")){
+
+            way.setShiptoName(waybills.get(0).getShiptoName());
+            way.setShiptoName(waybills.get(0).getShiptoPhone());
+            way.setShiptoStatus("0");
+
+            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+            for (Waybill waybill : wayList) {
+                waybill.setShiptoStatus("1");
+                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+            }
+            return  1;
+        }else if (wy.getShipmentStatus().equals("1")){
+
+            way.setShipmentName(waybills.get(0).getShipmentName());
+            way.setShipmentPhone(waybills.get(0).getShipmentPhone());
+            way.setShipmentFromAddress(waybills.get(0).getShipmentFromAddress());
+            way.setShipmentToAddress(waybills.get(0).getShipmentToAddress());
+
+            way.setShipmentFromDetails(waybills.get(0).getShipmentFromDetails());
+            way.setShipmentToDetails(waybills.get(0).getShipmentToDetails());
+            way.setShipmentStatus("0");
+
+            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+            for (Waybill waybill : wayList) {
+                waybill.setShipmentStatus("1");
+                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+            }
+            return  1;
+
+
+
+
+        }else  if (wy.getCarriageStatus().equals("1")){
+
+            way.setCarriageName(waybills.get(0).getCarriageName());
+            way.setCarriagePhone(waybills.get(0).getCarriagePhone());
+            way.setCarriageLicensekey(waybills.get(0).getCarriageLicensekey());
+            way.setCarriageStatus("0");
+
+
+            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+            for (Waybill waybill : wayList) {
+                waybill.setCarriageStatus("1");
+                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+            }
+            return  1;
+
+        }else if(wy.getVehicleStatus().equals("1")){
+
+            way.setLicensePlateNum(waybills.get(0).getLicensePlateNum());
+
+            way.setLicensePlateColor(waybills.get(0).getLicensePlateColor());
+            way.setRoadTransportPermitNum(waybills.get(0).getRoadTransportPermitNum());
+            way.setTrailerNum(waybills.get(0).getTrailerNum());
+            way.setTrailerRoadRansportPermit(waybills.get(0).getTrailerRoadRansportPermit());
+            way.setCanbodyNum(waybills.get(0).getCanbodyNum());
+            way.setCanbodyVolume(waybills.get(0).getCanbodyVolume());
+
+            way.setDriverName(waybills.get(0).getDriverName());
+            way.setDriverCertificate(waybills.get(0).getDriverCertificate());
+            way.setDriverPhone(waybills.get(0).getDriverPhone());
+            way.setEscortName(waybills.get(0).getEscortName());
+            way.setEscortPhone(waybills.get(0).getEscortPhone());
+            way.setEscortCertificate(waybills.get(0).getEscortCertificate());
+
+            way.setVehicleStatus("0");
+
+            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+            for (Waybill waybill : wayList) {
+                waybill.setVehicleStatus("1");
+                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+            }
+            return  1;
+        }else if(wy.getGoodsStatus().equals("1")){
+
+            way.setGoodsName(waybills.get(0).getGoodsName());
+            way.setUnNum(waybills.get(0).getUnNum());
+            way.setGoodsType(waybills.get(0).getGoodsType());
+            way.setGoodsPackingNorms(waybills.get(0).getGoodsPackingNorms());
+            way.setGoodsPackingType(waybills.get(0).getGoodsPackingType());
+            way.setGoodsNum(waybills.get(0).getGoodsNum());
+            way.setGoodsCompany(waybills.get(0).getGoodsCompany());
+            way.setGoodsStatus("0");
+
+
+            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+            for (Waybill waybill : wayList) {
+                waybill.setGoodsStatus("1");
+                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+            }
+            return  1;
+        }
+        return 1;
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 //

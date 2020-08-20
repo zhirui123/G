@@ -295,7 +295,6 @@ public class WaybillController {
             return info;
         }
 
-
         if (waybill.getId() == null) {
             info.setResult_code(1);
             info.setResult_msg("电子运单id为空");
@@ -307,9 +306,11 @@ public class WaybillController {
                 waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
             }
 
+
             if (!StringUtil.isEmpty(waybill.getTrailerNum())) {
                 waybill.setTrailerNum(waybill.getTrailerNum().toUpperCase());
             }
+
 
             int recode = this.waybillService.updateWaybillByWaubillObj(waybill);
             if (recode == 0) {
@@ -325,8 +326,58 @@ public class WaybillController {
             log.error(Constants.RES + "|waybill/updatewaybill|更新数据的接口：", e);
             return new Result(ErrorCode.E_10001);
         }
-
     }
+
+
+
+    @PostMapping("/deletequery")
+    @ResponseBody
+    public Result deletequeryTipsWaybill(@RequestBody Waybill waybill) throws Exception {
+        //验证码错误
+        Result info = new Result();
+
+        if (waybill.getUserId() == null || waybill.getUserId().length() == 0) {
+            info.setResult_code(1);
+            info.setResult_msg("请输入用户id");
+            return info;
+        }
+
+        if (waybill.getId() == null) {
+            info.setResult_code(1);
+            info.setResult_msg("电子运单id为空");
+            return info;
+        }
+        try {
+            waybill.setUpdateTime(DateUtil.getNowTimestamp());
+            if (!StringUtil.isEmpty(waybill.getLicensePlateNum())) {
+                waybill.setLicensePlateNum(waybill.getLicensePlateNum().toUpperCase());
+            }
+
+
+            if (!StringUtil.isEmpty(waybill.getTrailerNum())) {
+                waybill.setTrailerNum(waybill.getTrailerNum().toUpperCase());
+            }
+
+
+            int recode = this.waybillService.deletequeryTipsWaybill(waybill);
+            if (recode == 0) {
+                info.setResult_code(1);
+                info.setResult_msg("请求失败");
+            } else {
+                info.setResult_code(0);
+                info.setResult_msg("成功");
+            }
+            info.setResult_data(recode);
+            return info;
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/updatewaybill|更新数据的接口：", e);
+            return new Result(ErrorCode.E_10001);
+        }
+    }
+
+
+
+
 
     @PostMapping("/status")
     @ResponseBody
@@ -340,6 +391,7 @@ public class WaybillController {
         if ((!"4".equals(status)) && (!"6".equals(status))) {
             status = String.valueOf(Integer.parseInt(status) + 1);
         }
+
 
         try {
             int recode = this.waybillService.changeStatusAction(status, goodsNum, id);
@@ -390,11 +442,9 @@ public class WaybillController {
         if (id == 0) {
             return   new Result(ErrorCode.E_10001, "请输入电子运单用户id");
         }
-
         if (userId.isEmpty()){
             return   new Result(ErrorCode.E_10001, "请输入用户id");
         }
-
 
 
         if (status == null || status.length() == 0) {
@@ -492,14 +542,11 @@ public class WaybillController {
     public Result queryByShiptoNameAndUserId(@RequestParam("shiptoName") String shiptoName, @RequestParam("userId") String userId) {
         //验证码错误
         Result info = new Result();
-
         List<Waybill> waybills = null;
-
         try {
             waybills = this.waybillService.queryByShiptoNameAndUserId(shiptoName, userId);
             List<Waybill> list = waybills.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getShiptoName() + ";"
                     + o.getShiptoPhone()))), ArrayList::new));//o代表属性值，根据此属性值去重
-
             info.setResult_code(0);
             info.setResult_data(list);
             info.setResult_msg("成功");
