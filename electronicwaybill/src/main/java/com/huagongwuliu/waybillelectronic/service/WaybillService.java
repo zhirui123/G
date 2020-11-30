@@ -111,10 +111,10 @@ public class WaybillService {
                 str = "接单完成，等待装货";
                 break;
             case "2":
-                str = "开始装货";
+                str = "到达装货地，开始装货";
                 break;
             case "3":
-                str = "装货完成，开始运输";
+                str = "装货完成，装货数量"+ goodsNum+"，开始运输";
                 break;
             case "4":
                 str = "卸货完成，任务结束";
