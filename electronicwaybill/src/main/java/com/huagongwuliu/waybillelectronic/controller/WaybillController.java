@@ -4,17 +4,16 @@ import com.github.pagehelper.PageInfo;
 import com.google.zxing.WriterException;
 import com.huagongwuliu.waybillelectronic.constant.Constants;
 import com.huagongwuliu.waybillelectronic.constant.ErrorCode;
-import com.huagongwuliu.waybillelectronic.pojo.Goods;
-import com.huagongwuliu.waybillelectronic.pojo.Result;
-import com.huagongwuliu.waybillelectronic.pojo.ResultInfo;
-import com.huagongwuliu.waybillelectronic.pojo.Waybill;
+import com.huagongwuliu.waybillelectronic.pojo.*;
 import com.huagongwuliu.waybillelectronic.service.GoodsService;
 import com.huagongwuliu.waybillelectronic.service.ShipperService;
+import com.huagongwuliu.waybillelectronic.service.WaybillLogService;
 import com.huagongwuliu.waybillelectronic.service.WaybillService;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.QRCodeGenerator;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import com.huagongwuliu.waybillelectronic.utils.WaybillUtils;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -36,6 +35,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @RequestMapping("/waybill")
+@Api(value = "WaybillController|一个用来测试swagger注解的控制器")
 public class WaybillController {
 
     @Autowired
@@ -43,6 +43,10 @@ public class WaybillController {
 
     @Autowired
     private ShipperService shipperService;
+
+
+    @Autowired
+    private WaybillLogService waybillLogService;
 
 
     @Autowired
@@ -777,6 +781,29 @@ public class WaybillController {
 
 
 
+
+
+
+
+    @PostMapping("/querywaybilllog")
+    @ResponseBody
+    public Result queryByWaybillId(@RequestParam String waybillId) {
+
+
+        if (StringUtil.isEmpty(waybillId)){
+            return new Result(1001, "请输入运单id", null);
+        }
+
+
+
+        try {
+            List<WaybillLog> waybillLog = this.waybillLogService.findByWaybillId(waybillId);
+            return new Result(ErrorCode.SUCCESS, waybillLog);
+        } catch (Exception e) {
+            log.error(Constants.RES + "|waybill/list|获取列表：", e);
+            return new Result(ErrorCode.E_10001);
+        }
+    }
 
 
 

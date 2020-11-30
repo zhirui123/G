@@ -13,6 +13,10 @@ spring:
 #    username: root
 #    password: yiguan888
 #    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/eesy?autoReconnect=true&characterEncoding=utf-8&nullCatalogMeansCurrent=true
+#    username: root
+#    password: 12345678
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   type-aliases-package: com.huagongwuliu.waybillelectronic.pojo
   configuration:

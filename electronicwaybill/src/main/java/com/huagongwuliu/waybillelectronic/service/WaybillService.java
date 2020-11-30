@@ -5,8 +5,10 @@ import com.github.pagehelper.PageInfo;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Shipper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
+import com.huagongwuliu.waybillelectronic.pojo.WaybillLog;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
+import com.huagongwuliu.waybillelectronic.utils.UuidUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +26,10 @@ public class WaybillService {
 
     @Resource
     private  UserService userService;
+
+    @Resource
+    private  WaybillLogService waybillLogService;
+
 
 
     public List<Waybill> findAll() throws Exception {
@@ -68,7 +74,24 @@ public class WaybillService {
 
     public Integer insertWaybillByWaubillObj(Waybill waybill) throws Exception {
 
-        return this.waybillMapper.insertWay(waybill);
+
+        int i = this.waybillMapper.insertWay(waybill);
+
+        WaybillLog waybillLog = new WaybillLog();
+        waybillLog.setId(UuidUtil.getUUID());
+        waybillLog.setUserId(waybill.getUserId());
+        waybillLog.setWaybillId(waybill.getId().toString());
+        waybillLog.setStatus(0);
+        waybillLog.setContent("电子运单创建成功,待接单");
+        waybillLog.setAddTime(DateUtil.getNowTimestamp());
+        waybillLog.setUpdateTime(DateUtil.getNowTimestamp());
+
+        this.waybillLogService.insertWaubillLog(waybillLog);
+
+
+
+
+        return i;
 
     }
 
@@ -78,7 +101,42 @@ public class WaybillService {
     }
 
 
-    public int changeStatusAction348(String status, String goodsNum, Long id,String userId) {
+    public int changeStatusAction348(String status, String goodsNum, Long id,String userId)  {
+
+
+
+        String str = "接单完成，等待装货";
+        switch (status) {
+            case "1":
+                str = "接单完成，等待装货";
+                break;
+            case "2":
+                str = "开始装货";
+                break;
+            case "3":
+                str = "装货完成，开始运输";
+                break;
+            case "4":
+                str = "卸货完成，任务结束";
+                break;
+            case "6":
+                str = "电子运单删除成功";
+                break;
+
+        }
+
+
+        WaybillLog waybillLog = new WaybillLog();
+        waybillLog.setId(UuidUtil.getUUID());
+        waybillLog.setUserId(userId);
+        waybillLog.setStatus(Integer.valueOf(status));
+        waybillLog.setWaybillId(id.toString());
+        waybillLog.setContent(str);
+        waybillLog.setAddTime(DateUtil.getNowTimestamp());
+        waybillLog.setUpdateTime(DateUtil.getNowTimestamp());
+
+        this.waybillLogService.insertWaubillLog(waybillLog);
+
         return this.waybillMapper.changeStatus348(status, goodsNum, id,userId);
     }
 
@@ -315,12 +373,8 @@ public class WaybillService {
             way.setShipperStatus("0");
 
 
-            System.out.println("88888888888888888 -------------------" + way);
-
-
-
             List<Waybill> wayList = this.waybillMapper.queryByWaybill(way);
-            System.out.println("------ 看这里-----" + wayList);
+
             for (Waybill waybill : wayList) {
                 waybill.setShipperStatus("1");
 
