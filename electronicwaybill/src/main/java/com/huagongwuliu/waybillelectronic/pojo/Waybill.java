@@ -102,4 +102,9 @@ public class Waybill {
     @Transient
     private  String electronicSealImage; //电子公章图片
 
+
+
+
+    private  User user;
+
 }

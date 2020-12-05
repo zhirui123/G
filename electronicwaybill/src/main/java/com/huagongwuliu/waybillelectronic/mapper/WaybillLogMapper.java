@@ -12,7 +12,7 @@ import java.util.List;
 public interface WaybillLogMapper {
 
 
-    @Select("select * from tb_waybill_log where  waybill_id = #{waybillId} order by add_time desc")
+    @Select("select * from tb_waybill_log where  waybill_id = #{waybillId} order by add_time asc")
     List<WaybillLog> findByWaybillId(String waybillId);
 
 
