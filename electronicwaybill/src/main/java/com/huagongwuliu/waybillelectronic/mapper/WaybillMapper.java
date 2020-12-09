@@ -362,58 +362,5 @@ public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> 
 
 
 
-    @Select("<script>" +
-            " select * from tb_eway where  user_id = #{userId}  " +
-            "<if test=' shipperName != null '>and shipper_name like concat('%',#{shipperName},'%') </if>" +
-            "<if test=' shipperContact != null '>and shipper_contact like concat('%',#{shipperContact},'%') </if>" +
-            "<if test=' shipperPhone != null '>and shipper_phone like concat('%',#{shipperPhone},'%') </if>" +
-
-            "<if test=' shiptoName != null '>and shipto_name like concat('%',#{shiptoName},'%') </if>" +
-            "<if test=' shiptoPhone != null '>and shipto_phone like concat('%',#{shiptoPhone},'%') </if>" +
-
-            "<if test=' shipmentName != null '>and shipment_name like concat('%',#{shipmentName},'%') </if>" +
-            "<if test=' shipmentPhone != null '>and shipment_phone like concat('%',#{shipmentPhone},'%') </if>" +
-            "<if test=' shipmentStarttime != null '>and shipment_starttime like concat('%',#{shipmentStarttime},'%') </if>" +
-            "<if test=' shipmentFromAddress != null '>and shipment_from_address like concat('%',#{shipmentFromAddress},'%') </if>" +
-            "<if test=' shipmentFromDetails != null '>and shipment_from_details like concat('%',#{shipmentFromDetails},'%') </if>" +
-            "<if test=' cityExpress != null '>and city_express like concat('%',#{cityExpress},'%') </if>" +
-            "<if test=' shipmentToAddress != null '>and shipment_to_address like concat('%',#{shipmentToAddress},'%') </if>" +
-            "<if test=' shipmentToDetails != null '>and shipment_to_details like concat('%',#{shipmentToDetails},'%') </if>" +
-
-            "<if test=' carriageName != null '>and carriage_name like concat('%',#{carriageName},'%') </if>" +
-            "<if test=' carriagePhone != null '>and carriage_phone like concat('%',#{carriagePhone},'%') </if>" +
-            "<if test=' carriageLicensekey != null '>and carriage_licensekey like concat('%',#{carriageLicensekey},'%') </if>" +
-
-            "<if test=' licensePlateNum != null '>and license_plate_num like concat('%',#{licensePlateNum},'%') </if>" +
-            "<if test=' licensePlateColor != null '>and license_plate_color like concat('%',#{licensePlateColor},'%') </if>" +
-            "<if test=' roadTransportPermitNum != null '>and road_transport_permit_num like concat('%',#{roadTransportPermitNum},'%') </if>" +
-            "<if test=' trailerRoadRansportPermit != null '>and trailer_road_ransport_permit like concat('%',#{trailerRoadRansportPermit},'%') </if>" +
-            "<if test=' canbodyNum != null '>and canbody_num like concat('%',#{canbodyNum},'%') </if>" +
-            "<if test=' driverName != null '>and driver_name like concat('%',#{driverName},'%') </if>" +
-            "<if test=' driverCertificate != null '>and driver_certificate like concat('%',#{driverCertificate},'%') </if>" +
-            "<if test=' driverPhone != null '>and driver_phone like concat('%',#{driverPhone},'%') </if>" +
-            "<if test=' escortName != null '>and escort_name like concat('%',#{escortName},'%') </if>" +
-            "<if test=' escortPhone != null '>and escort_phone like concat('%',#{escortPhone},'%') </if>" +
-            "<if test=' escortCertificate != null '>and escort_certificate like concat('%',#{escortCertificate},'%') </if>" +
-
-            "<if test=' goodsName != null '>and goods_name like concat('%',#{goodsName},'%') </if>" +
-            "<if test=' unNum != null '>and un_num like concat('%',#{unNum},'%') </if>" +
-            "<if test=' goodsType != null '>and goods_type like concat('%',#{goodsType},'%') </if>" +
-            "<if test=' goodsPackingNorms != null '>and goods_packing_norms like concat('%',#{goodsPackingNorms},'%') </if>" +
-            "<if test=' goodsPackingType != null '>and goods_packing_type like concat('%',#{goodsPackingType},'%') </if>" +
-            "<if test=' goodsNum != null '>and goods_num like concat('%',#{goodsNum},'%') </if>" +
-            "<if test=' goodsCompany != null '>and goods_company like concat('%',#{goodsCompany},'%') </if>" +
-            "<if test=' dispatcherName != null '>and dispatcher_name like concat('%',#{dispatcherName},'%') </if>" +
-            "<if test=' dispatcherDate != null '>and dispatcher_date like concat('%',#{dispatcherDate},'%') </if>" +
-            "<if test=' remarks != null '>and remarks like concat('%',#{remarks},'%') </if>" +
-            "<if test=' userId != null '>and user_id like concat('%',#{userId},'%') </if>" +
-            "<if test=' waybillCode != null '>and waybill_code like concat('%',#{waybillCode},'%') </if>" +
-            "<if test=' status != null '>and status like concat('%',#{status},'%') </if>" +
-            "<if test=' userCompanyName != null '>and user_company_name like concat('%',#{userCompanyName},'%') </if>" +
-            " order by add_time desc" +
-            "</script>")
-    List<Waybill> queryByWaybilllike(Waybill waybill);
-
-
 
 }

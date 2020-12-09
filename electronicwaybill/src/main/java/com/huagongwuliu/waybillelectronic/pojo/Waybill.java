@@ -4,10 +4,9 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Table(name = "tb_eway")
+//@Table(name = "tb_eway")
 @Data
 public class Waybill {
 
@@ -82,12 +81,16 @@ public class Waybill {
     private Integer updateTime;//更新时间
 
 
-
+    @Transient
     private String userCompanyName;// 认证用户公司名称
 
+    @Transient
     private Long startTime;
+    @Transient
     private Long endTime;
+    @Transient
     public Integer pageNum;
+    @Transient
     public Integer pageSize = 20;
     private String userPhone;
 
@@ -104,7 +107,5 @@ public class Waybill {
 
 
 
-
-    private  User user;
 
 }
