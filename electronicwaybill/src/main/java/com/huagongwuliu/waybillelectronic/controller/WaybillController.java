@@ -136,7 +136,7 @@ public class WaybillController {
 
     @PostMapping("/findbyidanduserid")
     @ResponseBody
-    public ResultInfo findwaybillsByIdAndUserId(@RequestParam("id") Long id, @RequestParam("userId") String userId) throws Exception {
+    public ResultInfo findwaybillsByIdAndUserId(@RequestParam("id") String id, @RequestParam("userId") String userId) throws Exception {
         //验证码错误
         ResultInfo info = new ResultInfo();
         List<Waybill> waybills = this.waybillService.queryByIdAndUserId(id, userId);
@@ -250,7 +250,7 @@ public class WaybillController {
 
 
             Integer serialNum = this.waybillService.queryCountByUserIdAndCreteDate(waybill.getUserId());
-            waybill.setId(WaybillUtils.getUserCode());
+            waybill.setId(WaybillUtils.getUserCode().toString());
             waybill.setAddTime(DateUtil.getNowTimestamp());
             waybill.setStatus("0");
             waybill.setWaybillCode(WaybillUtils.creatYDOrderNum(carriageLicensekeyNum, serialNum + 1));

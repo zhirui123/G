@@ -59,7 +59,7 @@ public class WaybillService {
 
 
 
-    public List<Waybill> queryByIdAndUserId(Long id, String userId) throws Exception {
+    public List<Waybill> queryByIdAndUserId(String id, String userId) throws Exception {
         List<Waybill> ws = this.waybillMapper.queryByIdAndUserId(id, userId);
         System.out.println(ws);
         return ws;
