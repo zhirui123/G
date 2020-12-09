@@ -495,9 +495,9 @@ public interface WaybillTagMapper {
             "</if>" +
 
 
-            "<if test='userId != null'>" +
-            "  user_id = #{userId}," +
-            "</if>" +
+//            "<if test='userId != null'>" +
+//            "  user_id = #{userId}," +
+//            "</if>" +
             "<if test='shipperStatus != null'>" +
             "  shipper_status = #{shipperStatus}," +
             "</if>" +

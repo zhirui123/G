@@ -74,12 +74,14 @@ public class WaybillService {
     }
 
     public int updateWaybillByWaubillObj(Waybill waybill) throws Exception {
+        this.waybillTagService.addWaybillTagByWaybill(waybill);
         return this.waybillMapper.updateByPrimaryKeySelective(waybill);
     }
 
     public Integer insertWaybillByWaubillObj(Waybill waybill) throws Exception {
 
 
+        this.waybillTagService.addWaybillTagByWaybill(waybill);
         int i = this.waybillMapper.insertWay(waybill);
 
         WaybillLog waybillLog = new WaybillLog();
