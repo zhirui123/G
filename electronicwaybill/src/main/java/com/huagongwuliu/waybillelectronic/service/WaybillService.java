@@ -168,7 +168,17 @@ public class WaybillService {
      * @throws Exception
      */
     public List<Waybill> queryByShipperNameAndUserId(String shipperName, String userId) throws Exception {
-        return this.waybillMapper.queryByShipperNameAndUserId(shipperName, userId);
+
+        Waybill waybill = new Waybill();
+        waybill.setShipperName(shipperName);
+        waybill.setUserId(userId);
+        waybill.setShipperStatus(0);
+
+        return  this.waybillTagService.getListLike(waybill);
+
+//        return this.waybillMapper.queryByShipperNameAndUserId(shipperName, userId);
+
+
     }
 
 
@@ -180,7 +190,15 @@ public class WaybillService {
      * @return
      */
     public List<Waybill> queryByShiptoNameAndUserId(String shiptoName, String userId) throws Exception {
-        return this.waybillMapper.queryByShiptoNameAndUserId(shiptoName, userId);
+
+        Waybill waybill = new Waybill();
+        waybill.setShiptoName(shiptoName);
+        waybill.setUserId(userId);
+        waybill.setShiptoStatus(0);
+
+        return  this.waybillTagService.getListLike(waybill);
+
+//        return this.waybillMapper.queryByShiptoNameAndUserId(shiptoName, userId);
     }
 
     /**
@@ -192,7 +210,15 @@ public class WaybillService {
      * @throws Exception
      */
     public List<Waybill> queryByShipmentNameAndUserId(String shipmentName, String userId) throws Exception {
-        return this.waybillMapper.queryByShipmentNameAndUserId(shipmentName, userId);
+
+        Waybill waybill = new Waybill();
+        waybill.setShipmentName(shipmentName);
+        waybill.setUserId(userId);
+        waybill.setShipmentStatus(0);
+
+        return  this.waybillTagService.getListLike(waybill);
+
+//        return this.waybillMapper.queryByShipmentNameAndUserId(shipmentName, userId);
     }
 
     /**
@@ -204,7 +230,15 @@ public class WaybillService {
      * @throws Exception
      */
     public List<Waybill> queryByCarriageNameAndUserId(String carriageName, String userId) throws Exception {
-        return this.waybillMapper.queryByCarriageNameAndUserId(carriageName, userId);
+
+        Waybill waybill = new Waybill();
+        waybill.setCarriageName(carriageName);
+        waybill.setUserId(userId);
+        waybill.setCarriageStatus(0);
+
+        return  this.waybillTagService.getListLike(waybill);
+
+//        return this.waybillMapper.queryByCarriageNameAndUserId(carriageName, userId);
     }
 
 
@@ -217,7 +251,17 @@ public class WaybillService {
      */
 
     public List<Waybill> queryByLicensePlateNumAndUserId(String licensePlateNum, String userId) throws Exception {
-        return this.waybillMapper.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
+
+
+        Waybill waybill = new Waybill();
+        waybill.setLicensePlateNum(licensePlateNum);
+        waybill.setUserId(userId);
+        waybill.setVehicleStatus(0);
+
+        return  this.waybillTagService.getListLike(waybill);
+
+
+//        return this.waybillMapper.queryByLicensePlateNumAndUserId(licensePlateNum, userId);
     }
 
 
@@ -230,7 +274,14 @@ public class WaybillService {
      */
 
     public List<Waybill> queryByCanbodyNumAndUserId(String canbodyNum, String userId) throws Exception {
-        return this.waybillMapper.queryByCanbodyNumAndUserId(canbodyNum, userId);
+
+        Waybill waybill = new Waybill();
+        waybill.setCanbodyNum(canbodyNum);
+        waybill.setUserId(userId);
+        waybill.setVehicleStatus(0);
+
+        return  this.waybillTagService.getListLike(waybill);
+//        return this.waybillMapper.queryByCanbodyNumAndUserId(canbodyNum, userId);
     }
 
 
@@ -242,7 +293,15 @@ public class WaybillService {
      * @return
      */
     public List<Waybill> queryByEscortNameAndUserId(String escortName, String userId) throws Exception {
-        return this.waybillMapper.queryByEscortNameAndUserId(escortName, userId);
+
+        Waybill waybill = new Waybill();
+        waybill.setEscortName(escortName);
+        waybill.setUserId(userId);
+        waybill.setVehicleStatus(0);
+
+        return  this.waybillTagService.getListLike(waybill);
+
+//        return this.waybillMapper.queryByEscortNameAndUserId(escortName, userId);
     }
 
 
@@ -257,7 +316,14 @@ public class WaybillService {
     public List<Waybill> queryByGoodsNameAndUserId(String goodsName, String userId) {
 
 
-        return this.waybillMapper.queryByGoodsNameAndUserId(goodsName, userId);
+
+        Waybill waybill = new Waybill();
+        waybill.setGoodsName(goodsName);
+        waybill.setUserId(userId);
+        waybill.setGoodsName("0");
+
+        return  this.waybillTagService.getListLike(waybill);
+//        return this.waybillMapper.queryByGoodsNameAndUserId(goodsName, userId);
     }
 
 
@@ -362,127 +428,139 @@ public class WaybillService {
     @Transient
     public int deletequeryTipsWaybill(Waybill wy)  throws  Exception{
 
-        List<Waybill> waybills = this.queryByIdAndUserId(wy.getId(), wy.getUserId());
-        if (waybills.size() ==0|| waybills.get(0).getUserId().isEmpty() ) {
-            return  0;
-        }
+//        List<String> ids = new ArrayList<>();
+//        ids.add(wy.getId());
+//      return    this.waybillTagService.remove(ids);
 
-        Waybill way = new Waybill();
-        way.setUserId(waybills.get(0).getUserId());
-
-
-        if (wy.getShipperStatus().equals("1")){
-
-
-            way.setShipperName(waybills.get(0).getShipperName());
-            way.setShipperContact(waybills.get(0).getShipperContact());
-            way.setShipperPhone(waybills.get(0).getShipperPhone());
-            way.setShipperStatus("0");
-
-
-            List<Waybill> wayList = this.waybillMapper.queryByWaybill(way);
-
-            for (Waybill waybill : wayList) {
-                waybill.setShipperStatus("1");
-
-                this.waybillMapper.updateByPrimaryKeySelective(waybill);
-            }
-            return  1;
-
-        }else if(wy.getShiptoStatus().equals("1")){
-
-            way.setShiptoName(waybills.get(0).getShiptoName());
-            way.setShiptoName(waybills.get(0).getShiptoPhone());
-            way.setShiptoStatus("0");
-
-            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
-            for (Waybill waybill : wayList) {
-                waybill.setShiptoStatus("1");
-                this.waybillMapper.updateByPrimaryKeySelective(waybill);
-            }
-            return  1;
-        }else if (wy.getShipmentStatus().equals("1")){
-
-            way.setShipmentName(waybills.get(0).getShipmentName());
-            way.setShipmentPhone(waybills.get(0).getShipmentPhone());
-            way.setShipmentFromAddress(waybills.get(0).getShipmentFromAddress());
-            way.setShipmentToAddress(waybills.get(0).getShipmentToAddress());
-
-            way.setShipmentFromDetails(waybills.get(0).getShipmentFromDetails());
-            way.setShipmentToDetails(waybills.get(0).getShipmentToDetails());
-            way.setShipmentStatus("0");
-
-            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
-            for (Waybill waybill : wayList) {
-                waybill.setShipmentStatus("1");
-                this.waybillMapper.updateByPrimaryKeySelective(waybill);
-            }
-            return  1;
+        return    this.waybillTagService.updateWaubillTag(wy);
 
 
 
 
-        }else  if (wy.getCarriageStatus().equals("1")){
-
-            way.setCarriageName(waybills.get(0).getCarriageName());
-            way.setCarriagePhone(waybills.get(0).getCarriagePhone());
-            way.setCarriageLicensekey(waybills.get(0).getCarriageLicensekey());
-            way.setCarriageStatus("0");
 
 
-            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
-            for (Waybill waybill : wayList) {
-                waybill.setCarriageStatus("1");
-                this.waybillMapper.updateByPrimaryKeySelective(waybill);
-            }
-            return  1;
 
-        }else if(wy.getVehicleStatus().equals("1")){
-
-            way.setLicensePlateNum(waybills.get(0).getLicensePlateNum());
-
-            way.setLicensePlateColor(waybills.get(0).getLicensePlateColor());
-            way.setRoadTransportPermitNum(waybills.get(0).getRoadTransportPermitNum());
-            way.setTrailerNum(waybills.get(0).getTrailerNum());
-            way.setTrailerRoadRansportPermit(waybills.get(0).getTrailerRoadRansportPermit());
-            way.setCanbodyNum(waybills.get(0).getCanbodyNum());
-            way.setCanbodyVolume(waybills.get(0).getCanbodyVolume());
-
-            way.setDriverName(waybills.get(0).getDriverName());
-            way.setDriverCertificate(waybills.get(0).getDriverCertificate());
-            way.setDriverPhone(waybills.get(0).getDriverPhone());
-            way.setEscortName(waybills.get(0).getEscortName());
-            way.setEscortPhone(waybills.get(0).getEscortPhone());
-            way.setEscortCertificate(waybills.get(0).getEscortCertificate());
-
-            way.setVehicleStatus("0");
-
-            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
-            for (Waybill waybill : wayList) {
-                waybill.setVehicleStatus("1");
-                this.waybillMapper.updateByPrimaryKeySelective(waybill);
-            }
-            return  1;
-        }else if(wy.getGoodsStatus().equals("1")){
-
-            way.setGoodsName(waybills.get(0).getGoodsName());
-            way.setUnNum(waybills.get(0).getUnNum());
-            way.setGoodsType(waybills.get(0).getGoodsType());
-            way.setGoodsPackingNorms(waybills.get(0).getGoodsPackingNorms());
-            way.setGoodsPackingType(waybills.get(0).getGoodsPackingType());
-            way.setGoodsNum(waybills.get(0).getGoodsNum());
-            way.setGoodsCompany(waybills.get(0).getGoodsCompany());
-            way.setGoodsStatus("0");
-
-
-            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
-            for (Waybill waybill : wayList) {
-                waybill.setGoodsStatus("1");
-                this.waybillMapper.updateByPrimaryKeySelective(waybill);
-            }
-            return  1;
-        }
-        return 1;
+//        List<Waybill> waybills = this.queryByIdAndUserId(wy.getId(), wy.getUserId());
+//        if (waybills.size() ==0|| waybills.get(0).getUserId().isEmpty() ) {
+//            return  0;
+//        }
+//
+//        Waybill way = new Waybill();
+//        way.setUserId(waybills.get(0).getUserId());
+//
+//
+//        if (wy.getShipperStatus() == 1){
+//
+//
+//            way.setShipperName(waybills.get(0).getShipperName());
+//            way.setShipperContact(waybills.get(0).getShipperContact());
+//            way.setShipperPhone(waybills.get(0).getShipperPhone());
+//            way.setShipperStatus(0);
+//
+//
+//            List<Waybill> wayList = this.waybillMapper.queryByWaybill(way);
+//
+//            for (Waybill waybill : wayList) {
+//                waybill.setShipperStatus(1);
+//
+//                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+//            }
+//            return  1;
+//
+//        }else if(wy.getShiptoStatus()== 1){
+//
+//            way.setShiptoName(waybills.get(0).getShiptoName());
+//            way.setShiptoName(waybills.get(0).getShiptoPhone());
+//            way.setShiptoStatus(0);
+//
+//            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+//            for (Waybill waybill : wayList) {
+//                waybill.setShiptoStatus(1);
+//                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+//            }
+//            return  1;
+//        }else if (wy.getShipmentStatus().equals("1")){
+//
+//            way.setShipmentName(waybills.get(0).getShipmentName());
+//            way.setShipmentPhone(waybills.get(0).getShipmentPhone());
+//            way.setShipmentFromAddress(waybills.get(0).getShipmentFromAddress());
+//            way.setShipmentToAddress(waybills.get(0).getShipmentToAddress());
+//
+//            way.setShipmentFromDetails(waybills.get(0).getShipmentFromDetails());
+//            way.setShipmentToDetails(waybills.get(0).getShipmentToDetails());
+//            way.setShipmentStatus(0);
+//
+//            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+//            for (Waybill waybill : wayList) {
+//                waybill.setShipmentStatus(1);
+//                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+//            }
+//            return  1;
+//
+//
+//
+//
+//        }else  if (wy.getCarriageStatus()== 1){
+//
+//            way.setCarriageName(waybills.get(0).getCarriageName());
+//            way.setCarriagePhone(waybills.get(0).getCarriagePhone());
+//            way.setCarriageLicensekey(waybills.get(0).getCarriageLicensekey());
+//            way.setCarriageStatus(0);
+//
+//
+//            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+//            for (Waybill waybill : wayList) {
+//                waybill.setCarriageStatus(1);
+//                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+//            }
+//            return  1;
+//
+//        }else if(wy.getVehicleStatus() == 1){
+//
+//            way.setLicensePlateNum(waybills.get(0).getLicensePlateNum());
+//
+//            way.setLicensePlateColor(waybills.get(0).getLicensePlateColor());
+//            way.setRoadTransportPermitNum(waybills.get(0).getRoadTransportPermitNum());
+//            way.setTrailerNum(waybills.get(0).getTrailerNum());
+//            way.setTrailerRoadRansportPermit(waybills.get(0).getTrailerRoadRansportPermit());
+//            way.setCanbodyNum(waybills.get(0).getCanbodyNum());
+//            way.setCanbodyVolume(waybills.get(0).getCanbodyVolume());
+//
+//            way.setDriverName(waybills.get(0).getDriverName());
+//            way.setDriverCertificate(waybills.get(0).getDriverCertificate());
+//            way.setDriverPhone(waybills.get(0).getDriverPhone());
+//            way.setEscortName(waybills.get(0).getEscortName());
+//            way.setEscortPhone(waybills.get(0).getEscortPhone());
+//            way.setEscortCertificate(waybills.get(0).getEscortCertificate());
+//
+//            way.setVehicleStatus(0);
+//
+//            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+//            for (Waybill waybill : wayList) {
+//                waybill.setVehicleStatus(1);
+//                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+//            }
+//            return  1;
+//        }else if(wy.getGoodsStatus() == 1){
+//
+//            way.setGoodsName(waybills.get(0).getGoodsName());
+//            way.setUnNum(waybills.get(0).getUnNum());
+//            way.setGoodsType(waybills.get(0).getGoodsType());
+//            way.setGoodsPackingNorms(waybills.get(0).getGoodsPackingNorms());
+//            way.setGoodsPackingType(waybills.get(0).getGoodsPackingType());
+//            way.setGoodsNum(waybills.get(0).getGoodsNum());
+//            way.setGoodsCompany(waybills.get(0).getGoodsCompany());
+//            way.setGoodsStatus(0);
+//
+//
+//            List<Waybill> wayList =   this.waybillMapper.queryByWaybill(way);
+//            for (Waybill waybill : wayList) {
+//                waybill.setGoodsStatus(1);
+//                this.waybillMapper.updateByPrimaryKeySelective(waybill);
+//            }
+//            return  1;
+//        }
+//        return 1;
 
     }
 

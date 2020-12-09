@@ -12,7 +12,7 @@ public interface WaybillTagMapper {
 
     // 单条新增客户基本信息
     @Insert("<script>" +
-            "insert into tb_waybill_tag  " +
+            "insert into tb_eway_tag  " +
             "<trim prefix='(' suffix=')' suffixOverrides=','>" +
             "<if test='id != null'>" +
             "  id," +
@@ -359,7 +359,7 @@ public interface WaybillTagMapper {
 
 
     @Update("<script>" +
-            "UPDATE tb_waybill_tag  " +
+            "UPDATE tb_eway_tag  " +
             "    <set>" +
 
             "<if test='shipperName != null'>" +
@@ -540,7 +540,7 @@ public interface WaybillTagMapper {
 
 
     @Delete("<script>" +
-            "DELETE FROM tb_waybill_tag WHERE id IN " +
+            "DELETE FROM tb_eway_tag WHERE id IN " +
             "<foreach item='id' collection='ids' open='(' separator=',' close=')'>" +
             " #{id} " +
             "</foreach>;" +
@@ -549,149 +549,149 @@ public interface WaybillTagMapper {
 
 
     @Select("<script>" +
-            "SELECT * from tb_waybill_tag " +
+            "SELECT * from tb_eway_tag " +
             "<where>" +
             "    <if test=\"shipperName != null and shipperName != ''\"> " +
-            "      AND shipper_name = #{shipperName}, " +
+            "      AND shipper_name = #{shipperName} " +
             "    </if> " +
             "    <if test=\"shipperContact != null and shipperContact != ''\"> " +
-            "      AND shipper_contact = #{shipperContact}, " +
+            "      AND shipper_contact = #{shipperContact} " +
             "    </if> " +
             "    <if test=\"shipperPhone != null and shipperPhone != ''\"> " +
-            "      AND shipper_phone = #{shipperPhone}, " +
+            "      AND shipper_phone = #{shipperPhone} " +
             "    </if> " +
 
             "    <if test=\"shiptoName != null and shiptoName != ''\"> " +
-            "      AND shipto_name = #{shiptoName}, " +
+            "      AND shipto_name = #{shiptoName} " +
             "    </if> " +
             "    <if test=\"shiptoPhone != null and shiptoPhone != ''\"> " +
-            "      AND shipto_phone = #{shiptoPhone}, " +
+            "      AND shipto_phone = #{shiptoPhone} " +
             "    </if> " +
 
             "    <if test=\"shipmentName != null and shipmentName != ''\"> " +
-            "      AND shipment_name = #{shipmentName}, " +
+            "      AND shipment_name = #{shipmentName} " +
             "    </if> " +
             "    <if test=\"shipmentPhone != null and shipmentPhone != ''\"> " +
-            "      AND shipment_phone = #{shipmentPhone},' " +
+            "      AND shipment_phone = #{shipmentPhone} " +
             "    </if> " +
             "    <if test=\"shipmentStarttime != null and shipmentStarttime != ''\"> " +
-            "      AND shipment_starttime = #{shipmentStarttime}, " +
+            "      AND shipment_starttime = #{shipmentStarttime} " +
             "    </if> " +
             "    <if test=\"shipmentFromAddress != null and shipmentFromAddress != ''\"> " +
-            "      AND shipment_from_address = #{shipmentFromAddress}, " +
+            "      AND shipment_from_address = #{shipmentFromAddress} " +
             "    </if> " +
             "    <if test=\"shipmentFromDetails != null and shipmentFromDetails != ''\"> " +
-            "      AND shipment_from_details = #{shipmentFromDetails},  " +
+            "      AND shipment_from_details = #{shipmentFromDetails} " +
             "    </if> " +
             "    <if test=\"cityExpress != null \"> " +
-            "      AND city_express = #{cityExpress}, " +
+            "      AND city_express = #{cityExpress} " +
             "    </if> " +
             "    <if test=\"shipmentToAddress != null and shipmentToAddress != ''\"> " +
-            "      AND shipment_to_address = #{shipmentToAddress}, " +
+            "      AND shipment_to_address = #{shipmentToAddress} " +
             "    </if> " +
             "    <if test=\"shipmentToDetails != null and shipmentToDetails != ''\"> " +
-            "      AND shipment_to_details = #{shipmentToDetails}, " +
+            "      AND shipment_to_details = #{shipmentToDetails} " +
             "    </if> " +
 
 
 
             "    <if test=\"carriageName != null and carriageName != ''\"> " +
-            "      AND carriage_name = #{carriageName}, " +
+            "      AND carriage_name = #{carriageName} " +
             "    </if> " +
             "    <if test=\"carriagePhone != null and carriagePhone != ''\"> " +
-            "      AND carriage_phone = #{carriagePhone}," +
+            "      AND carriage_phone = #{carriagePhone}" +
             "    </if> " +
             "    <if test=\"carriageLicensekey != null and carriageLicensekey != ''\"> " +
-            "      AND carriage_licensekey = #{carriageLicensekey}, " +
+            "      AND carriage_licensekey = #{carriageLicensekey} " +
             "    </if> " +
 
 
 
             "    <if test=\"licensePlateNum != null and licensePlateNum != ''\"> " +
-            "      AND license_plate_num = #{licensePlateNum}, " +
+            "      AND license_plate_num = #{licensePlateNum} " +
             "    </if> " +
             "    <if test=\"licensePlateColor != null and licensePlateColor != ''\"> " +
-            "      AND license_plate_color = #{licensePlateColor}, " +
+            "      AND license_plate_color = #{licensePlateColor} " +
             "    </if> " +
             "    <if test=\"roadTransportPermitNum != null and roadTransportPermitNum != ''\"> " +
-            "      AND road_transport_permit_num = #{roadTransportPermitNum}, " +
+            "      AND road_transport_permit_num = #{roadTransportPermitNum} " +
             "    </if> " +
 
             "    <if test=\"trailerNum != null and trailerNum != ''\"> " +
-            "      AND trailer_num = #{trailerNum}, " +
+            "      AND trailer_num = #{trailerNum} " +
             "    </if> " +
 
             "    <if test=\"trailerRoadRansportPermit != null and trailerRoadRansportPermit != ''\"> " +
-            "      AND trailer_road_ransport_permit = #{trailerRoadRansportPermit}, " +
+            "      AND trailer_road_ransport_permit = #{trailerRoadRansportPermit} " +
             "    </if> " +
             "    <if test=\"canbodyNum != null and canbodyNum != ''\"> " +
-            "      AND canbody_num = #{canbodyNum}, " +
+            "      AND canbody_num = #{canbodyNum} " +
             "    </if> " +
             "    <if test=\"canbodyVolume != null and canbodyVolume != ''\"> " +
-            "      AND canbody_volume = #{canbodyVolume}, " +
+            "      AND canbody_volume = #{canbodyVolume} " +
             "    </if> " +
 
             "    <if test=\"driverName != null and driverName != ''\"> " +
-            "      AND driver_name = #{driverName}  " +
+            "      AND driver_name = #{driverName}   " +
             "    </if> " +
             "    <if test=\"driverCertificate != null and driverCertificate != ''\"> " +
-            "      AND driver_certificate = #{driverCertificate}  " +
+            "      AND driver_certificate = #{driverCertificate}   " +
             "    </if> " +
             "    <if test=\"driverPhone != null and driverPhone != ''\"> " +
-            "      AND driver_phone = #{driverPhone}  " +
+            "      AND driver_phone = #{driverPhone}   " +
             "    </if> " +
             "    <if test=\"escortName != null and escortName != ''\"> " +
-            "      AND escort_name = #{escortName}  " +
+            "      AND escort_name = #{escortName}   " +
             "    </if> " +
             "    <if test=\"escortPhone != null and escortPhone != ''\"> " +
-            "      AND escort_phone = #{escortPhone}  " +
+            "      AND escort_phone = #{escortPhone}   " +
             "    </if> " +
             "    <if test=\"escortCertificate != null and escortCertificate != ''\"> " +
-            "      AND escort_certificate = #{escortCertificate}  " +
+            "      AND escort_certificate = #{escortCertificate}   " +
             "    </if> " +
 
 
             "    <if test=\"goodsName != null and goodsName != ''\"> " +
-            "      AND goods_name = #{goodsName}  " +
+            "      AND goods_name = #{goodsName}   " +
             "    </if> " +
             "    <if test=\"unNum != null and unNum != ''\"> " +
-            "      AND un_num = #{unNum}  " +
+            "      AND un_num = #{unNum}   " +
             "    </if> " +
             "    <if test=\"goodsType != null and goodsType != ''\"> " +
-            "      AND goods_type = #{goodsType}  " +
+            "      AND goods_type = #{goodsType}   " +
             "    </if> " +
             "    <if test=\"goodsPackingNorms != null and goodsPackingNorms != ''\"> " +
-            "      AND goods_packing_norms = #{goodsPackingNorms}  " +
+            "      AND goods_packing_norms = #{goodsPackingNorms}   " +
             "    </if> " +
             "    <if test=\"goodsPackingType != null and goodsPackingType != ''\"> " +
-            "      AND goods_packing_type = #{goodsPackingType}  " +
+            "      AND goods_packing_type = #{goodsPackingType}   " +
             "    </if> " +
             "    <if test=\"goodsNum != null and goodsNum != ''\"> " +
             "      AND goods_num = #{goodsNum}  " +
             "    </if> " +
             "    <if test=\"goodsCompany != null and goodsCompany != ''\"> " +
-            "      AND goods_company = #{goodsCompany}  " +
+            "      AND goods_company = #{goodsCompany}   " +
             "    </if> " +
             "    <if test=\"dispatcherName != null and dispatcherName != ''\"> " +
-            "      AND dispatcher_name = #{dispatcherName}  " +
+            "      AND dispatcher_name = #{dispatcherName}   " +
             "    </if> " +
             "    <if test=\"dispatcherDate != null and dispatcherDate != ''\"> " +
-            "      AND dispatcher_date = #{dispatcherDate}  " +
+            "      AND dispatcher_date = #{dispatcherDate}   " +
             "    </if> " +
 //            "    <if test=\"userId != null and userId != ''\"> " +
-            "      AND user_id = #{userId}  " +
+            "      AND user_id = #{userId}   " +
 //            "    </if> " +
             "    <if test=\"shipperStatus != null \"> " +
-            "      AND shipper_status = #{shipperStatus}  " +
+            "      AND shipper_status = #{shipperStatus}   " +
             "    </if> " +
             "    <if test=\"shipmentStatus != null \"> " +
-            "      AND shipment_status = #{shipmentStatus}  " +
+            "      AND shipment_status = #{shipmentStatus}   " +
             "    </if> " +
             "    <if test=\"vehicleStatus != null \"> " +
-            "      AND vehicle_status = #{vehicleStatus}  " +
+            "      AND vehicle_status = #{vehicleStatus}   " +
             "    </if> " +
             "    <if test=\"goodsStatus != null \"> " +
-            "      AND goods_status = #{goodsStatus}  " +
+            "      AND goods_status = #{goodsStatus}   " +
             "    </if> " +
             "    <if test=\"carriageStatus != null \"> " +
             "      AND carriage_status = #{carriageStatus}  " +
@@ -700,4 +700,179 @@ public interface WaybillTagMapper {
             "ORDER BY add_time DESC " +
             "</script>")
     List<Waybill> list(Waybill waybill);
+
+
+
+
+    @Select("<script>" +
+            "SELECT * from tb_eway_tag " +
+            "<where>" +
+            "    <if test=\"shipperName != null and shipperName != ''\"> " +
+            "      AND shipper_name like concat('%', #{shipperName},'%')  " +
+            "    </if> " +
+            "    <if test=\"shipperContact != null and shipperContact != ''\"> " +
+            "      AND shipper_contact like concat('%', #{shipperContact}, '%') " +
+            "    </if> " +
+            "    <if test=\"shipperPhone != null and shipperPhone != ''\"> " +
+            "      AND shipper_phone like concat('%', #{shipperPhone},'%')  " +
+            "    </if> " +
+
+            "    <if test=\"shiptoName != null and shiptoName != ''\"> " +
+            "      AND shipto_name like concat('%', #{shiptoName},'%')  " +
+            "    </if> " +
+            "    <if test=\"shiptoPhone != null and shiptoPhone != ''\"> " +
+            "      AND shipto_phone like concat('%', #{shiptoPhone},'%')  " +
+            "    </if> " +
+
+            "    <if test=\"shipmentName != null and shipmentName != ''\"> " +
+            "      AND shipment_name like concat('%', #{shipmentName},'%')  " +
+            "    </if> " +
+            "    <if test=\"shipmentPhone != null and shipmentPhone != ''\"> " +
+            "      AND shipment_phone like concat('%', #{shipmentPhone},'%') " +
+            "    </if> " +
+            "    <if test=\"shipmentStarttime != null and shipmentStarttime != ''\"> " +
+            "      AND shipment_starttime like concat('%', #{shipmentStarttime},'%')  " +
+            "    </if> " +
+            "    <if test=\"shipmentFromAddress != null and shipmentFromAddress != ''\"> " +
+            "      AND shipment_from_address like concat('%', #{shipmentFromAddress},'%')  " +
+            "    </if> " +
+            "    <if test=\"shipmentFromDetails != null and shipmentFromDetails != ''\"> " +
+            "      AND shipment_from_details like concat('%', #{shipmentFromDetails},'%')   " +
+            "    </if> " +
+            "    <if test=\"cityExpress != null \"> " +
+            "      AND city_express like concat('%', #{cityExpress},'%') " +
+            "    </if> " +
+            "    <if test=\"shipmentToAddress != null and shipmentToAddress != ''\"> " +
+            "      AND shipment_to_address like concat('%', #{shipmentToAddress},'%')  " +
+            "    </if> " +
+            "    <if test=\"shipmentToDetails != null and shipmentToDetails != ''\"> " +
+            "      AND shipment_to_details like concat('%', #{shipmentToDetails},'%')  " +
+            "    </if> " +
+
+
+
+            "    <if test=\"carriageName != null and carriageName != ''\"> " +
+            "      AND carriage_name like concat('%', #{carriageName}, '%') " +
+            "    </if> " +
+            "    <if test=\"carriagePhone != null and carriagePhone != ''\"> " +
+            "      AND carriage_phone like concat('%', #{carriagePhone},'%') " +
+            "    </if> " +
+            "    <if test=\"carriageLicensekey != null and carriageLicensekey != ''\"> " +
+            "      AND carriage_licensekey like concat('%', #{carriageLicensekey},'%')  " +
+            "    </if> " +
+
+
+
+            "    <if test=\"licensePlateNum != null and licensePlateNum != ''\"> " +
+            "      AND license_plate_num like concat('%', #{licensePlateNum},'%')  " +
+            "    </if> " +
+            "    <if test=\"licensePlateColor != null and licensePlateColor != ''\"> " +
+            "      AND license_plate_color like concat('%', #{licensePlateColor},'%')  " +
+            "    </if> " +
+            "    <if test=\"roadTransportPermitNum != null and roadTransportPermitNum != ''\"> " +
+            "      AND road_transport_permit_num like concat('%', #{roadTransportPermitNum},'%')  " +
+            "    </if> " +
+
+            "    <if test=\"trailerNum != null and trailerNum != ''\"> " +
+            "      AND trailer_num like concat('%', #{trailerNum},'%')  " +
+            "    </if> " +
+
+            "    <if test=\"trailerRoadRansportPermit != null and trailerRoadRansportPermit != ''\"> " +
+            "      AND trailer_road_ransport_permit like concat('%', #{trailerRoadRansportPermit},'%')  " +
+            "    </if> " +
+            "    <if test=\"canbodyNum != null and canbodyNum != ''\"> " +
+            "      AND canbody_num like concat('%', #{canbodyNum},'%')  " +
+            "    </if> " +
+            "    <if test=\"canbodyVolume != null and canbodyVolume != ''\"> " +
+            "      AND canbody_volume like concat('%', #{canbodyVolume},'%')  " +
+            "    </if> " +
+
+            "    <if test=\"driverName != null and driverName != ''\"> " +
+            "      AND driver_name like concat('%', #{driverName} ,'%')  " +
+            "    </if> " +
+            "    <if test=\"driverCertificate != null and driverCertificate != ''\"> " +
+            "      AND driver_certificate like concat('%', #{driverCertificate} ,'%')  " +
+            "    </if> " +
+            "    <if test=\"driverPhone != null and driverPhone != ''\"> " +
+            "      AND driver_phone like concat('%', #{driverPhone},'%')   " +
+            "    </if> " +
+            "    <if test=\"escortName != null and escortName != ''\"> " +
+            "      AND escort_name like concat('%', #{escortName} ,'%')  " +
+            "    </if> " +
+            "    <if test=\"escortPhone != null and escortPhone != ''\"> " +
+            "      AND escort_phone like concat('%', #{escortPhone} ,'%')  " +
+            "    </if> " +
+            "    <if test=\"escortCertificate != null and escortCertificate != ''\"> " +
+            "      AND escort_certificate like concat('%', #{escortCertificate} ,'%')  " +
+            "    </if> " +
+
+
+            "    <if test=\"goodsName != null and goodsName != ''\"> " +
+            "      AND goods_name like concat('%', #{goodsName} ,'%')  " +
+            "    </if> " +
+            "    <if test=\"unNum != null and unNum != ''\"> " +
+            "      AND un_num like concat('%', #{unNum} ,'%')  " +
+            "    </if> " +
+            "    <if test=\"goodsType != null and goodsType != ''\"> " +
+            "      AND goods_type like concat('%', #{goodsType}   ,'%') " +
+            "    </if> " +
+            "    <if test=\"goodsPackingNorms != null and goodsPackingNorms != ''\"> " +
+            "      AND goods_packing_norms like concat('%', #{goodsPackingNorms}  " +
+            "    </if> " +
+            "    <if test=\"goodsPackingType != null and goodsPackingType != ''\"> " +
+            "      AND goods_packing_type like concat('%', #{goodsPackingType}  ,'%')  " +
+            "    </if> " +
+            "    <if test=\"goodsNum != null and goodsNum != ''\"> " +
+            "      AND goods_num like concat('%', #{goodsNum} ,'%')   " +
+            "    </if> " +
+            "    <if test=\"goodsCompany != null and goodsCompany != ''\"> " +
+            "      AND goods_company like concat('%', #{goodsCompany}  ,'%')  " +
+            "    </if> " +
+            "    <if test=\"dispatcherName != null and dispatcherName != ''\"> " +
+            "      AND dispatcher_name like concat('%', #{dispatcherName}  ,'%')  " +
+            "    </if> " +
+            "    <if test=\"dispatcherDate != null and dispatcherDate != ''\"> " +
+            "      AND dispatcher_date like concat('%', #{dispatcherDate}  ,'%')  " +
+            "    </if> " +
+//            "    <if test=\"userId != null and userId != ''\"> " +
+            "      AND user_id = #{userId}  " +
+//            "    </if> " +
+            "    <if test=\"shipperStatus != null \"> " +
+            "      AND shipper_status =  #{shipperStatus}   " +
+            "    </if> " +
+            "    <if test=\"shiptoStatus != null \"> " +
+            "      AND shipto_status =  #{shiptoStatus}   " +
+            "    </if> " +
+            "    <if test=\"shipmentStatus != null \"> " +
+            "      AND shipment_status =  #{shipmentStatus}  " +
+            "    </if> " +
+            "    <if test=\"vehicleStatus != null \"> " +
+            "      AND vehicle_status = #{vehicleStatus}  " +
+            "    </if> " +
+            "    <if test=\"goodsStatus != null \"> " +
+            "      AND goods_status =  #{goodsStatus}   " +
+            "    </if> " +
+            "    <if test=\"carriageStatus != null \"> " +
+            "      AND carriage_status =  #{carriageStatus}    " +
+            "    </if> " +
+            "</where>" +
+            "ORDER BY add_time DESC " +
+            "</script>")
+    List<Waybill> listLike(Waybill waybill);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

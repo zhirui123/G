@@ -22,6 +22,13 @@ public class WaybillTagService {
     public List<Waybill> getList(Waybill waybill){
         return this.waybillTagMapper.list(waybill);
     }
+
+    public List<Waybill> getListLike(Waybill waybill){
+        return this.waybillTagMapper.listLike(waybill);
+    }
+
+
+
     public  Waybill get(String id){
         return  this.waybillTagMapper.get(id);
     }
@@ -50,8 +57,10 @@ public class WaybillTagService {
             addWaybillTagShipperByWaybill(waybill);
             addWaybillTagShiptoByWaybill(waybill);
             addWaybillTagshipmentByWaybill(waybill);
+            addWaybillTagCarriageByWaybill(waybill);
             addWaybillTagVehicleByWaybill(waybill);
             addWaybillTagGoodsByWaybill(waybill);
+
         }
 
     }
@@ -69,7 +78,23 @@ public class WaybillTagService {
             waybillTag.setShipperPhone(waybill.getShipperPhone());
             waybillTag.setShipperContact(waybill.getShipperContact());
             waybillTag.setUserId(waybill.getUserId());
-            waybillTag.setShipperStatus("0");
+            waybillTag.setShipperStatus(0);
+
+            waybillTag.setShiptoStatus(1);
+            waybillTag.setCarriageStatus(1);
+            waybillTag.setShipmentStatus(1);
+            waybillTag.setVehicleStatus(1);
+            waybillTag.setGoodsStatus(1);
+
+
+//            private Integer shipperStatus;// = "0";//托运人状态
+//            private Integer shiptoStatus;// = "0";//收货人状态S
+//            private Integer carriageStatus ;//= "0";//承运人
+//            private Integer shipmentStatus ;//= "0";//装货人状态
+//            private Integer vehicleStatus;// = "0";//车辆状态
+//            private Integer goodsStatus ;//= "0";//货物状态
+
+
 
             List<Waybill> list = this.getList(waybillTag);
 
@@ -99,7 +124,15 @@ public class WaybillTagService {
             waybillTag.setShiptoPhone(waybill.getShiptoPhone());
 
             waybillTag.setUserId(waybill.getUserId());
-            waybillTag.setShipperStatus("0");
+
+
+
+            waybillTag.setShipperStatus(1);
+            waybillTag.setShiptoStatus(0);
+            waybillTag.setCarriageStatus(1);
+            waybillTag.setShipmentStatus(1);
+            waybillTag.setVehicleStatus(1);
+            waybillTag.setGoodsStatus(1);
 
             List<Waybill> list = this.getList(waybillTag);
 
@@ -136,7 +169,13 @@ public class WaybillTagService {
 
 
             waybillTag.setUserId(waybill.getUserId());
-            waybillTag.setShipmentStatus("0");
+//            waybillTag.setShipmentStatus(0);
+            waybillTag.setShipperStatus(1);
+            waybillTag.setShiptoStatus(1);
+            waybillTag.setCarriageStatus(1);
+            waybillTag.setShipmentStatus(0);
+            waybillTag.setVehicleStatus(1);
+            waybillTag.setGoodsStatus(1);
 
             List<Waybill> list = this.getList(waybillTag);
 
@@ -169,8 +208,14 @@ public class WaybillTagService {
 
 
             waybillTag.setUserId(waybill.getUserId());
-            waybillTag.setCarriageStatus("0");
+//            waybillTag.setCarriageStatus(0);
 
+            waybillTag.setShipperStatus(1);
+            waybillTag.setShiptoStatus(1);
+            waybillTag.setCarriageStatus(0);
+            waybillTag.setShipmentStatus(1);
+            waybillTag.setVehicleStatus(1);
+            waybillTag.setGoodsStatus(1);
             List<Waybill> list = this.getList(waybillTag);
 
             if (list.size() > 0){
@@ -219,7 +264,13 @@ public class WaybillTagService {
 
 
             waybillTag.setUserId(waybill.getUserId());
-            waybillTag.setVehicleStatus("0");
+//            waybillTag.setVehicleStatus(0);
+            waybillTag.setShipperStatus(1);
+            waybillTag.setShiptoStatus(1);
+            waybillTag.setCarriageStatus(1);
+            waybillTag.setShipmentStatus(1);
+            waybillTag.setVehicleStatus(0);
+            waybillTag.setGoodsStatus(1);
 
             List<Waybill> list = this.getList(waybillTag);
 
@@ -263,8 +314,13 @@ public class WaybillTagService {
 
 
             waybillTag.setUserId(waybill.getUserId());
-            waybillTag.setGoodsStatus("0");
-
+//            waybillTag.setGoodsStatus(0);
+            waybillTag.setShipperStatus(1);
+            waybillTag.setShiptoStatus(1);
+            waybillTag.setCarriageStatus(1);
+            waybillTag.setShipmentStatus(1);
+            waybillTag.setVehicleStatus(1);
+            waybillTag.setGoodsStatus(0);
             List<Waybill> list = this.getList(waybillTag);
 
             if (list.size() > 0){

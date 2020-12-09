@@ -71,12 +71,12 @@ public class Waybill {
     private String status;//状态值
 
 
-    private String shipperStatus = "0";//托运人状态
-    private String shiptoStatus = "0";//收货人状态S
-    private String carriageStatus = "0";//承运人
-    private String shipmentStatus = "0";//装货人状态
-    private String vehicleStatus = "0";//车辆状态
-    private String goodsStatus = "0";//货物状态
+    private Integer shipperStatus;// = "0";//托运人状态
+    private Integer shiptoStatus;// = "0";//收货人状态S
+    private Integer carriageStatus ;//= "0";//承运人
+    private Integer shipmentStatus ;//= "0";//装货人状态
+    private Integer vehicleStatus;// = "0";//车辆状态
+    private Integer goodsStatus ;//= "0";//货物状态
     private Integer addTime;//插入时间
     private Integer updateTime;//更新时间
 
