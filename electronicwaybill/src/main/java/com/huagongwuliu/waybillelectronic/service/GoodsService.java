@@ -1,7 +1,9 @@
 package com.huagongwuliu.waybillelectronic.service;
 
 import com.huagongwuliu.waybillelectronic.mapper.GoodsMapper;
+import com.huagongwuliu.waybillelectronic.mapper.WaybillLogMapper;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillMapper;
+import com.huagongwuliu.waybillelectronic.mapper.WaybillTagMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Goods;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import org.apache.ibatis.annotations.*;
@@ -17,7 +19,7 @@ public class GoodsService {
     private GoodsMapper goodsMapper;
 
     @Autowired
-    WaybillMapper mapper;
+    WaybillTagMapper mapper;
 
     public List<Goods> queryByGoodsName(String goodsName,String userId) throws Exception {
         List<Goods> list = goodsMapper.queryByGoodsName(goodsName);

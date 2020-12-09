@@ -12,7 +12,7 @@ public interface WaybillTagMapper {
 
     // 单条新增客户基本信息
     @Insert("<script>" +
-            "insert into tb_waybill_tag  " +
+            "insert into tb_eway_tag  " +
             "<trim prefix='(' suffix=')' suffixOverrides=','>" +
             "<if test='id != null'>" +
             "  id," +
@@ -359,7 +359,7 @@ public interface WaybillTagMapper {
 
 
     @Update("<script>" +
-            "UPDATE tb_waybill_tag  " +
+            "UPDATE tb_eway_tag  " +
             "    <set>" +
 
             "<if test='shipperName != null'>" +
@@ -534,101 +534,107 @@ public interface WaybillTagMapper {
 
 
     @Select("<script>" +
-            "SELECT  * from tb_waybill_tag where id = #{id}" +
+            "SELECT  * from tb_eway_tag where id = #{id}" +
             "</script>")
     Waybill get(String id);
 
 
     @Delete("<script>" +
-            "DELETE FROM tb_waybill_tag WHERE id IN " +
+            "DELETE FROM tb_eway_tag WHERE id IN " +
             "<foreach item='id' collection='ids' open='(' separator=',' close=')'>" +
             " #{id} " +
             "</foreach>;" +
             "</script>")
     int delete(@Param("ids") List<String> ids);
 
+    @Select("<script>" +
+            " select * from tb_eway_tag where  user_id = #{userId}  and status != 6  and goods_status = 0" +
+            "<if test=' goodsName != null '> and goods_name like concat('%',#{goodsName},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
+    List<Waybill> queryByGoodsNameAndUserId(String goodsName, String userId);
 
     @Select("<script>" +
-            "SELECT * from tb_waybill_tag " +
+            "SELECT * from tb_eway_tag " +
             "<where>" +
             "    <if test=\"shipperName != null and shipperName != ''\"> " +
-            "      AND shipper_name = #{shipperName}, " +
+            "      AND shipper_name = #{shipperName}" +
             "    </if> " +
             "    <if test=\"shipperContact != null and shipperContact != ''\"> " +
-            "      AND shipper_contact = #{shipperContact}, " +
+            "      AND shipper_contact = #{shipperContact}" +
             "    </if> " +
             "    <if test=\"shipperPhone != null and shipperPhone != ''\"> " +
-            "      AND shipper_phone = #{shipperPhone}, " +
+            "      AND shipper_phone = #{shipperPhone}" +
             "    </if> " +
 
             "    <if test=\"shiptoName != null and shiptoName != ''\"> " +
-            "      AND shipto_name = #{shiptoName}, " +
+            "      AND shipto_name = #{shiptoName}" +
             "    </if> " +
             "    <if test=\"shiptoPhone != null and shiptoPhone != ''\"> " +
-            "      AND shipto_phone = #{shiptoPhone}, " +
+            "      AND shipto_phone = #{shiptoPhone} " +
             "    </if> " +
 
             "    <if test=\"shipmentName != null and shipmentName != ''\"> " +
-            "      AND shipment_name = #{shipmentName}, " +
+            "      AND shipment_name = #{shipmentName}" +
             "    </if> " +
             "    <if test=\"shipmentPhone != null and shipmentPhone != ''\"> " +
-            "      AND shipment_phone = #{shipmentPhone},' " +
+            "      AND shipment_phone = #{shipmentPhone}" +
             "    </if> " +
             "    <if test=\"shipmentStarttime != null and shipmentStarttime != ''\"> " +
-            "      AND shipment_starttime = #{shipmentStarttime}, " +
+            "      AND shipment_starttime = #{shipmentStarttime} " +
             "    </if> " +
             "    <if test=\"shipmentFromAddress != null and shipmentFromAddress != ''\"> " +
-            "      AND shipment_from_address = #{shipmentFromAddress}, " +
+            "      AND shipment_from_address = #{shipmentFromAddress}" +
             "    </if> " +
             "    <if test=\"shipmentFromDetails != null and shipmentFromDetails != ''\"> " +
-            "      AND shipment_from_details = #{shipmentFromDetails},  " +
+            "      AND shipment_from_details = #{shipmentFromDetails} " +
             "    </if> " +
             "    <if test=\"cityExpress != null \"> " +
-            "      AND city_express = #{cityExpress}, " +
+            "      AND city_express = #{cityExpress} " +
             "    </if> " +
             "    <if test=\"shipmentToAddress != null and shipmentToAddress != ''\"> " +
-            "      AND shipment_to_address = #{shipmentToAddress}, " +
+            "      AND shipment_to_address = #{shipmentToAddress} " +
             "    </if> " +
             "    <if test=\"shipmentToDetails != null and shipmentToDetails != ''\"> " +
-            "      AND shipment_to_details = #{shipmentToDetails}, " +
+            "      AND shipment_to_details = #{shipmentToDetails}" +
             "    </if> " +
 
 
 
             "    <if test=\"carriageName != null and carriageName != ''\"> " +
-            "      AND carriage_name = #{carriageName}, " +
+            "      AND carriage_name = #{carriageName} " +
             "    </if> " +
             "    <if test=\"carriagePhone != null and carriagePhone != ''\"> " +
-            "      AND carriage_phone = #{carriagePhone}," +
+            "      AND carriage_phone = #{carriagePhone}" +
             "    </if> " +
             "    <if test=\"carriageLicensekey != null and carriageLicensekey != ''\"> " +
-            "      AND carriage_licensekey = #{carriageLicensekey}, " +
+            "      AND carriage_licensekey = #{carriageLicensekey}" +
             "    </if> " +
 
 
 
             "    <if test=\"licensePlateNum != null and licensePlateNum != ''\"> " +
-            "      AND license_plate_num = #{licensePlateNum}, " +
+            "      AND license_plate_num = #{licensePlateNum}" +
             "    </if> " +
             "    <if test=\"licensePlateColor != null and licensePlateColor != ''\"> " +
-            "      AND license_plate_color = #{licensePlateColor}, " +
+            "      AND license_plate_color = #{licensePlateColor} " +
             "    </if> " +
             "    <if test=\"roadTransportPermitNum != null and roadTransportPermitNum != ''\"> " +
-            "      AND road_transport_permit_num = #{roadTransportPermitNum}, " +
+            "      AND road_transport_permit_num = #{roadTransportPermitNum} " +
             "    </if> " +
 
             "    <if test=\"trailerNum != null and trailerNum != ''\"> " +
-            "      AND trailer_num = #{trailerNum}, " +
+            "      AND trailer_num = #{trailerNum} " +
             "    </if> " +
 
             "    <if test=\"trailerRoadRansportPermit != null and trailerRoadRansportPermit != ''\"> " +
-            "      AND trailer_road_ransport_permit = #{trailerRoadRansportPermit}, " +
+            "      AND trailer_road_ransport_permit = #{trailerRoadRansportPermit} " +
             "    </if> " +
             "    <if test=\"canbodyNum != null and canbodyNum != ''\"> " +
-            "      AND canbody_num = #{canbodyNum}, " +
+            "      AND canbody_num = #{canbodyNum} " +
             "    </if> " +
             "    <if test=\"canbodyVolume != null and canbodyVolume != ''\"> " +
-            "      AND canbody_volume = #{canbodyVolume}, " +
+            "      AND canbody_volume = #{canbodyVolume} " +
             "    </if> " +
 
             "    <if test=\"driverName != null and driverName != ''\"> " +

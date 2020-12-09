@@ -10,6 +10,7 @@ public class ElectronicwaybillApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ElectronicwaybillApplication.class, args);
+		System.out.println("启动成功！");
 	}
 
 }
