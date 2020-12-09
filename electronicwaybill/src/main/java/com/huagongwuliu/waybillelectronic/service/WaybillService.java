@@ -9,6 +9,7 @@ import com.huagongwuliu.waybillelectronic.pojo.WaybillLog;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import com.huagongwuliu.waybillelectronic.utils.UuidUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,6 +30,10 @@ public class WaybillService {
 
     @Resource
     private  WaybillLogService waybillLogService;
+
+
+    @Autowired
+    private  WaybillTagService  waybillTagService;
 
 
 
@@ -478,6 +483,10 @@ public class WaybillService {
         return 1;
 
     }
+
+
+
+
 
 
 

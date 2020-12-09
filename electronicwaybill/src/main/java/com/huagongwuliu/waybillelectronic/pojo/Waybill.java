@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 public class Waybill {
 
     @Id
-    private Long id;
+    private String id;
     private String shipperName;//托运方
     private String shipperContact;//托运方联系人
     private String shipperPhone;//托运方 联系电话
