@@ -1,11 +1,13 @@
 package com.huagongwuliu.waybillelectronic.service;
 
 
+import com.huagongwuliu.waybillelectronic.mapper.GoodsMapper;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillTagMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import com.huagongwuliu.waybillelectronic.utils.UuidUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,35 +20,41 @@ public class WaybillTagService {
     @Resource
     WaybillTagMapper waybillTagMapper;
 
+    @Autowired
+    GoodsMapper mapper;
 
-    public List<Waybill> getList(Waybill waybill){
+
+    public List<Waybill> getList(Waybill waybill) {
         return this.waybillTagMapper.list(waybill);
     }
-    public  Waybill get(String id){
-        return  this.waybillTagMapper.get(id);
+
+    public Waybill get(String id) {
+        return this.waybillTagMapper.get(id);
     }
-    public int updateWaubillTag(Waybill waybill)  {
+
+    public int updateWaubillTag(Waybill waybill) {
         return this.waybillTagMapper.update(waybill);
     }
 
-    public Integer insertWaubillTag(Waybill waybill)  {
+    public Integer insertWaubillTag(Waybill waybill) {
         return this.waybillTagMapper.add(waybill);
     }
 
     public int remove(List<String> ids) {
 
-        return  waybillTagMapper.delete(ids);
+        return waybillTagMapper.delete(ids);
     }
 
 
     /**
      * 根据电子运单内容，添加电子运单标签
+     *
      * @param waybill
      */
-    public  void  addWaybillTagByWaybill(Waybill waybill){
+    public void addWaybillTagByWaybill(Waybill waybill) {
 
 
-        if (StringUtil.isNotEmpty(waybill.getUserId())){
+        if (StringUtil.isNotEmpty(waybill.getUserId())) {
             addWaybillTagShipperByWaybill(waybill);
             addWaybillTagShiptoByWaybill(waybill);
             addWaybillTagshipmentByWaybill(waybill);
@@ -59,11 +67,12 @@ public class WaybillTagService {
 
     /**
      * 添加到托运方标签
+     *
      * @param waybill
      */
-    private   void  addWaybillTagShipperByWaybill(Waybill waybill){
+    private void addWaybillTagShipperByWaybill(Waybill waybill) {
 
-        if (StringUtil.isNotEmpty(waybill.getShipperName())){
+        if (StringUtil.isNotEmpty(waybill.getShipperName())) {
             Waybill waybillTag = new Waybill();
             waybillTag.setShipperName(waybill.getShipperName());
             waybillTag.setShipperPhone(waybill.getShipperPhone());
@@ -71,11 +80,11 @@ public class WaybillTagService {
             waybillTag.setUserId(waybill.getUserId());
             waybillTag.setShipperStatus("0");
 
-            List<Waybill> list = this.getList(waybillTag);
+            List<Waybill> list = getList(waybillTag);
 
-            if (list.size() > 0){
+            if (list.size() > 0) {
 
-            }else{
+            } else {
 
                 waybillTag.setId(UuidUtil.getUUID());
                 waybillTag.setAddTime(DateUtil.getNowTimestamp());
@@ -88,12 +97,13 @@ public class WaybillTagService {
 
     /**
      * 添加收货方标签
+     *
      * @param waybill
      */
 
-    private  void  addWaybillTagShiptoByWaybill(Waybill waybill){
+    private void addWaybillTagShiptoByWaybill(Waybill waybill) {
 
-        if (StringUtil.isNotEmpty(waybill.getShiptoName())){
+        if (StringUtil.isNotEmpty(waybill.getShiptoName())) {
             Waybill waybillTag = new Waybill();
             waybillTag.setShiptoName(waybill.getShiptoName());
             waybillTag.setShiptoPhone(waybill.getShiptoPhone());
@@ -101,11 +111,11 @@ public class WaybillTagService {
             waybillTag.setUserId(waybill.getUserId());
             waybillTag.setShipperStatus("0");
 
-            List<Waybill> list = this.getList(waybillTag);
+            List<Waybill> list = getList(waybillTag);
 
-            if (list.size() > 0){
+            if (list.size() > 0) {
 
-            }else{
+            } else {
 
                 waybillTag.setId(UuidUtil.getUUID());
                 waybillTag.setAddTime(DateUtil.getNowTimestamp());
@@ -119,11 +129,12 @@ public class WaybillTagService {
 
     /**
      * 添加装货人标签
+     *
      * @param waybill
      */
-    public  void  addWaybillTagshipmentByWaybill(Waybill waybill){
+    public void addWaybillTagshipmentByWaybill(Waybill waybill) {
 
-        if (StringUtil.isNotEmpty(waybill.getShipmentName())){
+        if (StringUtil.isNotEmpty(waybill.getShipmentName())) {
             Waybill waybillTag = new Waybill();
 
 
@@ -138,11 +149,11 @@ public class WaybillTagService {
             waybillTag.setUserId(waybill.getUserId());
             waybillTag.setShipmentStatus("0");
 
-            List<Waybill> list = this.getList(waybillTag);
+            List<Waybill> list = getList(waybillTag);
 
-            if (list.size() > 0){
+            if (list.size() > 0) {
 
-            }else{
+            } else {
 
                 waybillTag.setId(UuidUtil.getUUID());
                 waybillTag.setAddTime(DateUtil.getNowTimestamp());
@@ -156,11 +167,12 @@ public class WaybillTagService {
 
     /**
      * 添加承运人标签
+     *
      * @param waybill
      */
-    public  void  addWaybillTagCarriageByWaybill(Waybill waybill){
+    public void addWaybillTagCarriageByWaybill(Waybill waybill) {
 
-        if (StringUtil.isNotEmpty(waybill.getCarriageName())){
+        if (StringUtil.isNotEmpty(waybill.getCarriageName())) {
             Waybill waybillTag = new Waybill();
 
             waybillTag.setCarriageName(waybill.getCarriageName());
@@ -171,11 +183,11 @@ public class WaybillTagService {
             waybillTag.setUserId(waybill.getUserId());
             waybillTag.setCarriageStatus("0");
 
-            List<Waybill> list = this.getList(waybillTag);
+            List<Waybill> list = getList(waybillTag);
 
-            if (list.size() > 0){
+            if (list.size() > 0) {
 
-            }else{
+            } else {
 
                 waybillTag.setId(UuidUtil.getUUID());
                 waybillTag.setAddTime(DateUtil.getNowTimestamp());
@@ -189,15 +201,13 @@ public class WaybillTagService {
 
     /**
      * 添加车辆标签
+     *
      * @param waybill
      */
-    public  void  addWaybillTagVehicleByWaybill(Waybill waybill){
+    public void addWaybillTagVehicleByWaybill(Waybill waybill) {
 
-        if (StringUtil.isNotEmpty(waybill.getLicensePlateNum())){
+        if (StringUtil.isNotEmpty(waybill.getLicensePlateNum())) {
             Waybill waybillTag = new Waybill();
-
-
-
 
 
             waybillTag.setLicensePlateNum(waybill.getLicensePlateNum());
@@ -216,16 +226,14 @@ public class WaybillTagService {
             waybillTag.setEscortCertificate(waybill.getEscortCertificate());
 
 
-
-
             waybillTag.setUserId(waybill.getUserId());
             waybillTag.setVehicleStatus("0");
 
-            List<Waybill> list = this.getList(waybillTag);
+            List<Waybill> list = getList(waybillTag);
 
-            if (list.size() > 0){
+            if (list.size() > 0) {
 
-            }else{
+            } else {
 
                 waybillTag.setId(UuidUtil.getUUID());
                 waybillTag.setAddTime(DateUtil.getNowTimestamp());
@@ -237,18 +245,14 @@ public class WaybillTagService {
     }
 
 
-
-
-
-
-
     /**
      * 添加货物标签
+     *
      * @param waybill
      */
-    public  void  addWaybillTagGoodsByWaybill(Waybill waybill){
+    public void addWaybillTagGoodsByWaybill(Waybill waybill) {
 
-        if (StringUtil.isNotEmpty(waybill.getGoodsName())){
+        if (StringUtil.isNotEmpty(waybill.getGoodsName())) {
             Waybill waybillTag = new Waybill();
 
 
@@ -261,16 +265,10 @@ public class WaybillTagService {
 //            waybillTag.setGoodsCompany(waybill.getGoodsCompany());
 
 
-
             waybillTag.setUserId(waybill.getUserId());
             waybillTag.setGoodsStatus("0");
 
-            List<Waybill> list = this.getList(waybillTag);
-
-            if (list.size() > 0){
-
-            }else{
-
+            if (getList(waybillTag).size() <= 0 && mapper.queryByGoodsName2(waybill.getGoodsName()).size() <= 0) {
                 waybillTag.setId(UuidUtil.getUUID());
                 waybillTag.setAddTime(DateUtil.getNowTimestamp());
                 waybillTag.setUpdateTime(DateUtil.getNowTimestamp());
@@ -279,13 +277,6 @@ public class WaybillTagService {
 
         }
     }
-
-
-
-
-
-
-
 
 
 }
