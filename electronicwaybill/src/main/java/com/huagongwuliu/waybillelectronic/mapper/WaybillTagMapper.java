@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface WaybillTagMapper {
 
-
     // 单条新增客户基本信息
     @Insert("<script>" +
             "insert into tb_waybill_tag  " +
@@ -33,8 +32,6 @@ public interface WaybillTagMapper {
             "<if test='shiptoPhone != null'>" +
             "  shipto_phone," +
             "</if>" +
-
-
             "<if test='shipmentName != null'>" +
             "  shipment_name," +
             "</if>" +
