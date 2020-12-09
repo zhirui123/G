@@ -1,11 +1,13 @@
 package com.huagongwuliu.waybillelectronic.service;
 
 
+import com.huagongwuliu.waybillelectronic.mapper.GoodsMapper;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillTagMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
 import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import com.huagongwuliu.waybillelectronic.utils.UuidUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,8 +20,11 @@ public class WaybillTagService {
     @Resource
     WaybillTagMapper waybillTagMapper;
 
+    @Autowired
+    GoodsMapper mapper;
 
-    public List<Waybill> getList(Waybill waybill){
+
+    public List<Waybill> getList(Waybill waybill) {
         return this.waybillTagMapper.list(waybill);
     }
 
@@ -312,7 +317,6 @@ public class WaybillTagService {
 //            waybillTag.setGoodsCompany(waybill.getGoodsCompany());
 
 
-
             waybillTag.setUserId(waybill.getUserId());
 //            waybillTag.setGoodsStatus(0);
             waybillTag.setShipperStatus(1);
@@ -327,6 +331,9 @@ public class WaybillTagService {
 
             }else{
 
+            waybillTag.setGoodsStatus("0");
+
+            if (getList(waybillTag).size() <= 0 && mapper.queryByGoodsName2(waybill.getGoodsName()).size() <= 0) {
                 waybillTag.setId(UuidUtil.getUUID());
                 waybillTag.setAddTime(DateUtil.getNowTimestamp());
                 waybillTag.setUpdateTime(DateUtil.getNowTimestamp());
@@ -335,13 +342,6 @@ public class WaybillTagService {
 
         }
     }
-
-
-
-
-
-
-
 
 
 }

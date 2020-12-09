@@ -2,9 +2,11 @@ package com.huagongwuliu.waybillelectronic.mapper;
 
 import com.huagongwuliu.waybillelectronic.pojo.Goods;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface GoodsMapper {
 
     /**

@@ -2,6 +2,7 @@ package com.huagongwuliu.waybillelectronic.mapper;
 
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 //}
 //@Mapper
 //@Repository
-@Mapper
+@Repository
 public interface WaybillMapper extends tk.mybatis.mapper.common.Mapper<Waybill> {
 
     /**
