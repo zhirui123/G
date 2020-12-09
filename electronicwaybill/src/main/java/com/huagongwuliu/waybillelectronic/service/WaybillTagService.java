@@ -302,9 +302,9 @@ public class WaybillTagService {
      * 添加货物标签
      * @param waybill
      */
-    public  void  addWaybillTagGoodsByWaybill(Waybill waybill){
+    public  void  addWaybillTagGoodsByWaybill(Waybill waybill) {
 
-        if (StringUtil.isNotEmpty(waybill.getGoodsName())){
+        if (StringUtil.isNotEmpty(waybill.getGoodsName())) {
             Waybill waybillTag = new Waybill();
 
 
@@ -327,19 +327,18 @@ public class WaybillTagService {
             waybillTag.setGoodsStatus(0);
             List<Waybill> list = this.getList(waybillTag);
 
-            if (list.size() > 0){
+            if (list.size() > 0) {
 
-            }else{
+            } else {
 
-            waybillTag.setGoodsStatus("0");
+                if (getList(waybillTag).size() <= 0 && mapper.queryByGoodsName2(waybill.getGoodsName()).size() <= 0) {
+                    waybillTag.setId(UuidUtil.getUUID());
+                    waybillTag.setAddTime(DateUtil.getNowTimestamp());
+                    waybillTag.setUpdateTime(DateUtil.getNowTimestamp());
+                    insertWaubillTag(waybillTag);
+                }
 
-            if (getList(waybillTag).size() <= 0 && mapper.queryByGoodsName2(waybill.getGoodsName()).size() <= 0) {
-                waybillTag.setId(UuidUtil.getUUID());
-                waybillTag.setAddTime(DateUtil.getNowTimestamp());
-                waybillTag.setUpdateTime(DateUtil.getNowTimestamp());
-                insertWaubillTag(waybillTag);
             }
-
         }
     }
 

@@ -547,6 +547,12 @@ public interface WaybillTagMapper {
             "</script>")
     int delete(@Param("ids") List<String> ids);
 
+    @Select("<script>" +
+            " select * from tb_eway_tag where  user_id = #{userId}  and status != 6  and goods_status = 0" +
+            "<if test=' goodsName != null '> and goods_name like concat('%',#{goodsName},'%') </if>" +
+            "order by add_time desc" +
+            "</script>")
+    List<Waybill> queryByGoodsNameAndUserId(String goodsName, String userId);
 
     @Select("<script>" +
             "SELECT * from tb_eway_tag " +
