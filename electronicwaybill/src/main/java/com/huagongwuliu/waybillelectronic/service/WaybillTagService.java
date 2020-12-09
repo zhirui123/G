@@ -4,6 +4,7 @@ package com.huagongwuliu.waybillelectronic.service;
 import com.huagongwuliu.waybillelectronic.mapper.WaybillTagMapper;
 import com.huagongwuliu.waybillelectronic.pojo.Waybill;
 import com.huagongwuliu.waybillelectronic.utils.DateUtil;
+import com.huagongwuliu.waybillelectronic.utils.StringUtil;
 import com.huagongwuliu.waybillelectronic.utils.UuidUtil;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,13 @@ public class WaybillTagService {
 
     public  void  addWaybillTagByWaybill(Waybill waybill){
 
-         addWaybillTagShipperByWaybill(waybill);
+
+        if (StringUtil.isNotEmpty(waybill.getUserId())){
+            addWaybillTagShipperByWaybill(waybill);
+        }
+
+
+
 
 
 
@@ -58,26 +65,26 @@ public class WaybillTagService {
      */
     public  void  addWaybillTagShipperByWaybill(Waybill waybill){
 
-        Waybill waybillTag = new Waybill();
-        waybillTag.setShipperName(waybill.getShipperName());
-        waybillTag.setShipperPhone(waybill.getShipperPhone());
-        waybillTag.setShipperContact(waybill.getShipperContact());
-        waybillTag.setUserId(waybill.getUserId());
-        waybillTag.setShipperStatus("0");
+        if (StringUtil.isNotEmpty(waybill.getShipperName())){
+            Waybill waybillTag = new Waybill();
+            waybillTag.setShipperName(waybill.getShipperName());
+            waybillTag.setShipperPhone(waybill.getShipperPhone());
+            waybillTag.setShipperContact(waybill.getShipperContact());
+            waybillTag.setUserId(waybill.getUserId());
+            waybillTag.setShipperStatus("0");
 
-        List<Waybill> list = this.getList(waybillTag);
+            List<Waybill> list = this.getList(waybillTag);
 
-        if (list.size() > 0){
+            if (list.size() > 0){
 
-        }else{
+            }else{
 
-            waybillTag.setId(UuidUtil.getUUID());
-            waybillTag.setAddTime(DateUtil.getNowTimestamp());
-            waybillTag.setUpdateTime(DateUtil.getNowTimestamp());
-            insertWaubillTag(waybillTag);
+                waybillTag.setId(UuidUtil.getUUID());
+                waybillTag.setAddTime(DateUtil.getNowTimestamp());
+                waybillTag.setUpdateTime(DateUtil.getNowTimestamp());
+                insertWaubillTag(waybillTag);
+            }
         }
-
-
     }
 
 
